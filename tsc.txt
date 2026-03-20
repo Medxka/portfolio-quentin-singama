@@ -1,0 +1,16 @@
+﻿src/pages/Home.tsx(466,23): error TS2322: Type '{ children: any; key: string; delay: number; }' is not assignable to type 'RevealProps'.
+  Property 'key' does not exist on type 'RevealProps'.
+src/pages/ProjectLINA.tsx(203,43): error TS2322: Type '{ children: string; className: string; style: { color: string; }; }' is not assignable to type 'LabelProps'.
+  Property 'style' does not exist on type 'LabelProps'.
+src/pages/ProjectLINA.tsx(238,23): error TS2322: Type '{ children: any; key: string; delay: number; }' is not assignable to type 'RevealProps'.
+  Property 'key' does not exist on type 'RevealProps'.
+src/pages/ProjectLINA.tsx(278,43): error TS2322: Type '{ children: string; className: string; style: { color: string; }; }' is not assignable to type 'LabelProps'.
+  Property 'style' does not exist on type 'LabelProps'.
+src/pages/ProjectLINA.tsx(345,43): error TS2322: Type '{ children: string; className: string; style: { color: string; }; }' is not assignable to type 'LabelProps'.
+  Property 'style' does not exist on type 'LabelProps'.
+src/pages/ProjectLINA.tsx(393,43): error TS2322: Type '{ children: string; className: string; style: { color: string; }; }' is not assignable to type 'LabelProps'.
+  Property 'style' does not exist on type 'LabelProps'.
+src/pages/ProjectLINA.tsx(471,43): error TS2322: Type '{ children: string; className: string; style: { color: string; }; }' is not assignable to type 'LabelProps'.
+  Property 'style' does not exist on type 'LabelProps'.
+src/pages/ProjectLINA.tsx(521,23): error TS2322: Type '{ children: any; key: string; delay: number; }' is not assignable to type 'RevealProps'.
+  Property 'key' does not exist on type 'RevealProps'.
