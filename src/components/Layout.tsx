@@ -9,11 +9,11 @@ export function Layout() {
   React.useEffect(() => {
     const titles: Record<string, string> = {
       "/": "Quentin Singama | UX/UI Designer & Researcher",
-      "/ink": "INK — Branding Dystopique | Quentin Singama",
-      "/lina": "LINA — Expérience Librairie | Quentin Singama",
-      "/research": "UX Research — Concerts Étudiants | Quentin Singama",
-      "/musthane": "Musthane — Audit UX | Quentin Singama",
-      "/about": "À Propos — Dossier Personnel | Quentin Singama",
+      "/ink": "INK · Branding Dystopique | Quentin Singama",
+      "/lina": "LINA · Expérience Librairie | Quentin Singama",
+      "/research": "UX Research · Concerts Étudiants | Quentin Singama",
+      "/musthane": "Musthane · Audit UX | Quentin Singama",
+      "/about": "À Propos · Dossier Personnel | Quentin Singama",
     }
     
     // Set title based on current path, or fallback to default

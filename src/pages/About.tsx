@@ -326,9 +326,9 @@ export function About() {
               transition={{ delay: 0.6, duration: 0.6 }}
             >
               {[
-                { label: "Status", value: "En recherche d'alternance", dot: true },
-                { label: "Formation", value: "M1 UX/UI - ECV Bordeaux" },
-                { label: "Poste actuel", value: "Graphic Designer - Happy Job" },
+                { label: "Status", value: "En recherche d'alternance · Disponible", dot: true },
+                { label: "Formation", value: "M1 UX/UI · ECV Bordeaux" },
+                { label: "Dernière exp.", value: "Graphic Designer · Happy Job (2 mois)" },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-2">
                   {item.dot && (
@@ -455,7 +455,7 @@ export function About() {
                 <div className="mt-16 flex items-center justify-center gap-4 group cursor-default">
                   <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-t3/30" />
                   <span className="font-mono text-[10px] sm:text-[11px] text-t3 opacity-40 group-hover:opacity-70 transition-opacity duration-500 tracking-wider text-center">
-                    // L'esthétique Mechanicus est un clin d'œil — le designer, lui, est bien réel.
+                    // L'esthétique Mechanicus est un clin d'œil · le designer, lui, est bien réel.
                   </span>
                   <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-t3/30" />
                 </div>

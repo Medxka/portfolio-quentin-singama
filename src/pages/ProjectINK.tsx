@@ -140,8 +140,8 @@ export function ProjectINK() {
     { year: "2054", title: "TRAITÉ DE GENÈVE NUMÉRIQUE", desc: "Signature par 187 nations d'un accord de \"stabilisation informationnelle\". Création du Conseil Provisoire de Régulation Mondiale. Premier embryon du futur 13e Ordre." },
     { year: "2078", title: "NAISSANCE DU 13E ORDRE", desc: "Le Conseil Provisoire se transforme en autorité permanente. Premier Édit : \"Toute information non validée par le Conseil est une menace à la stabilité collective.\"" },
     { year: "2089", title: "FONDATION DE K.N.I.", desc: "Kinetic Nutrition Inc. est créée sous mandat du 13e Ordre. Mission officielle : nutrition optimisée pour la population mondiale. Mission réelle : surveiller les comportements de consommation et identifier les dissidents via leurs habitudes alimentaires." },
-    { year: "2094", title: "LOI D'ÉPURATION — PHASE 1", desc: "Interdiction de toute presse physique. Justification : \"Le papier imprimé est un vecteur de désinformation non traçable.\" Peine : rééducation mémorielle de 6 mois." },
-    { year: "2100", title: "LOI D'ÉPURATION — PHASE FINALE", desc: "Extension à tout objet imprimé : tickets, étiquettes, emballages, photographies, affiches. Le Print devient le bien le plus illégal — et donc le plus précieux — du monde. Naissance du marché noir." },
+    { year: "2094", title: "LOI D'ÉPURATION · PHASE 1", desc: "Interdiction de toute presse physique. Justification : \"Le papier imprimé est un vecteur de désinformation non traçable.\" Peine : rééducation mémorielle de 6 mois." },
+    { year: "2100", title: "LOI D'ÉPURATION · PHASE FINALE", desc: "Extension à tout objet imprimé : tickets, étiquettes, emballages, photographies, affiches. Le Print devient le bien le plus illégal · et donc le plus précieux · du monde. Naissance du marché noir." },
     { year: "2134", title: "FONDATION DE L'I.N.K.", desc: "Un collectif de 12 chercheurs développe la technologie de récupération temporelle. Objectif : voyager dans le passé pour extraire des prints avant leur destruction et les ramener dans le présent. Financement : vente aux enchères aux ultra-riches nostalgiques. Usage des fonds : financer la résistance sur le front." },
     { year: "3113", title: "AUJOURD'HUI", desc: "L'I.N.K. opère depuis 979 ans. 200k crédits récoltés. 99% d'authenticité. 1M d'années parcourues. Le 13e Ordre ne sait pas encore qu'ils existent." },
   ]
@@ -192,7 +192,7 @@ export function ProjectINK() {
 
           <Reveal delay={0.15}>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display tracking-tight text-white mb-4">
-              INK — <span style={{ color: INK.red }}>Illicit Network Keepers</span>
+              INK · <span style={{ color: INK.red }}>Illicit Network Keepers</span>
             </h1>
           </Reveal>
 
@@ -227,14 +227,14 @@ export function ProjectINK() {
       </section>
 
       {/* ═══════════════════════════════════════ */}
-      {/* 2. LE BRIEF — DATA-LOG                  */}
+      {/* 2. LE BRIEF · DATA-LOG                  */}
       {/* ═══════════════════════════════════════ */}
       <section className="py-20 md:py-28 relative overflow-hidden">
         <GlitchDivider />
         <div className="max-w-4xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: INK.red }}>// MISSION_BRIEF</Label>
-            <DataLog>{`// MISSION_BRIEF_REÇU — 09:00
+            <DataLog>{`// MISSION_BRIEF_REÇU · 09:00
 SUJET    : A JOURNEY
 THÈME    : PRINT ___
 GROUPE   : 13
@@ -260,13 +260,13 @@ OBJECTIF : CRÉER UNE MARQUE COMPLÈTE`}</DataLog>
         <GlitchDivider />
         <div className="max-w-4xl mx-auto px-6 mt-12">
           <Reveal>
-            <Label className="mb-4 block" style={{ color: INK.red }}>// CHRONOLOGIE — DATA-LOG HISTORIQUE</Label>
+            <Label className="mb-4 block" style={{ color: INK.red }}>// CHRONOLOGIE · DATA-LOG HISTORIQUE</Label>
             <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-4 max-w-3xl">
               La chute du{" "}
               <span style={{ color: INK.red }}>monde libre</span>
             </h2>
             <p className="text-lg text-t2 max-w-3xl leading-relaxed mb-12">
-              Comment le Print est devenu le bien le plus illégal — et le plus précieux — de l'humanité.
+              Comment le Print est devenu le bien le plus illégal · et le plus précieux · de l'humanité.
             </p>
           </Reveal>
 
@@ -307,7 +307,7 @@ OBJECTIF : CRÉER UNE MARQUE COMPLÈTE`}</DataLog>
               <div className="w-full h-full" style={{ background: `linear-gradient(to bottom, transparent, ${INK.red}, transparent)` }} />
             </div>
 
-            {/* LEFT — KNI */}
+            {/* LEFT · KNI */}
             <Reveal>
               <div className="p-6 md:p-10 rounded-2xl lg:rounded-r-none border border-border-color/30 lg:mr-4" style={{ backgroundColor: "#F5F5F5" }}>
                 <div className="flex items-center gap-3 mb-6">
@@ -349,7 +349,7 @@ OBJECTIF : CRÉER UNE MARQUE COMPLÈTE`}</DataLog>
               </div>
             </Reveal>
 
-            {/* RIGHT — INK */}
+            {/* RIGHT · INK */}
             <Reveal delay={0.15}>
               <div className="p-6 md:p-10 rounded-2xl lg:rounded-l-none border lg:ml-4 mt-4 lg:mt-0"
                 style={{ backgroundColor: INK.black, borderColor: INK.red + "25" }}
@@ -406,7 +406,7 @@ OBJECTIF : CRÉER UNE MARQUE COMPLÈTE`}</DataLog>
                 transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
               />
               <pre className="font-mono text-[11px] md:text-xs leading-relaxed relative z-10" style={{ color: INK.red }}>
-{`// D.I.B. ALERT — BUREAU D'INTÉGRITÉ NUMÉRIQUE
+{`// D.I.B. ALERT · BUREAU D'INTÉGRITÉ NUMÉRIQUE
 Détention de Print : effacement mémoriel immédiat.
 Toute transaction non déclarée sera tracée.
 Soyez vigilant. Soyez conformes.`}
@@ -423,7 +423,7 @@ Soyez vigilant. Soyez conformes.`}
         <GlitchDivider />
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
-            <Label className="mb-4 block" style={{ color: INK.red }}>// IDENTITÉ VISUELLE — SYSTÈME GRAPHIQUE</Label>
+            <Label className="mb-4 block" style={{ color: INK.red }}>// IDENTITÉ VISUELLE · SYSTÈME GRAPHIQUE</Label>
             <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Nuanciers & <span style={{ color: INK.red }}>typographie</span>
             </h2>
@@ -433,7 +433,7 @@ Soyez vigilant. Soyez conformes.`}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <Reveal>
               <div className="rounded-2xl overflow-hidden border bg-bg-card" style={{ borderColor: INK.red + "15" }}>
-                <img src="/ink-nuancier-ink.png" alt="Nuancier INK — Noir, Rouge Résistance, Dégradé" className="w-full h-auto" />
+                <img src="/ink-nuancier-ink.png" alt="Nuancier INK · Noir, Rouge Résistance, Dégradé" className="w-full h-auto" />
                 <div className="p-4">
                   <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// NUANCIER INK</span>
                 </div>
@@ -441,7 +441,7 @@ Soyez vigilant. Soyez conformes.`}
             </Reveal>
             <Reveal delay={0.1}>
               <div className="rounded-2xl overflow-hidden border border-border-color/30 bg-bg-card">
-                <img src="/ink-nuancier-kni.png" alt="Nuancier KNI — palette gouvernementale" className="w-full h-auto" />
+                <img src="/ink-nuancier-kni.png" alt="Nuancier KNI · palette gouvernementale" className="w-full h-auto" />
                 <div className="p-4">
                   <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-t3">// NUANCIER KNI</span>
                 </div>
@@ -469,9 +469,9 @@ Soyez vigilant. Soyez conformes.`}
             </Reveal>
             <Reveal delay={0.2}>
               <div className="rounded-2xl overflow-hidden border border-border-color/30 bg-bg-card">
-                <img src="/ink-contexte.png" alt="Contexte narratif — 13e Ordre" className="w-full h-auto" />
+                <img src="/ink-contexte.png" alt="Contexte narratif · 13e Ordre" className="w-full h-auto" />
                 <div className="p-4">
-                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-t3">// CONTEXTE — 13E ORDRE</span>
+                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-t3">// CONTEXTE · 13E ORDRE</span>
                 </div>
               </div>
             </Reveal>
@@ -481,25 +481,25 @@ Soyez vigilant. Soyez conformes.`}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Reveal>
               <div className="rounded-2xl overflow-hidden border bg-bg-card" style={{ borderColor: INK.red + "15" }}>
-                <img src="/ink-cover-13ordre.png" alt="File cover — 13e Ordre" className="w-full h-auto" />
+                <img src="/ink-cover-13ordre.png" alt="File cover · 13e Ordre" className="w-full h-auto" />
                 <div className="p-4">
-                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// COVER — 13E ORDRE</span>
+                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// COVER · 13E ORDRE</span>
                 </div>
               </div>
             </Reveal>
             <Reveal delay={0.1}>
               <div className="rounded-2xl overflow-hidden border border-border-color/30 bg-bg-card">
-                <img src="/ink-cover-kni.png" alt="File cover — KNI" className="w-full h-auto" />
+                <img src="/ink-cover-kni.png" alt="File cover · KNI" className="w-full h-auto" />
                 <div className="p-4">
-                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-t3">// COVER — KNI</span>
+                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-t3">// COVER · KNI</span>
                 </div>
               </div>
             </Reveal>
             <Reveal delay={0.2}>
               <div className="rounded-2xl overflow-hidden border bg-bg-card" style={{ borderColor: INK.red + "15" }}>
-                <img src="/ink-cover-ink.png" alt="File cover — INK" className="w-full h-auto" />
+                <img src="/ink-cover-ink.png" alt="File cover · INK" className="w-full h-auto" />
                 <div className="p-4">
-                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// COVER — INK</span>
+                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// COVER · INK</span>
                 </div>
               </div>
             </Reveal>
@@ -514,7 +514,7 @@ Soyez vigilant. Soyez conformes.`}
         <GlitchDivider />
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
-            <Label className="mb-4 block" style={{ color: INK.red }}>// RÉFÉRENCES VISUELLES — DATA-LOG MOODBOARD</Label>
+            <Label className="mb-4 block" style={{ color: INK.red }}>// RÉFÉRENCES VISUELLES · DATA-LOG MOODBOARD</Label>
             <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Inspirations &{" "}
               <span style={{ color: INK.red }}>références</span>
@@ -527,7 +527,7 @@ Soyez vigilant. Soyez conformes.`}
             >
               <img
                 src="/ink-sommaire.png"
-                alt="Moodboard INK — références visuelles dystopiques"
+                alt="Moodboard INK · références visuelles dystopiques"
                 className="w-full h-auto hover:scale-[1.02] transition-transform duration-700"
               />
             </div>
@@ -536,13 +536,13 @@ Soyez vigilant. Soyez conformes.`}
       </section>
 
       {/* ═══════════════════════════════════════ */}
-      {/* 6. LES DEUX SITES — MOCKUPS             */}
+      {/* 6. LES DEUX SITES · MOCKUPS             */}
       {/* ═══════════════════════════════════════ */}
       <section className="py-20 md:py-28 relative overflow-hidden">
         <GlitchDivider />
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
-            <Label className="mb-4 block" style={{ color: INK.red }}>// INTERFACES — DOUBLE STANDARD</Label>
+            <Label className="mb-4 block" style={{ color: INK.red }}>// INTERFACES · DOUBLE STANDARD</Label>
             <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Façade & <span style={{ color: INK.red }}>clandestinité</span>
             </h2>
@@ -555,7 +555,7 @@ Soyez vigilant. Soyez conformes.`}
                 <div className="overflow-hidden">
                   <img
                     src="/ink-maquette-kni.png"
-                    alt="Site KNI — façade gouvernementale"
+                    alt="Site KNI · façade gouvernementale"
                     className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700"
                   />
                 </div>
@@ -576,7 +576,7 @@ Soyez vigilant. Soyez conformes.`}
                 <div className="overflow-hidden">
                   <img
                     src="/ink-maquette.png"
-                    alt="Site INK — interface clandestine"
+                    alt="Site INK · interface clandestine"
                     className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700"
                   />
                 </div>
@@ -595,17 +595,17 @@ Soyez vigilant. Soyez conformes.`}
             <Reveal delay={0.2}>
               <div className="rounded-2xl overflow-hidden border bg-bg-card group" style={{ borderColor: INK.red + "15" }}>
                 <div className="overflow-hidden">
-                  <img src="/ink-enchere-full.png" alt="INK — Plateforme de mise aux enchères" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
+                  <img src="/ink-enchere-full.png" alt="INK · Plateforme de mise aux enchères" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
                 </div>
                 <div className="p-4">
-                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// ENCHÈRES — FULL VIEW</span>
+                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// ENCHÈRES · FULL VIEW</span>
                 </div>
               </div>
             </Reveal>
             <Reveal delay={0.25}>
               <div className="rounded-2xl overflow-hidden border bg-bg-card group" style={{ borderColor: INK.red + "15" }}>
                 <div className="overflow-hidden">
-                  <img src="/ink-enchere.png" alt="INK — Connexion enchères" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
+                  <img src="/ink-enchere.png" alt="INK · Connexion enchères" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
                 </div>
                 <div className="p-4">
                   <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// MODAL CONNEXION</span>
@@ -615,10 +615,10 @@ Soyez vigilant. Soyez conformes.`}
             <Reveal delay={0.3}>
               <div className="rounded-2xl overflow-hidden border border-border-color/30 bg-bg-card group">
                 <div className="overflow-hidden">
-                  <img src="/ink-home-kni.png" alt="KNI — Page d'accueil" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
+                  <img src="/ink-home-kni.png" alt="KNI · Page d'accueil" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
                 </div>
                 <div className="p-4">
-                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-t3">// HOME KNI — ACCUEIL OFFICIEL</span>
+                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-t3">// HOME KNI · ACCUEIL OFFICIEL</span>
                 </div>
               </div>
             </Reveal>
@@ -629,20 +629,20 @@ Soyez vigilant. Soyez conformes.`}
             <Reveal delay={0.2}>
               <div className="rounded-2xl overflow-hidden border border-border-color/30 bg-bg-card group">
                 <div className="overflow-hidden">
-                  <img src="/ink-produit-kni.png" alt="KNI — Produits nutritionnels" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
+                  <img src="/ink-produit-kni.png" alt="KNI · Produits nutritionnels" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
                 </div>
                 <div className="p-4">
-                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-t3">// PRODUITS KNI — NUTRITION CINÉTIQUE</span>
+                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase text-t3">// PRODUITS KNI · NUTRITION CINÉTIQUE</span>
                 </div>
               </div>
             </Reveal>
             <Reveal delay={0.25}>
               <div className="rounded-2xl overflow-hidden border bg-bg-card group" style={{ borderColor: INK.red + "15" }}>
                 <div className="overflow-hidden">
-                  <img src="/ink-produits-print.png" alt="INK — Collection de prints" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
+                  <img src="/ink-produits-print.png" alt="INK · Collection de prints" className="w-full h-auto group-hover:scale-[1.02] transition-transform duration-700" />
                 </div>
                 <div className="p-4">
-                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// COLLECTION PRINTS — RELIQUES</span>
+                  <span className="font-mono text-[9px] tracking-[0.15em] uppercase" style={{ color: INK.red }}>// COLLECTION PRINTS · RELIQUES</span>
                 </div>
               </div>
             </Reveal>
@@ -666,8 +666,8 @@ Soyez vigilant. Soyez conformes.`}
 
           <Reveal delay={0.1}>
             <p className="text-lg text-t2 leading-relaxed mb-10">
-              Dans ce groupe de 11, je me suis occupé du <span className="text-t1 font-semibold">storytelling</span> — construire
-              la chronologie du 13e Ordre, le narratif de l'I.N.K., la logique de l'univers — et de{" "}
+              Dans ce groupe de 11, je me suis occupé du <span className="text-t1 font-semibold">storytelling</span> · construire
+              la chronologie du 13e Ordre, le narratif de l'I.N.K., la logique de l'univers · et de{" "}
               <span className="text-t1 font-semibold">l'UI du site INK</span> (interface clandestine rouge/noir).
               Le branding KNI et INK, le moodboard et les assets produits ont été réalisés en collaboration avec l'équipe.
             </p>
@@ -677,7 +677,7 @@ Soyez vigilant. Soyez conformes.`}
           <Reveal delay={0.2}>
             <div className="p-6 rounded-xl border" style={{ borderColor: INK.red + "20", backgroundColor: INK.red + "05" }}>
               <span className="font-mono text-[10px] tracking-[0.15em] uppercase block mb-4" style={{ color: INK.red + "80" }}>
-                // ÉQUIPE COMPLÈTE — GROUPE 13
+                // ÉQUIPE COMPLÈTE · GROUPE 13
               </span>
               <div className="flex flex-wrap gap-2">
                 {[

@@ -26,7 +26,7 @@ function TerminalHeader({ label, refId, statusText, statusColor, isHovered }: {
       </div>
       {/* Label */}
       <span className="font-mono text-[9px] text-t3/50 tracking-[0.15em] uppercase ml-2 flex-1 truncate">
-        // {label} — DOSSIER {refId}
+        // {label} · DOSSIER {refId}
       </span>
       {/* Status badge */}
       <motion.span
@@ -37,6 +37,20 @@ function TerminalHeader({ label, refId, statusText, statusColor, isHovered }: {
       >
         {statusText}
       </motion.span>
+    </div>
+  )
+}
+
+/* ── Status fiche signal data row ── */
+function DataRow({ label, value, accent }: { label: string; value: string; accent: string }) {
+  return (
+    <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
+      <span className="font-mono text-[9px] tracking-[0.2em] uppercase shrink-0 sm:w-[140px]" style={{ color: accent + "99" }}>
+        {label}
+      </span>
+      <span className="font-mono text-xs md:text-sm text-t1 leading-snug">
+        {value}
+      </span>
     </div>
   )
 }
@@ -146,7 +160,7 @@ function ScrollToTopButton() {
           <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-p5 relative z-10 group-hover:-translate-y-0.5 transition-transform" stroke="currentColor" strokeWidth="2.5">
             <path d="M5 15l7-7 7 7" strokeLinecap="square" strokeLinejoin="miter"/>
           </svg>
-          <span className="font-mono text-[7px] text-p5/50 tracking-[0.2em] uppercase relative z-10">TOP</span>
+          <span className="font-mono text-[8px] text-p5/50 tracking-[0.2em] uppercase relative z-10">TOP</span>
         </motion.button>
       )}
     </AnimatePresence>
@@ -225,11 +239,11 @@ function WarpText({ text, delay = 0 }: { text: string; delay?: number }) {
 }
 
 /* ═══════════════════════════════════════ */
-/* INK — CLASSIFIED DOSSIER TERMINAL      */
+/* INK · CLASSIFIED DOSSIER TERMINAL      */
 /* ═══════════════════════════════════════ */
 function InkDossierCard() {
   const [hovered, setHovered] = React.useState(false)
-  const statusText = useScrambleText("[████████] CLASSIFIÉ", "[ACCÈS ACCORDÉ]", hovered)
+  const statusText = "HACKATHON · 2ÈME PLACE"
 
   return (
     <Link to="/ink" className="block" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
@@ -253,7 +267,7 @@ function InkDossierCard() {
             <div className="w-2 h-2 rounded-full bg-t3/30" />
           </div>
           <span className="font-mono text-[9px] text-t3/50 tracking-[0.15em] uppercase ml-2 flex-1">
-            // D.I.B. TERMINAL — ACCÈS RESTREINT
+            // D.I.B. TERMINAL · ACCÈS RESTREINT
           </span>
           <motion.span
             className="font-mono text-[8px] tracking-[0.15em] uppercase px-2 py-0.5 border rounded-sm"
@@ -265,12 +279,12 @@ function InkDossierCard() {
           </motion.span>
         </div>
 
-        {/* Body — asymmetric layout */}
+        {/* Body · asymmetric layout */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-0 flex-1 relative">
           {/* Scanline */}
           <Scanline accentColor="#AB0600" isHovered={hovered} />
 
-          {/* Left 55% — Mockup */}
+          {/* Left 55% · Mockup */}
           <div className="md:col-span-7 relative overflow-hidden p-4 md:p-6">
             <motion.div
               className="relative rounded-xl overflow-hidden"
@@ -283,7 +297,7 @@ function InkDossierCard() {
             >
               <img
                 src="/ink-cover-card.png"
-                alt="INK — Interface clandestine rouge et noir"
+                alt="INK · Interface clandestine rouge et noir"
                 className="w-full h-auto"
               />
               {/* Edge glow */}
@@ -295,7 +309,7 @@ function InkDossierCard() {
             </motion.div>
           </div>
 
-          {/* Right 45% — Dossier content */}
+          {/* Right 45% · Dossier content */}
           <div className="md:col-span-5 p-5 md:p-6 flex flex-col relative z-10">
             <div className="font-mono text-[10px] text-t3/50 tracking-[0.12em] uppercase mb-4 space-y-1">
               <div>REF : <span className="text-t3">INK-3113-ALPHA</span></div>
@@ -314,17 +328,17 @@ function InkDossierCard() {
             </div>
 
             <h3 className="text-xl md:text-2xl font-bold font-display text-t1 mb-3 leading-tight">
-              INK —<br />Une marque de résistance<br />née en 48h.
+              INK ·<br />Une marque de résistance<br />née en 48h.
             </h3>
 
-            <p className="font-mono text-[11px] text-t2/70 leading-relaxed mb-4">
-              Hackathon créatif · Thème "A Journey"<br />
-              Thème imposé : Print.<br />
-              Deux identités. Un univers dystopique.<br />
-              2ème place.
-            </p>
+            <div className="font-mono text-[11px] leading-relaxed mb-4 space-y-1.5 border-l-2 pl-3" style={{ borderColor: "#AB060040" }}>
+              <div><span className="text-t3/50">CONTEXTE</span> <span className="text-t2">· Hackathon créatif "A Journey"</span></div>
+              <div><span className="text-t3/50">RÔLE</span> <span className="text-t2">· Direction artistique + UI · équipe de 11</span></div>
+              <div><span className="text-t3/50">LIVRABLES</span> <span className="text-t2">· Identité, supports print, narratif</span></div>
+              <div><span className="text-t3/50">RÉSULTAT</span> <span className="text-t1 font-semibold">· 2ᵉ place / promotion ECV</span></div>
+            </div>
 
-            {/* OUVRIR LE DOSSIER — always in DOM, fades in/out */}
+            {/* OUVRIR LE DOSSIER · always in DOM, fades in/out */}
             <span
               className="font-mono text-[10px] uppercase tracking-[0.15em] mt-auto transition-all duration-300"
               style={{ color: "#AB0600", opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(5px)" }}
@@ -334,7 +348,7 @@ function InkDossierCard() {
           </div>
         </div>
 
-        {/* Badge — bottom left */}
+        {/* Badge · bottom left */}
         <div className="absolute bottom-10 left-4 z-20">
           <span className="inline-flex items-center gap-1.5 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.12em] border rounded-sm"
             style={{ borderColor: "#AB060050", color: "#AB0600", backgroundColor: "#AB060010", transform: "rotate(-2deg)" }}
@@ -351,12 +365,12 @@ function InkDossierCard() {
 }
 
 /* ═══════════════════════════════════════ */
-/* LINA — ARCHIVED DOSSIER                */
+/* LINA · ARCHIVED DOSSIER                */
 /* ═══════════════════════════════════════ */
 function LinaDossierCard() {
   const [hovered, setHovered] = React.useState(false)
   const INDIGO = "#4F46E5"
-  const statusText = useScrambleText("[ARCHIVÉ — LIVRÉ]", "[ACCÈS ACCORDÉ]", hovered)
+  const statusText = "WORKSHOP · LIVRÉ"
 
   return (
     <Link to="/lina" className="block" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
@@ -372,11 +386,11 @@ function LinaDossierCard() {
       >
         <TerminalHeader label="LINA" refId="LINA-2025-UX" statusText={statusText} statusColor={INDIGO} isHovered={hovered} />
 
-        {/* Body — asymmetric layout */}
+        {/* Body · asymmetric layout */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-0 flex-1 relative">
           <Scanline accentColor={INDIGO} isHovered={hovered} />
 
-          {/* Left — Mockup */}
+          {/* Left · Mockup */}
           <div className="md:col-span-7 relative overflow-hidden p-4 md:p-6">
             <div className="relative rounded-xl overflow-hidden max-h-[350px]"
               style={{ boxShadow: hovered ? `0 0 30px ${INDIGO}25` : `0 0 15px ${INDIGO}10` }}
@@ -396,7 +410,7 @@ function LinaDossierCard() {
             </div>
           </div>
 
-          {/* Right — Dossier content */}
+          {/* Right · Dossier content */}
           <div className="md:col-span-5 p-5 md:p-6 flex flex-col relative z-10">
             <div className="font-mono text-[10px] text-t3/50 tracking-[0.12em] uppercase mb-4 space-y-1">
               <div>REF : <span className="text-t3">LINA-2025-UX</span></div>
@@ -415,14 +429,15 @@ function LinaDossierCard() {
             </div>
 
             <h3 className="text-xl md:text-2xl font-bold font-display text-t1 mb-3 leading-tight">
-              LINA — Repenser la<br />découverte en librairie<br />indépendante
+              LINA · Repenser la<br />découverte en librairie<br />indépendante
             </h3>
 
-            <p className="font-mono text-[11px] text-t2/70 leading-relaxed mb-4">
-              Refonte UX/UI · Système d'icônes<br />
-              Workshop 3 jours · En duo<br />
-              ECV Bordeaux
-            </p>
+            <div className="font-mono text-[11px] leading-relaxed mb-4 space-y-1.5 border-l-2 pl-3" style={{ borderColor: INDIGO + "40" }}>
+              <div><span className="text-t3/50">CONTEXTE</span> <span className="text-t2">· Workshop ECV Bordeaux · 3 jours</span></div>
+              <div><span className="text-t3/50">RÔLE</span> <span className="text-t2">· UX/UI Designer · en duo</span></div>
+              <div><span className="text-t3/50">LIVRABLES</span> <span className="text-t2">· Refonte desktop + système d'icônes</span></div>
+              <div><span className="text-t3/50">FOCUS</span> <span className="text-t2">· Découverte produit · navigation</span></div>
+            </div>
 
             <span
               className="font-mono text-[10px] uppercase tracking-[0.15em] mt-auto transition-all duration-300"
@@ -433,7 +448,7 @@ function LinaDossierCard() {
           </div>
         </div>
 
-        {/* Status badge — top right corner */}
+        {/* Status badge · top right corner */}
         <div className="absolute top-12 right-4 z-20">
           <span className="font-mono text-[8px] uppercase tracking-[0.12em] px-2 py-0.5 border rounded-sm"
             style={{ borderColor: INDIGO + "40", color: INDIGO, backgroundColor: INDIGO + "10" }}
@@ -449,12 +464,12 @@ function LinaDossierCard() {
 }
 
 /* ═══════════════════════════════════════ */
-/* RESEARCH — DATA ANALYSIS TERMINAL      */
+/* RESEARCH · DATA ANALYSIS TERMINAL      */
 /* ═══════════════════════════════════════ */
 function ResearchDossierCard() {
   const [hovered, setHovered] = React.useState(false)
   const CYAN = "#06B6D4"
-  const statusText = useScrambleText("[EN ANALYSE ···]", "[ACCÈS ACCORDÉ]", hovered)
+  const statusText = "RECHERCHE UX · TERRAIN"
 
   return (
     <Link to="/research" className="block" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
@@ -470,31 +485,38 @@ function ResearchDossierCard() {
       >
         <TerminalHeader label="UX RESEARCH" refId="RES-2025-UX" statusText={statusText} statusColor={CYAN} isHovered={hovered} />
 
-        {/* Cover visual */}
-        <div className="relative overflow-hidden h-[180px] md:h-[220px]">
+        {/* Cover visual · verbatim & participants */}
+        <div className="relative overflow-hidden h-[180px] md:h-[220px] flex flex-col justify-between p-5 md:p-6" style={{ backgroundColor: "#0A1015" }}>
           <Scanline accentColor={CYAN} isHovered={hovered} />
-          <div className="w-full h-full relative" style={{ backgroundColor: "#0A1015" }}>
-            {/* Data-grid visual */}
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(${CYAN}08 1px, transparent 1px)`,
-              backgroundSize: "8px 8px",
-            }} />
-            {/* Central icon */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-center">
-                <div className="font-mono text-[48px] leading-none mb-2" style={{ color: CYAN + "20" }}>🎧</div>
-                <div className="font-mono text-[9px] tracking-[0.25em] uppercase" style={{ color: CYAN + "40" }}>7 INTERVIEWS · ANALYSE QUALITATIVE</div>
-              </div>
-            </div>
-            {/* Floating data tags */}
-            <div className="absolute top-3 left-3 px-2 py-0.5 border rounded-sm" style={{ borderColor: CYAN + "20", backgroundColor: CYAN + "06" }}>
-              <span className="font-mono text-[7px] tracking-[0.15em] uppercase" style={{ color: CYAN + "50" }}>SEQ_SCORE::4.7/7</span>
-            </div>
-            <div className="absolute bottom-3 right-3 px-2 py-0.5 border rounded-sm" style={{ borderColor: CYAN + "20", backgroundColor: CYAN + "06" }}>
-              <span className="font-mono text-[7px] tracking-[0.15em] uppercase" style={{ color: CYAN + "50" }}>18-25_ANS</span>
-            </div>
+          {/* Subtle background dots */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(${CYAN}08 1px, transparent 1px)`,
+            backgroundSize: "10px 10px",
+          }} />
+
+          {/* Verbatim quote */}
+          <div className="relative z-10 max-w-[90%]">
+            <span className="font-display text-[36px] md:text-[44px] leading-none block mb-1" style={{ color: CYAN + "30" }}>"</span>
+            <p className="text-sm md:text-base text-t1/90 italic leading-snug -mt-3 md:-mt-4">
+              Je les découvre en scrollant Twitter, j'ai juste à attendre que le concert soit annoncé.
+            </p>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D14] via-transparent to-transparent" />
+
+          {/* Participant strip */}
+          <div className="relative z-10 flex items-center gap-2 flex-wrap">
+            {["Q1", "Q2", "K1", "K2", "K3", "T1", "T2"].map(p => (
+              <span
+                key={p}
+                className="font-mono text-[9px] tracking-wider uppercase px-1.5 py-0.5 border rounded-sm"
+                style={{ borderColor: CYAN + "30", color: CYAN + "AA", backgroundColor: CYAN + "08" }}
+              >
+                {p}
+              </span>
+            ))}
+            <span className="font-mono text-[9px] text-t3/60 ml-1">· 7 récits</span>
+          </div>
+
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D14]/80 via-transparent to-transparent pointer-events-none" />
         </div>
 
         {/* Content */}
@@ -513,9 +535,11 @@ function ResearchDossierCard() {
             Découverte de concerts chez les étudiants
           </h3>
 
-          <p className="font-mono text-[11px] text-t2/70 leading-relaxed mb-3">
-            Étude qualitative · 7 interviews<br />Analyse thématique · Personas
-          </p>
+          <div className="font-mono text-[10px] leading-relaxed mb-3 space-y-1 border-l-2 pl-2.5" style={{ borderColor: CYAN + "40" }}>
+            <div><span className="text-t3/50">RÔLE</span> <span className="text-t2">· UX Researcher</span></div>
+            <div><span className="text-t3/50">MÉTHODE</span> <span className="text-t2">· 7 interviews · analyse thématique</span></div>
+            <div><span className="text-t3/50">LIVRABLES</span> <span className="text-t2">· Personas · insights · recommandations</span></div>
+          </div>
 
           <span
             className="font-mono text-[10px] uppercase tracking-[0.15em] mt-auto transition-all duration-300"
@@ -532,75 +556,83 @@ function ResearchDossierCard() {
 }
 
 /* ═══════════════════════════════════════ */
-/* MUSTHANE — AUDIT REPORT                */
+/* MUSTHANE · AUDIT REPORT                */
 /* ═══════════════════════════════════════ */
 function MusthaneDossierCard() {
+  const [hovered, setHovered] = React.useState(false)
   const AMBER = "#F59E0B"
+  const statusText = "REFONTE NAV · LIVRÉ"
 
   return (
-    <div className="block cursor-not-allowed">
-      <div
-        className="noise-overlay flex flex-col overflow-hidden rounded-xl border transition-all duration-500 h-full relative"
+    <Link to="/musthane" className="block" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      <motion.div
+        whileHover={{ y: -4 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="noise-overlay flex flex-col overflow-hidden rounded-xl border transition-all duration-500 h-full"
         style={{
           backgroundColor: "#0D0D14",
-          borderColor: AMBER + "15",
-          opacity: 0.6,
+          borderColor: hovered ? AMBER + "CC" : AMBER + "20",
+          boxShadow: hovered ? `0 0 25px ${AMBER}25` : "none",
         }}
       >
-        <TerminalHeader label="MUSTHANE" refId="MUST-2025-AUD" statusText="[EN CONSTRUCTION]" statusColor={AMBER} isHovered={false} />
+        <TerminalHeader label="MUSTHANE" refId="MUST-2025-NAV" statusText={statusText} statusColor={AMBER} isHovered={hovered} />
 
-        {/* Mockup */}
-        <div className="relative overflow-hidden h-[180px] md:h-[220px]">
-          <Scanline accentColor={AMBER} isHovered={false} />
-          <div className="w-full h-full" style={{ backgroundColor: "#111118" }} />
+        {/* Cover · arborescence visual */}
+        <div className="relative overflow-hidden h-[180px] md:h-[220px]" style={{ backgroundColor: "#111118" }}>
+          <Scanline accentColor={AMBER} isHovered={hovered} />
+          {/* Subtle grid */}
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(${AMBER}06 1px, transparent 1px), linear-gradient(90deg, ${AMBER}06 1px, transparent 1px)`,
+            backgroundSize: "20px 20px",
+          }} />
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="text-center">
-              <span className="font-mono text-[40px] block mb-2" style={{ color: AMBER + "20" }}>⚙</span>
-              <span className="font-mono text-[10px] tracking-[0.2em] uppercase" style={{ color: AMBER + "40" }}>DOSSIER EN COURS DE COMPILATION</span>
+              <span className="font-display font-bold block leading-none mb-2" style={{ color: AMBER, fontSize: "44px" }}>4 → 1</span>
+              <span className="font-mono text-[9px] tracking-[0.2em] uppercase" style={{ color: AMBER + "70" }}>4 AXES DE NAV · UN SEUL POINT D'ENTRÉE</span>
             </div>
+          </div>
+          <div className="absolute bottom-3 right-3 px-2 py-0.5 border rounded-sm" style={{ borderColor: AMBER + "20", backgroundColor: AMBER + "06" }}>
+            <span className="font-mono text-[8px] tracking-[0.15em] uppercase" style={{ color: AMBER + "70" }}>100+ PRODUITS</span>
           </div>
         </div>
 
         {/* Content */}
         <div className="p-4 md:p-5 flex flex-col flex-1 relative z-10">
           <div className="font-mono text-[10px] text-t3/50 tracking-[0.12em] uppercase mb-3 space-y-0.5">
-            <div>REF : <span className="text-t3">MUST-2025-AUD</span></div>
-            <div>STATUT : <span style={{ color: AMBER + "60" }}>[EN CONSTRUCTION]</span></div>
+            <div>REF : <span className="text-t3">MUST-2025-NAV</span></div>
+            <div>STATUT : <span style={{ color: AMBER }}>{statusText}</span></div>
           </div>
 
           <div className="flex flex-wrap gap-1.5 mb-3">
-            {["UX AUDIT", "SEO"].map(tag => (
+            {["ARBORESCENCE", "NAV DESIGN", "MOBILE", "AUDIT UX"].map(tag => (
               <span key={tag} className="font-mono text-[8px] uppercase tracking-[0.15em] px-2 py-0.5 border rounded-sm"
-                style={{ borderColor: AMBER + "15", color: AMBER + "40" }}>
+                style={{ borderColor: AMBER + "30", color: AMBER + "99" }}>
                 {tag}
               </span>
             ))}
           </div>
 
-          <h3 className="text-lg font-bold font-display text-t3/60 mb-2 leading-tight">
-            Audit UX & SEO — site industriel Musthane
+          <h3 className="text-lg font-bold font-display text-t1 mb-2 leading-tight">
+            Refonte navigation · site industriel
           </h3>
 
-          <p className="font-mono text-[11px] text-t3/50 leading-relaxed mb-3">
-            Évaluation heuristique · Arborescence<br />Recommandations priorisées
-          </p>
+          <div className="font-mono text-[10px] leading-relaxed mb-3 space-y-1 border-l-2 pl-2.5" style={{ borderColor: AMBER + "40" }}>
+            <div><span className="text-t3/50">CONTEXTE</span> <span className="text-t2">· Projet école · 2 jours</span></div>
+            <div><span className="text-t3/50">RÔLE</span> <span className="text-t2">· UX · arborescence et nav</span></div>
+            <div><span className="text-t3/50">LIVRABLES</span> <span className="text-t2">· Arbo · nav desktop &amp; mobile · accueil</span></div>
+          </div>
 
           <span
-            className="font-mono text-[10px] uppercase tracking-[0.15em] mt-auto"
-            style={{ color: AMBER + "30" }}
+            className="font-mono text-[10px] uppercase tracking-[0.15em] mt-auto transition-all duration-300"
+            style={{ color: AMBER, opacity: hovered ? 1 : 0, transform: hovered ? "translateY(0)" : "translateY(5px)" }}
           >
-            BIENTÔT DISPONIBLE
+            OUVRIR LE DOSSIER →
           </span>
         </div>
 
-        <DossierFooter text="// UX AUDIT · SEO · ÉVALUATION HEURISTIQUE · ECV BORDEAUX" accentColor={AMBER} />
-
-        {/* Locked overlay scanline */}
-        <div className="absolute inset-0 pointer-events-none" style={{
-          background: "repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(245,158,11,0.02) 3px, rgba(245,158,11,0.02) 4px)"
-        }} />
-      </div>
-    </div>
+        <DossierFooter text="// REFONTE ARBORESCENCE · NAV DESKTOP &amp; MOBILE · ECV BORDEAUX · 2 JOURS" accentColor={AMBER} />
+      </motion.div>
+    </Link>
   )
 }
 
@@ -626,13 +658,13 @@ export function Home() {
           <div className="absolute bottom-[20%] left-[10%] w-[40vw] h-[40vw] max-w-[600px] max-h-[600px] bg-c5/8 rounded-full blur-[140px]" />
         </div>
 
-        {/* ── Side data readouts (desktop) — warp scramble ── */}
+        {/* ── Side data readouts (desktop) ── */}
         <div className="absolute left-6 top-1/2 -translate-y-1/2 z-10 hidden lg:flex flex-col gap-6 items-start">
           {/* Vertical line */}
           <div className="w-[1px] h-16 bg-gradient-to-b from-p5/30 to-transparent ml-[3px]" />
           {[
-            { label: "LOCATION", value: "44.8378° N" },
-            { label: "STATUS", value: "AVAILABLE" },
+            { label: "LOCATION", value: "BORDEAUX · 44.8378° N" },
+            { label: "STATUS", value: "DISPONIBLE" },
             { label: "STACK", value: "FIGMA · FRAMER" },
           ].map((item, i) => (
             <motion.div
@@ -643,7 +675,7 @@ export function Home() {
               className="flex flex-col gap-0.5"
             >
               <span className="font-mono text-[9px] text-p5/40 tracking-[0.2em] uppercase">{item.label}</span>
-              <WarpText text={item.value} delay={1.4 + i * 0.2} />
+              <span className="font-mono text-[10px] text-t3 tracking-wider">{item.value}</span>
             </motion.div>
           ))}
           <div className="w-[1px] h-8 bg-gradient-to-b from-transparent to-c5/20 ml-[3px]" />
@@ -677,7 +709,7 @@ export function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             {/* Left side text & CTAs */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-12">
               {/* Label */}
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
@@ -709,7 +741,7 @@ export function Home() {
                 {/* SINGAMA */}
                 <span className="block overflow-hidden relative">
                   <motion.span
-                    className="block text-5xl md:text-7xl lg:text-[7rem] uppercase tracking-[0.12em] md:tracking-[0.18em] lg:tracking-[0.22em]"
+                    className="block text-5xl md:text-7xl lg:text-[7rem] uppercase tracking-[0.15em] md:tracking-[0.2em]"
                     style={{
                       background: "linear-gradient(135deg, #8B5CF6 0%, #06B6D4 50%, #A78BFA 100%)",
                       WebkitBackgroundClip: "text",
@@ -809,69 +841,6 @@ export function Home() {
               </motion.div>
             </div>
 
-            {/* Right side Visual Element (Mechanicus Hologram) */}
-            <div className="hidden lg:flex lg:col-span-5 relative w-full items-center justify-center pl-10 items-end">
-              <motion.div 
-                className="relative w-full max-w-[400px] aspect-square flex items-center justify-center pointer-events-none opacity-80"
-                initial={{ opacity: 0, scale: 0.9, filter: "brightness(0.5)" }}
-                animate={{ opacity: 0.8, scale: 1, filter: "brightness(1)" }}
-                transition={{ delay: 1.2, duration: 1.5, ease: "easeOut" }}
-              >
-                {/* Outer rotating dashed ring */}
-                <motion.div
-                  className="absolute inset-[5%] rounded-full border-[1px] border-dashed border-p5/30"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-                />
-                
-                {/* Thick counter-rotating ring */}
-                <motion.div
-                  className="absolute inset-[20%] rounded-full border-[3px] border-transparent border-t-c5/40 border-b-c5/40"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-                />
-
-                {/* Inner precise scale */}
-                <motion.div
-                  className="absolute inset-[30%] rounded-full border-[1px] border-dotted border-p5/50"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-                />
-
-                {/* Central Mechanism */}
-                <motion.div
-                  className="relative w-[50%] h-[50%] flex items-center justify-center text-p5"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                >
-                  <svg viewBox="0 0 100 100" fill="none" className="w-full h-full drop-shadow-[0_0_15px_rgba(139,92,246,0.6)]">
-                    <path d="M50 5 L55 20 L75 15 L70 30 L90 35 L80 50 L90 65 L70 70 L75 85 L55 80 L50 95 L45 80 L25 85 L30 70 L10 65 L20 50 L10 35 L30 30 L25 15 L45 20 Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="miter" />
-                    <circle cx="50" cy="50" r="15" stroke="currentColor" strokeWidth="2" className="text-c5" />
-                    <circle cx="50" cy="50" r="6" fill="currentColor" className="text-c5/90" />
-                  </svg>
-                </motion.div>
-
-                {/* Crosshairs & Overlay lines */}
-                <div className="absolute inset-[15%] flex items-center justify-center">
-                  <div className="w-[120%] h-[1px] bg-gradient-to-r from-transparent via-c5/50 to-transparent absolute" />
-                  <div className="h-[120%] w-[1px] bg-gradient-to-b from-transparent via-p5/50 to-transparent absolute" />
-                  {/* scanning sweep line */}
-                  <motion.div
-                    className="absolute w-full h-[2px] bg-c5 shadow-[0_0_8px_#06B6D4]"
-                    animate={{ top: ["0%", "100%", "0%"] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                </div>
-                
-                {/* Data floating tags */}
-                <div className="absolute top-[10%] right-[5%] bg-bg/80 border border-c5/30 px-2 py-1 backdrop-blur-sm">
-                  <span className="font-mono text-[8px] text-c5 uppercase tracking-wider">SYNC_ID::904-A</span>
-                </div>
-                <div className="absolute bottom-[10%] left-[5%] bg-bg/80 border border-p5/30 px-2 py-1 backdrop-blur-sm">
-                  <span className="font-mono text-[8px] text-p5 uppercase tracking-wider">COGITATOR_ACTIVE</span>
-                </div>
-              </motion.div>
-            </div>
           </div>
         </div>
 
@@ -882,7 +851,7 @@ export function Home() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
         >
-          <span className="font-mono text-[9px] text-t3/60 tracking-[0.25em] uppercase">Scroll</span>
+          <span className="font-mono text-[9px] text-t3/60 tracking-[0.2em] uppercase">Scroll</span>
           <div className="relative w-[1px] h-8 bg-border-color/30 overflow-hidden">
             <motion.div
               className="absolute top-0 w-full h-3 bg-gradient-to-b from-p5/60 to-transparent"
@@ -911,6 +880,190 @@ export function Home() {
             <div className="absolute top-1/2 -translate-y-1/2 left-[65%] w-1.5 h-1.5 rounded-full bg-c5/20" />
             <div className="absolute top-1/2 -translate-y-1/2 left-[85%] w-1 h-1 rounded-full bg-p5/30" />
           </div>
+        </div>
+      </section>
+
+      {/* ═══ STATUS SECTION - Fiche signal ═══ */}
+      <section id="status" className="py-24 md:py-32 relative overflow-hidden" style={{ backgroundColor: "#0A0A0F" }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <div className="rounded-xl border overflow-hidden" style={{ borderColor: "rgba(139,92,246,0.25)", backgroundColor: "#0D0D14" }}>
+              {/* Terminal Header */}
+              <div className="flex items-center gap-2 px-4 py-2.5 border-b" style={{ backgroundColor: "#111111", borderColor: "rgba(139,92,246,0.15)" }}>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2 h-2 rounded-full bg-ok" />
+                  <div className="w-2 h-2 rounded-full bg-t3/30" />
+                  <div className="w-2 h-2 rounded-full bg-t3/30" />
+                </div>
+                <span className="font-mono text-[9px] text-t3/50 tracking-[0.15em] uppercase ml-2 flex-1 truncate">
+                  // SIGNAL ACTIF · DOSSIER QS-2026-09
+                </span>
+                <span className="font-mono text-[8px] tracking-[0.15em] uppercase px-2 py-0.5 border rounded-sm whitespace-nowrap"
+                  style={{ borderColor: "rgba(34,197,94,0.4)", color: "#22C55E", backgroundColor: "rgba(34,197,94,0.08)" }}
+                >
+                  ACTIVE
+                </span>
+              </div>
+
+              {/* Body */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-0">
+                {/* Left · primary signal */}
+                <div className="lg:col-span-8 p-6 md:p-10 relative">
+                  {/* Mechanicus corner brackets */}
+                  <div className="absolute top-4 left-4 w-3 h-3 border-l border-t border-p5/40" aria-hidden />
+                  <div className="absolute bottom-4 right-4 w-3 h-3 border-r border-b border-p5/40" aria-hidden />
+
+                  <div className="font-mono text-[10px] text-p5/50 tracking-[0.2em] uppercase mb-3">
+                    // RECHERCHE EN COURS
+                  </div>
+
+                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-t1 leading-[1.05] mb-6">
+                    Alternance UX/UI Designer<br />
+                    <span className="text-p5">· Septembre 2026</span>
+                  </h2>
+
+                  <p className="text-base md:text-lg text-t2 leading-relaxed max-w-2xl mb-8">
+                    Master 2 Design & UX/UI à l'ECV Bordeaux. Recherche entreprise pour une alternance d'un an, orientée <span className="text-t1 font-semibold">Product Design / UX-UI</span>. Disponible également pour des stages courts d'ici septembre.
+                  </p>
+
+                  {/* Data lines · fiche signal */}
+                  <div className="border-t pt-6 space-y-2.5" style={{ borderColor: "rgba(139,92,246,0.12)" }}>
+                    <DataRow label="POSTE" value="UX/UI Designer · Product Design" accent="#8B5CF6" />
+                    <DataRow label="CONTRAT" value="Alternance M2 · rythme école/entreprise" accent="#8B5CF6" />
+                    <DataRow label="DÉBUT" value="Septembre 2026 · 12 mois" accent="#8B5CF6" />
+                    <DataRow label="EN ATTENDANT" value="Stages courts ouverts (avr.→août 2026)" accent="#06B6D4" />
+                    <DataRow label="LOCALISATION" value="Bordeaux · Remote · Hybride" accent="#06B6D4" />
+                  </div>
+                </div>
+
+                {/* Right · contact CTAs */}
+                <div className="lg:col-span-4 p-6 md:p-10 border-t lg:border-t-0 lg:border-l flex flex-col justify-center gap-4 relative"
+                  style={{ borderColor: "rgba(139,92,246,0.12)", backgroundColor: "rgba(139,92,246,0.02)" }}
+                >
+                  <div className="font-mono text-[10px] text-p5/50 tracking-[0.2em] uppercase mb-1">
+                    // ÉTABLIR LE CONTACT
+                  </div>
+
+                  <a
+                    href="mailto:quentinsingama974@gmail.com?subject=Alternance%20UX%2FUI%20·%20Septembre%202026"
+                    className="group flex items-center justify-between gap-3 px-4 py-3.5 border rounded-sm transition-all hover:border-p5/60 hover:bg-p5/5"
+                    style={{ borderColor: "rgba(139,92,246,0.2)" }}
+                  >
+                    <div className="flex flex-col gap-0.5 min-w-0">
+                      <span className="font-mono text-[8px] text-p5/50 tracking-[0.2em] uppercase">EMAIL</span>
+                      <span className="font-mono text-[11px] text-t1 truncate">quentinsingama974@gmail.com</span>
+                    </div>
+                    <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 text-p5/60 shrink-0 transition-transform group-hover:translate-x-0.5">
+                      <path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
+                    </svg>
+                  </a>
+
+                  <a
+                    href="https://www.linkedin.com/in/quentin-singama-1b36b31b9/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center justify-between gap-3 px-4 py-3.5 border rounded-sm transition-all hover:border-c5/60 hover:bg-c5/5"
+                    style={{ borderColor: "rgba(6,182,212,0.2)" }}
+                  >
+                    <div className="flex flex-col gap-0.5 min-w-0">
+                      <span className="font-mono text-[8px] text-c5/60 tracking-[0.2em] uppercase">LINKEDIN</span>
+                      <span className="font-mono text-[11px] text-t1 truncate">in/quentin-singama</span>
+                    </div>
+                    <svg viewBox="0 0 20 20" fill="none" className="w-4 h-4 text-c5/60 shrink-0 transition-transform group-hover:translate-x-0.5">
+                      <path d="M5 10h10M11 6l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="square" />
+                    </svg>
+                  </a>
+
+                  <div className="font-mono text-[9px] text-t3/40 tracking-[0.12em] uppercase mt-2">
+                    Réponse sous 48h ouvrées.
+                  </div>
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="px-4 py-2.5 border-t" style={{ borderColor: "rgba(139,92,246,0.12)" }}>
+                <span className="font-mono text-[8px] text-t3/40 tracking-[0.12em] uppercase">
+                  // FICHE MISE À JOUR · ECV BORDEAUX · MASTER DESIGN UX/UI · PROMOTION 2026
+                </span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══ NOUVEAU PROJET — Musthane callout ═══ */}
+      <section className="pt-4 pb-16 md:pt-6 md:pb-24 relative overflow-hidden" style={{ backgroundColor: "#0A0A0F" }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <Reveal>
+            <Link
+              to="/musthane"
+              className="group block rounded-2xl border overflow-hidden relative transition-all duration-300 hover:border-[#F59E0B] hover:shadow-[0_0_40px_rgba(245,158,11,0.15)]"
+              style={{ borderColor: "rgba(245,158,11,0.3)", backgroundColor: "#0D0D14" }}
+            >
+              {/* Top sweep accent */}
+              <div className="absolute top-0 left-0 right-0 h-[1px]" style={{ background: "linear-gradient(to right, transparent, #F59E0B80, transparent)" }} />
+
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-0 items-stretch">
+                {/* Left — content */}
+                <div className="md:col-span-8 p-6 md:p-10 flex flex-col justify-center relative">
+                  {/* NOUVEAU badge */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <motion.span
+                      className="font-mono text-[9px] tracking-[0.25em] uppercase px-2.5 py-1 border rounded-sm"
+                      style={{ borderColor: "#F59E0B", color: "#F59E0B", backgroundColor: "rgba(245,158,11,0.08)" }}
+                      animate={{ opacity: [1, 0.55, 1] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      ◆ NOUVEAU
+                    </motion.span>
+                    <span className="font-mono text-[10px] text-t3/50 tracking-[0.15em] uppercase">// DERNIER PROJET DÉPLOYÉ</span>
+                  </div>
+
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold font-display text-t1 leading-tight mb-3">
+                    Refonte navigation Musthane <br className="hidden md:block" />
+                    <span style={{ color: "#F59E0B" }}>· 100+ produits remis en ordre</span>
+                  </h3>
+
+                  <p className="text-base text-t2 leading-relaxed max-w-2xl mb-6">
+                    Site B2B industriel · 4 axes de classification contradictoires démêlés en une logique unique. Audit heuristique, nouvelle arborescence, mega-menu desktop, drawer mobile et nouvelle accueil.
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-2 mb-6">
+                    {["ARBORESCENCE", "NAV DESIGN", "MOBILE", "AUDIT UX"].map(tag => (
+                      <span key={tag} className="font-mono text-[8px] uppercase tracking-[0.15em] px-2 py-0.5 border rounded-sm"
+                        style={{ borderColor: "rgba(245,158,11,0.3)", color: "rgba(245,158,11,0.85)" }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] transition-all duration-300"
+                    style={{ color: "#F59E0B" }}
+                  >
+                    Ouvrir l'étude
+                    <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </span>
+                </div>
+
+                {/* Right — visual */}
+                <div className="md:col-span-4 relative overflow-hidden border-t md:border-t-0 md:border-l min-h-[180px]"
+                  style={{ borderColor: "rgba(245,158,11,0.15)", backgroundColor: "#111118" }}
+                >
+                  {/* Subtle grid */}
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: "linear-gradient(rgba(245,158,11,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(245,158,11,0.04) 1px, transparent 1px)",
+                    backgroundSize: "20px 20px",
+                  }} />
+                  {/* Punchy stat */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+                    <span className="font-display font-bold leading-none mb-2" style={{ color: "#F59E0B", fontSize: "clamp(48px, 8vw, 88px)" }}>4 → 1</span>
+                    <span className="font-mono text-[9px] tracking-[0.2em] uppercase" style={{ color: "rgba(245,158,11,0.7)" }}>4 axes de nav · 1 logique</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </Reveal>
         </div>
       </section>
 
@@ -946,22 +1099,22 @@ export function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
 
-            {/* ═══ INK — CLASSIFIED DOSSIER TERMINAL ═══ */}
+            {/* ═══ INK · CLASSIFIED DOSSIER TERMINAL ═══ */}
             <Reveal className="md:col-span-2">
               <InkDossierCard />
             </Reveal>
 
-            {/* ═══ LINA — ARCHIVED DOSSIER ═══ */}
+            {/* ═══ LINA · ARCHIVED DOSSIER ═══ */}
             <Reveal className="md:col-span-2" delay={0.1}>
               <LinaDossierCard />
             </Reveal>
 
-            {/* ═══ RESEARCH — DATA ANALYSIS TERMINAL ═══ */}
+            {/* ═══ RESEARCH · DATA ANALYSIS TERMINAL ═══ */}
             <Reveal delay={0.15}>
               <ResearchDossierCard />
             </Reveal>
 
-            {/* ═══ MUSTHANE — AUDIT REPORT ═══ */}
+            {/* ═══ MUSTHANE · AUDIT REPORT ═══ */}
             <Reveal delay={0.2}>
               <MusthaneDossierCard />
             </Reveal>
@@ -997,7 +1150,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* ═══ ABOUT + STATS — Mechanicus Data-Log ═══ */}
+      {/* ═══ ABOUT + STATS · Mechanicus Data-Log ═══ */}
       <section className="py-24 md:py-32 relative overflow-hidden" style={{ backgroundColor: "#0A0A0F" }}>
         {/* Animated divider at top */}
         <div className="absolute top-0 left-0 right-0">
@@ -1013,7 +1166,7 @@ export function Home() {
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left — About content */}
+            {/* Left · About content */}
             <Reveal className="lg:col-span-7 order-2 lg:order-1">
               <div className="flex items-center gap-3 mb-6">
                 <motion.svg viewBox="0 0 24 24" fill="none" className="w-4 h-4 text-p5/40" xmlns="http://www.w3.org/2000/svg"
@@ -1023,16 +1176,16 @@ export function Home() {
                   <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" strokeWidth="1.5"/>
                   <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                 </motion.svg>
-                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-p5/50">// OPÉRATEUR — DOSSIER PERSONNEL</span>
+                <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-p5/50">// OPÉRATEUR · DOSSIER PERSONNEL</span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-8">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-t1 mb-8">
                 Designer qui pense{" "}
                 <span className="text-gradient">utilisateur</span>
               </h2>
 
               <div className="p-5 rounded-xl border mb-8" style={{ borderColor: "rgba(139,92,246,0.12)", backgroundColor: "#0D0D14" }}>
                 <p className="text-base text-t2 leading-relaxed">
-                  Étudiant en Master 1 Design & UX/UI à l'ECV Bordeaux, je travaille actuellement chez Happy Job comme graphic designer. Mon approche : <span className="text-t1 font-semibold">comprendre les vrais besoins des utilisateurs</span> avant de dessiner le moindre écran. Mobile-first, research-driven, orienté résultats.
+                  Étudiant en Master 1 Design & UX/UI à l'ECV Bordeaux. J'ai récemment terminé un stage de 2 mois en graphic design chez Happy Job. Mon approche · <span className="text-t1 font-semibold">comprendre les vrais besoins des utilisateurs</span> avant de dessiner le moindre écran. Mobile-first, research-driven, orienté résultats.
                 </p>
               </div>
 
@@ -1041,7 +1194,7 @@ export function Home() {
                 {["UX Research", "UI Design", "Figma", "Prototypage", "Framer", "UX Audit", "Print"].map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.1em] border rounded-sm text-t2 hover:text-t1 hover:border-p5/40 transition-all cursor-default"
+                    className="px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] border rounded-sm text-t2 hover:text-t1 hover:border-p5/40 transition-all cursor-default"
                     style={{ borderColor: "rgba(139,92,246,0.15)", backgroundColor: "rgba(139,92,246,0.04)" }}
                   >
                     {skill}
@@ -1058,22 +1211,22 @@ export function Home() {
                 ].map((stat, i) => (
                   <div key={stat.mono} className="p-4 rounded-lg border text-center" style={{ borderColor: "rgba(139,92,246,0.1)", backgroundColor: "#0D0D14" }}>
                     <span className="font-mono text-[8px] text-t3/40 tracking-[0.2em] block mb-2">{stat.mono}</span>
-                    <ScrambleStat value={stat.value} delay={i * 0.1} className={`text-3xl md:text-4xl font-bold font-display ${stat.color} block mb-1`} />
+                    <span className={`text-3xl md:text-4xl font-bold font-display ${stat.color} block mb-1`}>{stat.value}</span>
                     <span className="text-t3 font-mono text-[9px] uppercase tracking-wider">{stat.label}</span>
                   </div>
                 ))}
               </div>
 
-              {/* CTA — angular like footer */}
+              {/* CTA · angular like footer */}
               <Link to="/about"
-                className="group inline-flex items-center gap-3 px-6 py-3 text-sm font-mono font-bold uppercase tracking-[0.1em] text-t1 border transition-all duration-300 hover:border-p5/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)]"
+                className="group inline-flex items-center gap-3 px-6 py-3 text-sm font-mono font-bold uppercase tracking-[0.12em] text-t1 border transition-all duration-300 hover:border-p5/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.15)]"
                 style={{ borderColor: "rgba(139,92,246,0.2)", clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)" }}
               >
                 ACCÉDER AU DOSSIER COMPLET →
               </Link>
             </Reveal>
 
-            {/* Right — Photo with Mechanicus frame */}
+            {/* Right · Photo with Mechanicus frame */}
             <Reveal delay={0.2} className="lg:col-span-5 order-1 lg:order-2">
               <div className="relative flex justify-center">
                 {/* Outer decorative ring */}

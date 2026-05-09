@@ -77,7 +77,7 @@ export function Footer() {
           <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
           <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
         </div>
-        <span className="text-t3/40 uppercase hidden md:inline">// TRANSMISSION OUVERTE — EN ATTENTE DE RÉPONSE</span>
+        <span className="text-t3/40 uppercase hidden md:inline">// TRANSMISSION OUVERTE · EN ATTENTE DE RÉPONSE</span>
         <motion.span
           className="ml-auto px-2 py-0.5 border rounded-sm text-[9px] uppercase tracking-[0.15em]"
           style={{ borderColor: "rgba(139,92,246,0.4)", color: "var(--p4)" }}
@@ -92,7 +92,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6 md:px-8 py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
 
-          {/* Left 60% — Title + subtitle */}
+          {/* Left 60% · Title + subtitle */}
           <div className="lg:col-span-7">
             <Reveal>
               <div ref={titleRef} className="mb-8">
@@ -118,7 +118,7 @@ export function Footer() {
               </p>
             </Reveal>
 
-            {/* CTA Button — angular Mechanicus style */}
+            {/* CTA Button · angular Mechanicus style */}
             <Reveal delay={0.3}>
               <motion.a
                 href="mailto:quentinsingama974@gmail.com"
@@ -141,7 +141,7 @@ export function Footer() {
             </Reveal>
           </div>
 
-          {/* Right 40% — Contact data terminal */}
+          {/* Right 40% · Contact data terminal */}
           <div className="lg:col-span-5">
             <div className="p-6 rounded-xl border relative overflow-hidden"
               style={{ borderColor: "rgba(139,92,246,0.12)", backgroundColor: "#0D0D14" }}
