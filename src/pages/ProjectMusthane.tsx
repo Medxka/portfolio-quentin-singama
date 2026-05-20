@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Link } from "react-router-dom"
-import { motion, useScroll, useTransform } from "motion/react"
+import { motion, AnimatePresence, useScroll, useTransform } from "motion/react"
 import { Reveal } from "@/src/components/ui/Reveal"
 import { Label } from "@/src/components/ui/Label"
 
@@ -67,22 +67,73 @@ function ProblemCard({ num, title, desc }: { num: string; title: string; desc: s
   )
 }
 
-/* ── Mega-menu showcase card ── */
-function MegaMenuCard({ label, src, delay = 0 }: { label: string; src: string; delay?: number }) {
+/* ── Mega-menu tabs carousel ── */
+function MegaMenuTabs({ items }: { items: { label: string; tabLabel: string; src: string }[] }) {
+  const [active, setActive] = React.useState(0)
+
   return (
-    <Reveal delay={delay}>
-      <div className="rounded-2xl border overflow-hidden"
-        style={{ borderColor: C.amber + "25", backgroundColor: C.card }}
-      >
-        <div className="px-4 py-2.5 border-b flex items-center gap-2" style={{ borderColor: C.amber + "20", backgroundColor: C.cardAlt }}>
-          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: C.amber }} />
-          <span className="font-mono text-[10px] tracking-[0.15em] uppercase" style={{ color: C.amber }}>{label}</span>
-        </div>
-        <div className="overflow-hidden" style={{ backgroundColor: C.cardAlt }}>
-          <img src={src} alt={label} className="w-full h-auto block" loading="lazy" />
-        </div>
+    <div className="rounded-2xl border overflow-hidden" style={{ borderColor: C.amber + "25", backgroundColor: C.card }}>
+      {/* Tab bar */}
+      <div className="flex items-stretch border-b overflow-x-auto" style={{ borderColor: C.amber + "20", backgroundColor: C.cardAlt }}>
+        {items.map((item, i) => {
+          const isActive = i === active
+          return (
+            <button
+              key={item.tabLabel}
+              onClick={() => setActive(i)}
+              className="relative shrink-0 px-4 md:px-5 py-3 font-mono text-[10px] tracking-[0.15em] uppercase transition-colors duration-200 cursor-pointer"
+              style={{
+                color: isActive ? C.amber : "rgba(255,255,255,0.4)",
+                backgroundColor: isActive ? C.amber + "10" : "transparent",
+              }}
+            >
+              <span className="flex items-center gap-2">
+                <span
+                  className="w-1.5 h-1.5 rounded-full transition-colors"
+                  style={{ backgroundColor: isActive ? C.amber : "rgba(255,255,255,0.15)" }}
+                />
+                {item.tabLabel}
+              </span>
+              {isActive && (
+                <motion.span
+                  layoutId="megamenu-active-bar"
+                  className="absolute bottom-0 left-0 right-0 h-[2px]"
+                  style={{ backgroundColor: C.amber }}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+            </button>
+          )
+        })}
       </div>
-    </Reveal>
+
+      {/* Image stage */}
+      <div className="relative overflow-hidden" style={{ backgroundColor: C.cardAlt }}>
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={items[active].src}
+            src={items[active].src}
+            alt={items[active].label}
+            className="w-full h-auto block"
+            loading="lazy"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+          />
+        </AnimatePresence>
+      </div>
+
+      {/* Footer counter */}
+      <div className="px-4 py-2.5 border-t flex items-center justify-between" style={{ borderColor: C.amber + "20", backgroundColor: C.cardAlt }}>
+        <span className="font-mono text-[10px] tracking-[0.15em] uppercase" style={{ color: C.amber + "80" }}>
+          {items[active].label}
+        </span>
+        <span className="font-mono text-[9px] tracking-[0.2em] uppercase text-t3/60">
+          {String(active + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
+        </span>
+      </div>
+    </div>
   )
 }
 
@@ -308,13 +359,17 @@ export function ProjectMusthane() {
             </p>
           </Reveal>
 
-          <div className="space-y-4 md:space-y-6">
-            <MegaMenuCard label="MENU · NOS SOLUTIONS" src="/musthane-nav-solutions.jpg" delay={0} />
-            <MegaMenuCard label="MENU · VOTRE INDUSTRIE" src="/musthane-nav-industrie.jpg" delay={0.05} />
-            <MegaMenuCard label="MENU · NOS PRODUITS" src="/musthane-nav-produits.jpg" delay={0.1} />
-            <MegaMenuCard label="MENU · RESSOURCES" src="/musthane-nav-ressources.jpg" delay={0.15} />
-            <MegaMenuCard label="MENU · À PROPOS" src="/musthane-nav-apropos.jpg" delay={0.2} />
-          </div>
+          <Reveal>
+            <MegaMenuTabs
+              items={[
+                { tabLabel: "Solutions", label: "MENU · NOS SOLUTIONS", src: "/musthane-nav-solutions.jpg" },
+                { tabLabel: "Industrie", label: "MENU · VOTRE INDUSTRIE", src: "/musthane-nav-industrie.jpg" },
+                { tabLabel: "Produits", label: "MENU · NOS PRODUITS", src: "/musthane-nav-produits.jpg" },
+                { tabLabel: "Ressources", label: "MENU · RESSOURCES", src: "/musthane-nav-ressources.jpg" },
+                { tabLabel: "À propos", label: "MENU · À PROPOS", src: "/musthane-nav-apropos.jpg" },
+              ]}
+            />
+          </Reveal>
         </div>
       </section>
 
