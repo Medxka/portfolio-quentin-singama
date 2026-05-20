@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+/* ─────────────────────────────────────────────────────────────
+   Söhne (TestSohne — usage perso/portfolio)
+   ───────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: "Söhne";
+  src: url("/fonts/sohne-buch.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Söhne";
+  src: url("/fonts/sohne-buch-italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Söhne";
+  src: url("/fonts/sohne-kraftig.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Söhne";
+  src: url("/fonts/sohne-halbfett.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Color tokens — dark (default) & light
+   ───────────────────────────────────────────────────────────── */
+:root {
+  /* Surfaces */
+  --bg-base: #0a0b0d;
+  --bg-surface: #111317;
+  --bg-elevated: #1a1d23;
+
+  /* Text */
+  --text-t1: #f2f4f7;
+  --text-t2: #b4bcc8;
+  --text-t3: #6e7787;
+
+  /* Borders */
+  --border-subtle: #222730;
+  --border-strong: #3a4150;
+
+  /* Accents */
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --accent-2: #a78bfa;
+
+  /* Semantic */
+  --ok: #10b981;
+  --warn: #f59e0b;
+  --danger: #ef4444;
+
+  /* Motion */
+  --duration-instant: 80ms;
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="light"] {
+  --bg-base: #fafafb;
+  --bg-surface: #ffffff;
+  --bg-elevated: #f4f5f7;
+
+  --text-t1: #0a0b0d;
+  --text-t2: #3a4150;
+  --text-t3: #6e7787;
+
+  --border-subtle: #e5e7eb;
+  --border-strong: #9ca3af;
+
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --accent-2: #7c3aed; /* darker violet for AA contrast on light */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Tailwind v4 @theme — exposes tokens as utilities
+   ───────────────────────────────────────────────────────────── */
+@theme inline {
+  /* Colors */
+  --color-bg-base: var(--bg-base);
+  --color-bg-surface: var(--bg-surface);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-t1: var(--text-t1);
+  --color-t2: var(--text-t2);
+  --color-t3: var(--text-t3);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-2: var(--accent-2);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --color-danger: var(--danger);
+
+  /* Fonts */
+  --font-display: "Söhne", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Söhne", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+
+  /* Fluid type scale (clamp 320→1240 viewport) */
+  --text-display-xl: clamp(3.5rem, 1.5rem + 9.57vw, 9rem);       /* 56 → 144 */
+  --text-display-l: clamp(2.5rem, 1.25rem + 6.1vw, 6rem);        /* 40 → 96 */
+  --text-display-m: clamp(1.875rem, 1.125rem + 3.7vw, 4rem);     /* 30 → 64 */
+  --text-display-s: clamp(1.375rem, 1.07rem + 1.52vw, 2.25rem);  /* 22 → 36 */
+  --text-display-xs: clamp(1.125rem, 1.04rem + 0.43vw, 1.375rem);/* 18 → 22 */
+  --text-body-l: 1.125rem;
+  --text-body: 1rem;
+  --text-mono-label: 0.75rem;
+  --text-micro: 0.6875rem;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Base
+   ───────────────────────────────────────────────────────────── */
+html {
+  background: var(--bg-base);
+  color: var(--text-t1);
+}
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-base);
+  color: var(--text-t1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   prefers-reduced-motion — strict
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Signature gradient (Quentin Singama hero)
+   ───────────────────────────────────────────────────────────── */
+.text-gradient-signature {
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--accent) 70%, transparent) 0%,
+    color-mix(in oklab, var(--accent-2) 70%, transparent) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Mechanicus easter egg — REF code & section comment styling
+   ───────────────────────────────────────────────────────────── */
+.ref-code {
+  font-family: var(--font-mono);
+  font-size: var(--text-mono-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-t3);
+}
