@@ -1,70 +1,84 @@
 "use client";
 
-import { motion } from "motion/react";
-import { ProcessFlow } from "./ProcessFlow";
+import { motion, useReducedMotion } from "motion/react";
+import {
+  ArrowRight,
+  MapPin,
+  Briefcase,
+  Activity,
+  Mail,
+  CornerDownRight,
+  FileText,
+  Sparkle,
+} from "lucide-react";
+
+const STATS: { value: string; unit: string; label: string }[] = [
+  { value: "06", unit: "/ shipped", label: "Projets de bout en bout" },
+  { value: "04", unit: "ans", label: "Expérience design" },
+  { value: "M2", unit: "UX/UI", label: "Bordeaux — 2026" },
+  { value: "09", unit: "/ 2026", label: "Alternance · ETA" },
+];
 
 export function Hero() {
-  return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 w-full pt-32 pb-20">
-        {/* REF code micro signature */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="ref-code mb-8"
-        >
-          // QS · 2026 · BORDEAUX
-        </motion.div>
+  const reduce = useReducedMotion();
+  const fade = (delay = 0) =>
+    reduce
+      ? { initial: false, animate: { opacity: 1, y: 0 } }
+      : {
+          initial: { opacity: 0, y: 12 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.5, delay, ease: [0.2, 0, 0, 1] as const },
+        };
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left — copy */}
-          <div className="lg:col-span-7">
-            {/* Eyebrow */}
+  return (
+    <section className="relative border-b border-border-subtle bg-bg-base">
+      {/* Hairline top : breadcrumb mono */}
+      <div className="border-b border-border-subtle">
+        <div className="max-w-7xl mx-auto px-6 h-10 flex items-center justify-between">
+          <div className="flex items-center gap-2 font-mono text-micro uppercase tracking-[0.14em] text-t3">
+            <Sparkle className="w-3 h-3 text-accent" aria-hidden />
+            <span>QS</span>
+            <span className="text-border-strong">/</span>
+            <span>2026</span>
+            <span className="text-border-strong">/</span>
+            <span className="text-t2">PORTFOLIO_v3</span>
+          </div>
+          <div className="hidden sm:flex items-center gap-2 font-mono text-micro uppercase tracking-[0.14em] text-t3">
+            <span className="relative flex w-1.5 h-1.5">
+              <span className="absolute inset-0 rounded-full bg-ok/40 animate-ping" />
+              <span className="relative w-1.5 h-1.5 rounded-full bg-ok" />
+            </span>
+            <span>Available · Sept 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 pt-20 pb-24 lg:pt-28 lg:pb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 lg:gap-x-12">
+          {/* ─── Left · 7 cols · narrative ─── */}
+          <div className="lg:col-span-7 lg:border-r lg:border-border-subtle lg:pr-12">
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2, ease: [0.2, 0, 0, 1] }}
-              className="flex items-center gap-3 mb-8"
+              {...fade(0.05)}
+              className="flex items-center gap-2 font-mono text-mono-label uppercase tracking-[0.16em] text-t3 mb-10"
             >
-              <span className="h-px w-8 bg-accent" />
-              <span className="ref-code !text-accent !text-[11px]">
-                Product Designer · M2 UX/UI
-              </span>
+              <span className="h-px w-8 bg-accent" aria-hidden />
+              <span className="text-accent">001</span>
+              <CornerDownRight className="w-3.5 h-3.5 text-t3" aria-hidden />
+              <span>UX/UI Designer · M2 ECV Bordeaux</span>
             </motion.div>
 
-            {/* Headline */}
-            <h1 className="font-display font-semibold leading-[0.92] tracking-[-0.035em] mb-10">
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.3, ease: [0.2, 0, 0, 1] }}
-                className="block text-t1"
-                style={{ fontSize: "var(--text-display-xl)" }}
-              >
-                Quentin
-              </motion.span>
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: 0.45, ease: [0.2, 0, 0, 1] }}
-                className="block text-gradient-signature uppercase"
-                style={{
-                  fontSize: "var(--text-display-l)",
-                  letterSpacing: "0.04em",
-                }}
-              >
-                Singama
-              </motion.span>
-            </h1>
+            <motion.h1
+              {...fade(0.15)}
+              className="font-display font-semibold text-t1 leading-[0.92] tracking-[-0.035em]"
+              style={{ fontSize: "var(--text-display-xl)" }}
+            >
+              Quentin Singama.
+            </motion.h1>
 
-            {/* Accroche validée (Option A factuelle) */}
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6, ease: [0.2, 0, 0, 1] }}
-              className="text-t2 max-w-2xl mb-6"
-              style={{ fontSize: "var(--text-display-xs)", lineHeight: 1.5 }}
+              {...fade(0.3)}
+              className="mt-10 max-w-2xl text-t2"
+              style={{ fontSize: "var(--text-display-s)", lineHeight: 1.35 }}
             >
               M2 UX/UI à Bordeaux.{" "}
               <span className="text-t1">
@@ -72,73 +86,125 @@ export function Hero() {
               </span>
             </motion.p>
 
-            {/* Sub-headline */}
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7, ease: [0.2, 0, 0, 1] }}
-              className="text-t2 max-w-xl mb-12"
-              style={{ fontSize: "var(--text-body)", lineHeight: 1.65 }}
+              {...fade(0.4)}
+              className="mt-6 max-w-xl text-t2"
+              style={{ fontSize: "var(--text-body-l)", lineHeight: 1.6 }}
             >
-              Je cherche une alternance Product Design dans une équipe SaaS B2B
+              Je cherche une alternance UX/UI Design dans une équipe
               où la recherche utilisateur compte autant que le Figma.{" "}
               <span className="text-t1">Septembre 2026, Bordeaux ou remote.</span>
             </motion.p>
 
-            {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.85, ease: [0.2, 0, 0, 1] }}
-              className="flex flex-col sm:flex-row gap-3"
+              {...fade(0.5)}
+              className="mt-12 flex flex-col sm:flex-row gap-3"
             >
               <a
                 href="#projets"
-                className="inline-flex items-center justify-center gap-2 px-6 h-11 rounded-md font-display font-medium text-[15px] tracking-tight text-white transition-colors duration-150"
-                style={{
-                  backgroundColor: "var(--accent)",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.backgroundColor =
-                    "var(--accent-hover)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.backgroundColor = "var(--accent)")
-                }
+                className="group inline-flex items-center justify-center gap-2 h-11 px-5 font-display font-medium text-[15px] text-white bg-accent hover:bg-accent-hover transition-colors duration-150 rounded-md"
               >
                 Voir les projets
-                <span aria-hidden>→</span>
+                <ArrowRight
+                  className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-0.5"
+                  aria-hidden
+                />
               </a>
               <a
                 href="mailto:quentinsingama974@gmail.com?subject=Alternance%20Product%20Design%20%C2%B7%20Septembre%202026"
-                className="inline-flex items-center justify-center px-6 h-11 rounded-md font-display font-medium text-[15px] tracking-tight text-t1 border transition-colors duration-150"
-                style={{ borderColor: "var(--border-strong)" }}
+                className="group inline-flex items-center justify-center gap-2 h-11 px-5 font-display font-medium text-[15px] text-t1 border border-border-strong hover:border-accent hover:text-accent transition-colors duration-150 rounded-md"
               >
+                <Mail className="w-4 h-4" aria-hidden />
                 Me parler
               </a>
             </motion.div>
+
+            <motion.div
+              {...fade(0.6)}
+              className="mt-14 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-mono-label uppercase tracking-[0.12em] text-t3"
+            >
+              <span className="inline-flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-t2" aria-hidden />
+                Bordeaux · FR
+              </span>
+              <span className="text-border-strong" aria-hidden>·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Briefcase className="w-3.5 h-3.5 text-t2" aria-hidden />
+                Alternance · 12 mois
+              </span>
+              <span className="text-border-strong" aria-hidden>·</span>
+              <span className="inline-flex items-center gap-1.5">
+                <Activity className="w-3.5 h-3.5 text-accent" aria-hidden />
+                Product · Brand · Service
+              </span>
+            </motion.div>
           </div>
 
-          {/* Right — Process flow signature data viz */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.9, ease: [0.2, 0, 0, 1] }}
-            className="hidden lg:block lg:col-span-5"
-          >
-            <div className="border rounded-xl p-6" style={{ borderColor: "var(--border-subtle)", backgroundColor: "var(--bg-surface)" }}>
-              <div className="flex items-center gap-2 mb-6">
-                <span
-                  className="w-1.5 h-1.5 rounded-full"
-                  style={{ backgroundColor: "var(--ok)" }}
-                />
-                <span className="ref-code !text-[10px]">
-                  // PROCESS · LIVE
+          {/* ─── Right · 5 cols · raw stats ─── */}
+          <div className="lg:col-span-5">
+            <motion.div
+              {...fade(0.25)}
+              className="flex items-center justify-between font-mono text-micro uppercase tracking-[0.18em] text-t3 mb-8"
+            >
+              <span className="flex items-center gap-2">
+                <FileText className="w-3 h-3" aria-hidden />
+                index.dat
+              </span>
+              <span className="text-border-strong">→ snapshot</span>
+            </motion.div>
+
+            <ul className="border-t border-border-subtle">
+              {STATS.map((s, i) => (
+                <motion.li
+                  key={s.label}
+                  {...fade(0.35 + i * 0.07)}
+                  className="group flex items-baseline justify-between border-b border-border-subtle py-6 hover:bg-bg-surface/40 transition-colors duration-150"
+                >
+                  <div className="flex items-baseline gap-3">
+                    <span
+                      className="font-mono text-t1 tabular-nums tracking-[-0.04em]"
+                      style={{ fontSize: "var(--text-display-m)", lineHeight: 1 }}
+                    >
+                      {s.value}
+                    </span>
+                    <span className="font-mono text-mono-label uppercase tracking-[0.14em] text-t3">
+                      {s.unit}
+                    </span>
+                  </div>
+                  <span className="font-mono text-mono-label uppercase tracking-[0.12em] text-t2 text-right max-w-[55%]">
+                    {s.label}
+                  </span>
+                </motion.li>
+              ))}
+            </ul>
+
+            <motion.div
+              {...fade(0.7)}
+              className="mt-8 flex items-start gap-3 border-l-2 border-accent pl-4"
+            >
+              <p className="font-mono text-mono-label uppercase tracking-[0.12em] text-t3 leading-relaxed">
+                <span className="text-accent">// stage_court</span>{" "}
+                <span className="text-t2">
+                  disponible immédiatement · 2 à 6 mois · remote OK
                 </span>
-              </div>
-              <ProcessFlow />
-            </div>
-          </motion.div>
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Hairline bottom : terminal-style footer */}
+      <div className="border-t border-border-subtle">
+        <div className="max-w-7xl mx-auto px-6 h-10 flex items-center justify-between font-mono text-micro uppercase tracking-[0.14em] text-t3">
+          <span className="flex items-center gap-2">
+            <span className="text-accent">$</span>
+            <span>scroll</span>
+            <ArrowRight className="w-3 h-3 -rotate-90" aria-hidden />
+            <span className="text-t2">projets.shipped()</span>
+          </span>
+          <span className="hidden sm:inline text-t3">
+            EOF · ligne_001 · prêt
+          </span>
         </div>
       </div>
     </section>

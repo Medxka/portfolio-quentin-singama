@@ -1,9 +1,15 @@
 import { Hero } from "@/components/Hero";
+import { StatusSection } from "@/components/StatusSection";
+import { FeaturedMusthane } from "@/components/FeaturedMusthane";
+import { SelectedWork } from "@/components/SelectedWork";
 
 export default function Home() {
   return (
-    <main className="flex-1">
+    <>
       <Hero />
-    </main>
+      <StatusSection />
+      <FeaturedMusthane />
+      <SelectedWork />
+    </>
   );
 }

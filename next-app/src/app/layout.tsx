@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, IBM_Plex_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Nav } from "@/components/Nav";
+import { Footer } from "@/components/Footer";
 import "./globals.css";
 
 // Inter = fallback si Söhne ne charge pas (TestSohne local @font-face dans globals.css)
@@ -19,28 +21,29 @@ const ibmPlexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Quentin Singama · Product Designer SaaS B2B",
+    default: "Quentin Singama · UX/UI Designer · Bordeaux",
     template: "%s · Quentin Singama",
   },
   description:
-    "Portfolio de Quentin Singama, M2 UX/UI à Bordeaux. Product Designer, Generalist Research + Craft. En recherche d'alternance · septembre 2026.",
+    "Portfolio de Quentin Singama, M2 UX/UI à l'ECV Bordeaux. Generalist Research + Craft. En recherche d'alternance UX/UI · septembre 2026.",
   metadataBase: new URL("https://quentin-singama.com"),
   authors: [{ name: "Quentin Singama" }],
   keywords: [
     "UX Designer",
     "UI Designer",
     "Product Design",
+    "UX Research",
     "Portfolio",
-    "Alternance",
+    "Alternance UX/UI",
     "Bordeaux",
-    "SaaS B2B",
+    "ECV",
     "Quentin Singama",
   ],
   openGraph: {
     type: "website",
     locale: "fr_FR",
     siteName: "Quentin Singama",
-    title: "Quentin Singama · Product Designer SaaS B2B",
+    title: "Quentin Singama · UX/UI Designer · Bordeaux",
     description:
       "M2 UX/UI à Bordeaux. 6 projets, 2 ans à transformer du flou en interfaces qui tiennent.",
   },
@@ -67,7 +70,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-bg-base text-t1">
         <ThemeProvider attribute="data-theme" defaultTheme="dark" enableSystem>
-          {children}
+          <Nav />
+          <main className="flex-1 pt-16">{children}</main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
