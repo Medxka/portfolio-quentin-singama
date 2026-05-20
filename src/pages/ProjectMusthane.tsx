@@ -260,7 +260,7 @@ export function ProjectMusthane() {
                 <span className="font-mono text-[10px] tracking-[0.15em] uppercase text-t3">CAPTURE · MEGA-MENU "NOS SOLUTIONS" DU SITE ACTUEL</span>
               </div>
               <div style={{ backgroundColor: "#111118" }}>
-                <img src="/musthane-old-nav.jpg" alt="Mega-menu Nos Solutions sur le site Musthane actuel · 7 sous-marques en colonnes" className="w-full h-auto block" loading="lazy" />
+                <img src="/musthane-old-nav.webp" alt="Mega-menu Nos Solutions sur le site Musthane actuel · 7 sous-marques en colonnes" className="w-full h-auto block" loading="lazy" />
               </div>
               <div className="px-4 py-2.5 border-t font-mono text-[10px] text-t3/60" style={{ borderColor: "#3F3F46" }}>
                 7 sous-marques en colonnes · une même solution rangée plusieurs fois · pas de hiérarchie visuelle entre les marchés.
@@ -335,8 +335,8 @@ export function ProjectMusthane() {
           </Reveal>
 
           <CompareBlock
-            beforeImg="/musthane-arbo-old.png"
-            afterImg="/musthane-arbo-new.png"
+            beforeImg="/musthane-arbo-old.webp"
+            afterImg="/musthane-arbo-new.webp"
             beforeLabel="AVANT · 4 AXES CROISÉS"
             afterLabel="APRÈS · 1 LOGIQUE PAR USAGE"
           />
@@ -362,11 +362,11 @@ export function ProjectMusthane() {
           <Reveal>
             <MegaMenuTabs
               items={[
-                { tabLabel: "Solutions", label: "MENU · NOS SOLUTIONS", src: "/musthane-nav-solutions.jpg" },
-                { tabLabel: "Industrie", label: "MENU · VOTRE INDUSTRIE", src: "/musthane-nav-industrie.jpg" },
-                { tabLabel: "Produits", label: "MENU · NOS PRODUITS", src: "/musthane-nav-produits.jpg" },
-                { tabLabel: "Ressources", label: "MENU · RESSOURCES", src: "/musthane-nav-ressources.jpg" },
-                { tabLabel: "À propos", label: "MENU · À PROPOS", src: "/musthane-nav-apropos.jpg" },
+                { tabLabel: "Solutions", label: "MENU · NOS SOLUTIONS", src: "/musthane-nav-solutions.webp" },
+                { tabLabel: "Industrie", label: "MENU · VOTRE INDUSTRIE", src: "/musthane-nav-industrie.webp" },
+                { tabLabel: "Produits", label: "MENU · NOS PRODUITS", src: "/musthane-nav-produits.webp" },
+                { tabLabel: "Ressources", label: "MENU · RESSOURCES", src: "/musthane-nav-ressources.webp" },
+                { tabLabel: "À propos", label: "MENU · À PROPOS", src: "/musthane-nav-apropos.webp" },
               ]}
             />
           </Reveal>
@@ -437,7 +437,7 @@ export function ProjectMusthane() {
                 <span className="font-mono text-[10px] tracking-[0.15em] uppercase" style={{ color: C.amber }}>HOMEPAGE · ÉTAT PAR DÉFAUT</span>
               </div>
               <div className="overflow-hidden" style={{ backgroundColor: C.cardAlt }}>
-                <img src="/musthane-nav-default.jpg" alt="Nouvelle accueil Musthane (full)" className="w-full h-auto block" loading="lazy" />
+                <img src="/musthane-nav-default.webp" alt="Nouvelle accueil Musthane (full)" className="w-full h-auto block" loading="lazy" />
               </div>
             </div>
           </Reveal>
