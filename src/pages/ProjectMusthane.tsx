@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Link } from "react-router-dom"
-import { motion, AnimatePresence, useScroll, useTransform } from "motion/react"
+import { motion, useScroll, useTransform } from "motion/react"
 import { Reveal } from "@/src/components/ui/Reveal"
 import { Label } from "@/src/components/ui/Label"
 
@@ -107,21 +107,19 @@ function MegaMenuTabs({ items }: { items: { label: string; tabLabel: string; src
         })}
       </div>
 
-      {/* Image stage */}
-      <div className="relative overflow-hidden" style={{ backgroundColor: C.cardAlt }}>
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={items[active].src}
-            src={items[active].src}
-            alt={items[active].label}
-            className="w-full h-auto block"
-            loading="lazy"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
+      {/* Image stage — all images stacked, crossfade via opacity */}
+      <div className="relative overflow-hidden aspect-[1440/1800]" style={{ backgroundColor: C.cardAlt }}>
+        {items.map((item, i) => (
+          <img
+            key={item.src}
+            src={item.src}
+            alt={item.label}
+            className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out"
+            style={{ opacity: i === active ? 1 : 0, pointerEvents: i === active ? "auto" : "none" }}
+            loading={i === 0 ? "eager" : "lazy"}
+            decoding="async"
           />
-        </AnimatePresence>
+        ))}
       </div>
 
       {/* Footer counter */}
