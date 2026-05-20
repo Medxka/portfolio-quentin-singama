@@ -327,7 +327,7 @@ function InkDossierCard() {
               ))}
             </div>
 
-            <h3 className="text-xl md:text-2xl font-bold font-display text-t1 mb-3 leading-tight">
+            <h3 className="text-display-s font-bold font-display text-t1 mb-3 leading-tight">
               INK ·<br />Une marque de résistance<br />née en 48h.
             </h3>
 
@@ -428,7 +428,7 @@ function LinaDossierCard() {
               ))}
             </div>
 
-            <h3 className="text-xl md:text-2xl font-bold font-display text-t1 mb-3 leading-tight">
+            <h3 className="text-display-s font-bold font-display text-t1 mb-3 leading-tight">
               LINA · Repenser la<br />découverte en librairie<br />indépendante
             </h3>
 
@@ -531,7 +531,7 @@ function ResearchDossierCard() {
               style={{ borderColor: CYAN + "30", color: CYAN + "99" }}>UX RESEARCH</span>
           </div>
 
-          <h3 className="text-lg font-bold font-display text-t1 mb-2 leading-tight">
+          <h3 className="text-display-xs font-bold font-display text-t1 mb-2 leading-tight">
             Découverte de concerts chez les étudiants
           </h3>
 
@@ -612,7 +612,7 @@ function MusthaneDossierCard() {
             ))}
           </div>
 
-          <h3 className="text-lg font-bold font-display text-t1 mb-2 leading-tight">
+          <h3 className="text-display-xs font-bold font-display text-t1 mb-2 leading-tight">
             Refonte navigation · site industriel
           </h3>
 
@@ -917,7 +917,7 @@ export function Home() {
                     // RECHERCHE EN COURS
                   </div>
 
-                  <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-t1 leading-[1.05] mb-6">
+                  <h2 className="text-display-m font-bold font-display tracking-tight text-t1 leading-[1.05] mb-6">
                     Alternance UX/UI Designer<br />
                     <span className="text-p5">· Septembre 2026</span>
                   </h2>
@@ -1019,7 +1019,7 @@ export function Home() {
                     <span className="font-mono text-[10px] text-t3/50 tracking-[0.15em] uppercase">// DERNIER PROJET DÉPLOYÉ</span>
                   </div>
 
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold font-display text-t1 leading-tight mb-3">
+                  <h3 className="text-display-s font-bold font-display text-t1 leading-tight mb-3">
                     Refonte navigation Musthane <br className="hidden md:block" />
                     <span style={{ color: "#F59E0B" }}>· 100+ produits remis en ordre</span>
                   </h3>
@@ -1081,7 +1081,7 @@ export function Home() {
               </motion.svg>
               <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-p5/50">Archives // Projets</span>
             </div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-t1">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1">
               Ce sur quoi j'ai travaillé
             </h2>
             {/* circuit line under title */}
@@ -1139,7 +1139,7 @@ export function Home() {
                     <Tag>GRAPHIC DESIGN</Tag>
                     <span className="font-mono text-[9px] text-t3/40 tracking-wider">REF: HJ-2025</span>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-t1 mb-3">Campagnes visuelles - Happy Job Bordeaux</h3>
+                  <h3 className="text-display-s font-bold text-t1 mb-3">Campagnes visuelles - Happy Job Bordeaux</h3>
                   <p className="text-t2 text-sm md:text-base leading-relaxed">
                     Concept carte à jouer pour les campagnes saisonnières de recrutement - Industrie, Restauration, Agriculture.
                   </p>
@@ -1178,7 +1178,7 @@ export function Home() {
                 </motion.svg>
                 <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-p5/50">// OPÉRATEUR · DOSSIER PERSONNEL</span>
               </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-t1 mb-8">
+              <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-8">
                 Designer qui pense{" "}
                 <span className="text-gradient">utilisateur</span>
               </h2>

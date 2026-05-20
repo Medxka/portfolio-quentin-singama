@@ -77,7 +77,7 @@ export function ProjectResearch() {
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           <Reveal>
             <Label className="mb-6 block" style={{ color: C.cyan }}>// RAPPORT D'ANALYSE TERRAIN</Label>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display tracking-tight text-white mb-6">
+            <h1 className="text-display-l font-bold font-display tracking-tight text-white mb-6">
               Découverte de concerts{" "}
               <span style={{ color: C.cyan }}>chez les étudiants</span>
             </h1>
@@ -119,7 +119,7 @@ export function ProjectResearch() {
         <div className="max-w-4xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.cyan }}>// CONTEXTE · POURQUOI CETTE ÉTUDE</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
               Le <span style={{ color: C.cyan }}>point de départ</span>
             </h2>
           </Reveal>
@@ -162,7 +162,7 @@ export function ProjectResearch() {
         <div className="max-w-5xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.cyan }}>// MÉTHODOLOGIE · CE QU'ON A FAIT</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
               Comment on a <span style={{ color: C.cyan }}>travaillé</span>
             </h2>
             <p className="text-base md:text-lg text-t2 max-w-3xl leading-relaxed mb-12">
@@ -179,7 +179,7 @@ export function ProjectResearch() {
                 style={{ borderColor: C.cyan + "15", backgroundColor: C.cardAlt }}
               >
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase mb-3 block" style={{ color: C.cyan + "80" }}>ÉTAPE 1 · ~25 MIN</span>
-                <h3 className="text-base md:text-lg font-bold font-display text-t1 mb-4 leading-snug">Conversation sur leurs habitudes</h3>
+                <h3 className="text-display-xs font-bold font-display text-t1 mb-4 leading-snug">Conversation sur leurs habitudes</h3>
                 <div className="space-y-2.5 text-sm text-t2 relative z-10">
                   <p>→ Comment ils découvrent les concerts ?</p>
                   <p>→ Quel rôle jouent leurs amis ?</p>
@@ -194,7 +194,7 @@ export function ProjectResearch() {
                 style={{ borderColor: C.cyan + "15", backgroundColor: C.cardAlt }}
               >
                 <span className="font-mono text-[10px] tracking-[0.2em] uppercase mb-3 block" style={{ color: C.cyan + "80" }}>ÉTAPE 2 · ~20 MIN</span>
-                <h3 className="text-base md:text-lg font-bold font-display text-t1 mb-4 leading-snug">Tâche concrète en temps réel</h3>
+                <h3 className="text-display-xs font-bold font-display text-t1 mb-4 leading-snug">Tâche concrète en temps réel</h3>
                 <div className="space-y-2.5 text-sm text-t2 relative z-10">
                   <p className="italic text-t1/90">"Trouve un concert dans les 2 prochaines semaines et propose-le à tes amis, avec tes vrais outils."</p>
                   <p>→ Observation sans intervention.</p>
@@ -214,7 +214,7 @@ export function ProjectResearch() {
         <div className="max-w-5xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.cyan }}>// RÉSULTATS · CE QU'ON A DÉCOUVERT</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Les <span style={{ color: C.cyan }}>4 insights</span> principaux
             </h2>
           </Reveal>
@@ -260,7 +260,7 @@ export function ProjectResearch() {
         <div className="max-w-6xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.cyan }}>// PARTICIPANTS · LES 7 PROFILS</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               <span className="font-mono" style={{ color: C.cyan }}>7</span> récits, <span style={{ color: C.cyan }}>7</span> réalités
             </h2>
           </Reveal>
@@ -301,7 +301,7 @@ export function ProjectResearch() {
         <div className="max-w-5xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.cyan }}>// IMPLICATIONS · SI ON CONCEVAIT UN PRODUIT</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Ce que ces résultats <span style={{ color: C.cyan }}>veulent dire</span>
             </h2>
           </Reveal>
@@ -338,7 +338,7 @@ export function ProjectResearch() {
         <div className="max-w-4xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.cyan }}>// RÉFLEXION PERSONNELLE</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
               Mon rôle & ce que <span style={{ color: C.cyan }}>j'ai appris</span>
             </h2>
           </Reveal>
@@ -368,7 +368,7 @@ export function ProjectResearch() {
         <Reveal>
           <Label className="mb-4 block" style={{ color: C.cyan }}>PROJET SUIVANT</Label>
           <Link to="/musthane" className="inline-block group">
-            <h2 className="text-4xl md:text-6xl font-bold font-display text-t1 transition-colors group-hover:text-[#F59E0B]">
+            <h2 className="text-display-l font-bold font-display text-t1 transition-colors group-hover:text-[#F59E0B]">
               Audit UX &amp; SEO Musthane →
             </h2>
           </Link>
@@ -410,7 +410,7 @@ function InsightCard({ num, title, desc, quote, quoteAuthor }: { num: string; ti
         style={{ borderColor: C.cyan, backgroundColor: C.card }}
       >
         <Label className="mb-3 block" style={{ color: C.cyan }}>INSIGHT {num}</Label>
-        <h3 className="text-lg md:text-xl font-bold font-display text-t1 mb-4">{title}</h3>
+        <h3 className="text-display-xs font-bold font-display text-t1 mb-4">{title}</h3>
         <p className="text-sm md:text-base text-t2 leading-relaxed mb-4">{desc}</p>
 
         {quote && (

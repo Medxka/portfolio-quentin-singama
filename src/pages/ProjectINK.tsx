@@ -72,7 +72,7 @@ function TimelineEvent({ year, title, desc, delay = 0 }: { year: string; title: 
         <span className="font-mono text-[11px] tracking-[0.15em] block mb-1" style={{ color: INK.red }}>
           {year}
         </span>
-        <h4 className="text-base md:text-lg font-bold font-display text-t1 mb-2">{title}</h4>
+        <h4 className="text-display-xs font-bold font-display text-t1 mb-2">{title}</h4>
         <p className="text-sm text-t2 leading-relaxed whitespace-pre-line">{desc}</p>
       </div>
     </motion.div>
@@ -191,7 +191,7 @@ export function ProjectINK() {
           </Reveal>
 
           <Reveal delay={0.15}>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display tracking-tight text-white mb-4">
+            <h1 className="text-display-l font-bold font-display tracking-tight text-white mb-4">
               INK · <span style={{ color: INK.red }}>Illicit Network Keepers</span>
             </h1>
           </Reveal>
@@ -261,7 +261,7 @@ OBJECTIF : CRÉER UNE MARQUE COMPLÈTE`}</DataLog>
         <div className="max-w-4xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: INK.red }}>// CHRONOLOGIE · DATA-LOG HISTORIQUE</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-4 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-4 max-w-3xl">
               La chute du{" "}
               <span style={{ color: INK.red }}>monde libre</span>
             </h2>
@@ -294,7 +294,7 @@ OBJECTIF : CRÉER UNE MARQUE COMPLÈTE`}</DataLog>
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: INK.red }}>// DOUBLE IDENTITÉ</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Deux faces d'une même{" "}
               <span style={{ color: INK.red }}>résistance</span>
             </h2>
@@ -424,7 +424,7 @@ Soyez vigilant. Soyez conformes.`}
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: INK.red }}>// IDENTITÉ VISUELLE · SYSTÈME GRAPHIQUE</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Nuanciers & <span style={{ color: INK.red }}>typographie</span>
             </h2>
           </Reveal>
@@ -515,7 +515,7 @@ Soyez vigilant. Soyez conformes.`}
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: INK.red }}>// RÉFÉRENCES VISUELLES · DATA-LOG MOODBOARD</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Inspirations &{" "}
               <span style={{ color: INK.red }}>références</span>
             </h2>
@@ -543,7 +543,7 @@ Soyez vigilant. Soyez conformes.`}
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: INK.red }}>// INTERFACES · DOUBLE STANDARD</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Façade & <span style={{ color: INK.red }}>clandestinité</span>
             </h2>
           </Reveal>
@@ -658,7 +658,7 @@ Soyez vigilant. Soyez conformes.`}
         <div className="max-w-4xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: INK.red }}>// CONTRIBUTION</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-6">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-6">
               Mon rôle dans le{" "}
               <span style={{ color: INK.red }}>Groupe 13</span>
             </h2>

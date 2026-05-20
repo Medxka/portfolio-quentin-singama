@@ -96,9 +96,7 @@ export function Footer() {
           <div className="lg:col-span-7">
             <Reveal>
               <div ref={titleRef} className="mb-8">
-                <h2 className="font-bold font-display text-t1 leading-[0.95] tracking-[-0.03em] whitespace-pre-line"
-                  style={{ fontSize: "clamp(60px, 10vw, 120px)" }}
-                >
+                <h2 className="text-display-xl font-bold font-display text-t1 leading-[0.95] tracking-[-0.03em] whitespace-pre-line">
                   {displayed}
                   {displayed.length < title.length && (
                     <motion.span

@@ -59,7 +59,7 @@ function ProblemCard({ num, title, desc }: { num: string; title: string; desc: s
       >
         <div className="flex items-start gap-4 mb-3">
           <span className="font-display font-bold text-3xl shrink-0 leading-none" style={{ color: C.amber }}>{num}</span>
-          <h3 className="text-base md:text-lg font-bold font-display text-t1 leading-snug">{title}</h3>
+          <h3 className="text-display-xs font-bold font-display text-t1 leading-snug">{title}</h3>
         </div>
         <p className="text-sm text-t2 leading-relaxed">{desc}</p>
       </div>
@@ -193,7 +193,7 @@ export function ProjectMusthane() {
         <div className="max-w-5xl mx-auto px-6 relative z-10 text-center">
           <Reveal>
             <Label className="mb-6 block" style={{ color: C.amber }}>// REFONTE NAVIGATION & ARBORESCENCE</Label>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-display tracking-tight text-white mb-6">
+            <h1 className="text-display-l font-bold font-display tracking-tight text-white mb-6">
               Remettre de l'ordre dans{" "}
               <span style={{ color: C.amber }}>100+ produits</span>
             </h1>
@@ -233,7 +233,7 @@ export function ProjectMusthane() {
         <div className="max-w-4xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.amber }}>// CONTEXTE · LE SITE EN L'ÉTAT</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
               Quatre axes de classification <span style={{ color: C.amber }}>qui se contredisent</span>
             </h2>
           </Reveal>
@@ -276,7 +276,7 @@ export function ProjectMusthane() {
         <div className="max-w-6xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.amber }}>// AUDIT · CE QUE LES UTILISATEURS SUBISSENT</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12 max-w-3xl">
               Les <span style={{ color: C.amber }}>5 problèmes</span> majeurs identifiés
             </h2>
           </Reveal>
@@ -324,7 +324,7 @@ export function ProjectMusthane() {
         <div className="max-w-6xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.amber }}>// REFONTE · ARBORESCENCE</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
               Une seule logique : <span style={{ color: C.amber }}>par usage</span>
             </h2>
             <p className="text-base md:text-lg text-t2 max-w-3xl leading-relaxed mb-12">
@@ -349,7 +349,7 @@ export function ProjectMusthane() {
         <div className="max-w-6xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.amber }}>// LIVRABLE · NAVIGATION DESKTOP</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
               Cinq entrées, <span style={{ color: C.amber }}>cinq mega-menus</span>
             </h2>
             <p className="text-base md:text-lg text-t2 max-w-3xl leading-relaxed mb-12">
@@ -379,7 +379,7 @@ export function ProjectMusthane() {
         <div className="max-w-6xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.amber }}>// LIVRABLE · NAVIGATION MOBILE</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
               Drawer hiérarchisé, <span style={{ color: C.amber }}>pas un dump de liens</span>
             </h2>
             <p className="text-base md:text-lg text-t2 max-w-3xl leading-relaxed mb-12">
@@ -420,7 +420,7 @@ export function ProjectMusthane() {
         <div className="max-w-6xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.amber }}>// LIVRABLE · NOUVELLE ACCUEIL</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
               Une accueil qui dit <span style={{ color: C.amber }}>ce qu'on fait</span>
             </h2>
             <p className="text-base md:text-lg text-t2 max-w-3xl leading-relaxed mb-12">
@@ -450,7 +450,7 @@ export function ProjectMusthane() {
         <div className="max-w-4xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: C.amber }}>// RÉFLEXION PERSONNELLE</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
               Ce que <span style={{ color: C.amber }}>j'ai appris</span>
             </h2>
           </Reveal>
@@ -477,7 +477,7 @@ export function ProjectMusthane() {
         <Reveal>
           <Label className="mb-4 block" style={{ color: C.amber }}>PROJET SUIVANT</Label>
           <Link to="/lina" className="inline-block group">
-            <h2 className="text-4xl md:text-6xl font-bold font-display text-t1 transition-colors group-hover:text-[#4F46E5]">
+            <h2 className="text-display-l font-bold font-display text-t1 transition-colors group-hover:text-[#4F46E5]">
               LINA · Repenser la librairie indépendante →
             </h2>
           </Link>

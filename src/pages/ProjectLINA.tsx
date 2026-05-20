@@ -77,7 +77,7 @@ function JourneyStep({ num, title, desc, delay = 0, color }: { num: string; titl
 
       {/* Content */}
       <div className="pb-10">
-        <h4 className="text-lg font-bold font-display text-t1 mb-2">{title}</h4>
+        <h4 className="text-display-xs font-bold font-display text-t1 mb-2">{title}</h4>
         <p className="text-sm text-t2 leading-relaxed">{desc}</p>
       </div>
     </motion.div>
@@ -159,7 +159,7 @@ export function ProjectLINA() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-display tracking-tight text-t1 mb-4 max-w-5xl leading-[0.95]">
+            <h1 className="text-display-xl font-bold font-display tracking-tight text-t1 mb-4 max-w-5xl leading-[0.95]">
               Repenser la{" "}
               <span style={{ color: LINA.teal }}>découverte</span>
               <br />en librairie indépendante
@@ -201,7 +201,7 @@ export function ProjectLINA() {
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: LINA.teal }}>LE CONTEXTE</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-6 max-w-3xl">
               Un site fonctionnel,<br />mais pas <span style={{ color: LINA.orange }}>inspirant</span>
             </h2>
           </Reveal>
@@ -247,7 +247,7 @@ export function ProjectLINA() {
                   <span className="font-mono text-[10px] tracking-[0.2em] mb-4 block" style={{ color: problem.color + "80" }}>
                     {problem.num}
                   </span>
-                  <h3 className="text-lg font-bold font-display text-t1 mb-3">{problem.title}</h3>
+                  <h3 className="text-display-xs font-bold font-display text-t1 mb-3">{problem.title}</h3>
                   <p className="text-sm text-t2 leading-relaxed">{problem.desc}</p>
                 </motion.div>
               </Reveal>
@@ -276,7 +276,7 @@ export function ProjectLINA() {
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: LINA.yellow }}>SYSTÈME D'ICÔNES</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-4 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-4 max-w-3xl">
               Des <span style={{ color: LINA.yellow }}>signes</span> pour guider la découverte
             </h2>
             <p className="text-lg text-t2 max-w-3xl leading-relaxed mb-12">
@@ -343,7 +343,7 @@ export function ProjectLINA() {
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: LINA.teal }}>REFONTE DE LA HOME</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-4 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-4 max-w-3xl">
               D'un catalogue à une expérience de{" "}
               <span style={{ color: LINA.teal }}>découverte</span>
             </h2>
@@ -391,7 +391,7 @@ export function ProjectLINA() {
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: LINA.orange }}>PARCOURS UTILISATEUR</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-4 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-4 max-w-3xl">
               <span style={{ color: LINA.orange }}>The First Heretic</span> - un parcours immersif
             </h2>
             <p className="text-lg text-t2 max-w-3xl leading-relaxed mb-12">
@@ -469,7 +469,7 @@ export function ProjectLINA() {
         <div className="max-w-7xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-4 block" style={{ color: LINA.yellow }}>NOTES D'INTENTION</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-4">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-4">
               Choix chromatiques & architecturaux
             </h2>
             <p className="text-lg text-t2 max-w-3xl leading-relaxed mb-12">
@@ -495,7 +495,7 @@ export function ProjectLINA() {
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <Label className="mb-4 block">CE QUE J'AI APPRIS</Label>
-            <h2 className="text-3xl md:text-4xl font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-8 max-w-3xl">
               3 jours pour repenser une expérience complète
             </h2>
           </Reveal>
@@ -521,7 +521,7 @@ export function ProjectLINA() {
               <Reveal key={item.title} delay={i * 0.1}>
                 <div className="p-6 rounded-2xl bg-bg-card border border-border-color/50 h-full">
                   <div className="w-2 h-2 rounded-full mb-4" style={{ backgroundColor: item.color }} />
-                  <h3 className="text-lg font-bold font-display text-t1 mb-3">{item.title}</h3>
+                  <h3 className="text-display-xs font-bold font-display text-t1 mb-3">{item.title}</h3>
                   <p className="text-sm text-t2 leading-relaxed">{item.desc}</p>
                 </div>
               </Reveal>

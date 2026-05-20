@@ -46,7 +46,7 @@ export function ProjectCard({
         </div>
         <div className="flex flex-col flex-1 p-6 md:p-8">
           <Tag className="w-fit mb-4">{tag}</Tag>
-          <h3 className={cn("font-bold text-t1 mb-3", featured ? "text-2xl md:text-3xl" : "text-xl md:text-2xl")}>
+          <h3 className={cn("font-bold text-t1 mb-3", featured ? "text-display-m" : "text-display-s")}>
             {title}
           </h3>
           <p className="text-t2 text-sm md:text-base leading-relaxed">

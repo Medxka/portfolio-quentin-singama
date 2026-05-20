@@ -73,7 +73,7 @@ function TimelineEntry({
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-p5/30 via-transparent to-c5/20" />
           <div className="flex items-start justify-between mb-2">
             <div>
-              <h3 className="text-lg font-bold font-display text-t1">{role}</h3>
+              <h3 className="text-display-xs font-bold font-display text-t1">{role}</h3>
               <span className="text-sm text-c5 font-display">{company}</span>
             </div>
             <Cog className="w-4 h-4 text-p5/20 group-hover:text-p5/50 transition-colors" />
@@ -279,7 +279,7 @@ export function About() {
               transition={{ delay: 0.2, duration: 0.9, ease: EASE }}
               className="flex flex-col md:flex-row items-start md:items-end gap-6 md:gap-8 mb-6"
             >
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold font-display tracking-tight text-t1 leading-[0.95]">
+              <h1 className="text-display-xl font-bold font-display tracking-tight text-t1 leading-[0.95]">
                 Quentin <br className="hidden md:block" />
                 <span
                   className="uppercase tracking-[0.1em] md:tracking-[0.15em]"
@@ -357,7 +357,7 @@ export function About() {
             <div className="lg:col-span-5 lg:pr-8">
               <Reveal>
                 <Label className="mb-6 block">Data-Log // Doctrine</Label>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display tracking-tight text-t1 leading-[1.1]">
+                <h2 className="text-display-m font-bold font-display tracking-tight text-t1 leading-[1.1]">
                   Concevoir sans faille. <br />
                   <span style={{ color: "#FF6B35" }}>Itérer</span> sans fin.
                 </h2>
@@ -382,7 +382,7 @@ export function About() {
                     <div>
                       <div className="flex items-center gap-3 mb-2">
                         <Cog className="w-4 h-4 text-t3 group-hover:text-[#FF6B35] transition-colors" />
-                        <h3 className="text-lg font-bold font-display text-t1 uppercase tracking-wider">Discover</h3>
+                        <h3 className="text-display-xs font-bold font-display text-t1 uppercase tracking-wider">Discover</h3>
                       </div>
                       <p className="text-sm text-t2 mb-3">Auspex activé. Collecte de données primaires, entretiens utilisateurs et audits de l'existant.</p>
                       <div className="inline-flex">
@@ -401,7 +401,7 @@ export function About() {
                     <div>
                       <div className="flex items-center gap-3 mb-2">
                         <Cog className="w-4 h-4 text-t3 group-hover:text-p5 transition-colors" />
-                        <h3 className="text-lg font-bold font-display text-t1 uppercase tracking-wider">Define</h3>
+                        <h3 className="text-display-xs font-bold font-display text-t1 uppercase tracking-wider">Define</h3>
                       </div>
                       <p className="text-sm text-t2 mb-3">Synthèse des logs. Identification des frictions et structuration de l'architecture de l'information.</p>
                       <div className="inline-flex">
@@ -420,7 +420,7 @@ export function About() {
                     <div>
                       <div className="flex items-center gap-3 mb-2">
                         <Cog className="w-4 h-4 text-t3 group-hover:text-c5 transition-colors" />
-                        <h3 className="text-lg font-bold font-display text-t1 uppercase tracking-wider">Design</h3>
+                        <h3 className="text-display-xs font-bold font-display text-t1 uppercase tracking-wider">Design</h3>
                       </div>
                       <p className="text-sm text-t2 mb-3">Forge des interfaces. Création de filaires stricts, design systems et prototypes interactifs.</p>
                       <div className="inline-flex">
@@ -439,7 +439,7 @@ export function About() {
                     <div>
                       <div className="flex items-center gap-3 mb-2">
                         <Cog className="w-4 h-4 text-t3 group-hover:text-t2 transition-colors" />
-                        <h3 className="text-lg font-bold font-display text-t1 uppercase tracking-wider">Test</h3>
+                        <h3 className="text-display-xs font-bold font-display text-t1 uppercase tracking-wider">Test</h3>
                       </div>
                       <p className="text-sm text-t2 mb-3">Épreuve de vérité. Tests d'usabilité, itérations intensives et validation du design final.</p>
                       <div className="inline-flex">
@@ -480,7 +480,7 @@ export function About() {
               </motion.div>
               <Label>Data-Log // Expériences</Label>
             </div>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12">
               Parcours professionnel
             </h2>
           </Reveal>
@@ -529,7 +529,7 @@ export function About() {
         <div className="max-w-4xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-2 block">Savoirs techniques</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-12">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-12">
               Compétences & outils
             </h2>
           </Reveal>
@@ -565,7 +565,7 @@ export function About() {
         <div className="max-w-5xl mx-auto px-6 mt-12">
           <Reveal>
             <Label className="mb-2 block">Au-delà du design</Label>
-            <h2 className="text-3xl md:text-5xl font-bold font-display tracking-tight text-t1 mb-4">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-4">
               Centres d'intérêt
             </h2>
             <p className="text-lg text-t2 max-w-2xl mb-12 leading-relaxed">
@@ -591,7 +591,7 @@ export function About() {
                   </span>
                 </div>
                 <div className="relative z-10 max-w-xl">
-                  <h3 className="text-xl md:text-2xl font-bold font-display text-t1 mb-2 group-hover:text-[#8B5CF6] transition-colors">Warhammer 40K</h3>
+                  <h3 className="text-display-s font-bold font-display text-t1 mb-2 group-hover:text-[#8B5CF6] transition-colors">Warhammer 40K</h3>
                   <p className="text-sm text-t2 leading-relaxed">Adeptus Mechanicus, Dark Angels, et l'immense lore du 41e millénaire. Je suis fasciné par la noirceur et la démesure de cet univers.</p>
                 </div>
               </div>
@@ -613,7 +613,7 @@ export function About() {
                   </span>
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-lg font-bold font-display text-t1 mb-2 group-hover:text-[#E91E63] transition-colors">Anime, Manga & VN</h3>
+                  <h3 className="text-display-xs font-bold font-display text-t1 mb-2 group-hover:text-[#E91E63] transition-colors">Anime, Manga & VN</h3>
                   <p className="text-sm text-t2 leading-relaxed">Fate/TYPE-MOON, Umineko, Jujutsu Kaisen. Grand amateur de récits épiques et dramatiques.</p>
                 </div>
               </div>
@@ -636,7 +636,7 @@ export function About() {
                   </span>
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-lg font-bold font-display text-t1 mb-2 group-hover:text-[#06B6D4] transition-colors">TikTok</h3>
+                  <h3 className="text-display-xs font-bold font-display text-t1 mb-2 group-hover:text-[#06B6D4] transition-colors">TikTok</h3>
                   <p className="text-sm text-t2 leading-relaxed">Je partage ma passion pour l'univers de Warhammer 40K et vulgarise son lore auprès de ma communauté.</p>
                 </div>
               </div>
@@ -658,7 +658,7 @@ export function About() {
                   </span>
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-lg font-bold font-display text-t1 mb-2 group-hover:text-[#F59E0B] transition-colors">Photographie</h3>
+                  <h3 className="text-display-xs font-bold font-display text-t1 mb-2 group-hover:text-[#F59E0B] transition-colors">Photographie</h3>
                   <p className="text-sm text-t2 leading-relaxed">Équipé de mon appareil. J'aime me balader pour figer l'instant, jouer avec les cadres et la lumière naturelle.</p>
                 </div>
               </div>
@@ -683,7 +683,7 @@ export function About() {
                   </span>
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-lg font-bold font-display text-t1 mb-2 group-hover:text-[#10B981] transition-colors">PC Gaming</h3>
+                  <h3 className="text-display-xs font-bold font-display text-t1 mb-2 group-hover:text-[#10B981] transition-colors">PC Gaming</h3>
                   <p className="text-sm text-t2 leading-relaxed">Dévoreur de RPGs et de jeux purement narratifs, toujours à la recherche d'aventures immersives et marquantes.</p>
                 </div>
               </div>
@@ -705,7 +705,7 @@ export function About() {
                   </span>
                 </div>
                 <div className="relative z-10">
-                  <h3 className="text-lg font-bold font-display text-t1 mb-2 group-hover:text-[#A78BFA] transition-colors">Univers Narratifs</h3>
+                  <h3 className="text-display-xs font-bold font-display text-t1 mb-2 group-hover:text-[#A78BFA] transition-colors">Univers Narratifs</h3>
                   <p className="text-sm text-t2 leading-relaxed">Game of Thrones, Shinza Bansho... J'adore plonger dans des œuvres denses, décortiquer leur mythologie et débattre de powerscaling.</p>
                 </div>
               </div>
@@ -726,7 +726,7 @@ export function About() {
             >
               <Cog className="w-10 h-10 text-p5/20" />
             </motion.div>
-            <h2 className="text-3xl md:text-4xl font-bold font-display tracking-tight text-t1 mb-6">
+            <h2 className="text-display-m font-bold font-display tracking-tight text-t1 mb-6">
               Convaincu ? Parlons ensemble.
             </h2>
             <p className="text-lg text-t2 mb-10 leading-relaxed">
