@@ -1,144 +1,150 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
-import { ArrowUpRight, CornerDownRight, Sparkle } from "lucide-react";
+import { motion, useReducedMotion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 
-const TAGS = ["ARBORESCENCE", "NAV DESIGN", "MOBILE", "AUDIT UX"];
+const TAGS = ["Arbo", "Nav design", "Mobile", "Audit UX"] as const;
+
+const META = [
+  { label: "Scope", value: "100+ produits" },
+  { label: "Setup", value: "Solo · 2 jours" },
+  { label: "Rôle", value: "UX · IA" },
+] as const;
 
 export function FeaturedMusthane() {
+  const reduce = useReducedMotion();
+
+  const fade = (delay = 0) =>
+    reduce
+      ? { initial: false, animate: { opacity: 1, y: 0 } }
+      : {
+          initial: { opacity: 0, y: 20 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: "-10%" },
+          transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] as const },
+        };
+
   return (
-    <section id="projets" className="border-b border-border-subtle bg-bg-base">
-      <div className="max-w-7xl mx-auto px-6 pt-20 pb-12 lg:pt-28 lg:pb-16">
-        {/* Section header */}
+    <section
+      id="projets"
+      aria-labelledby="featured-musthane-title"
+      className="border-t border-border-subtle bg-bg-base text-t1"
+    >
+      <div className="mx-auto max-w-7xl px-6 md:px-12 lg:px-16 py-16 md:py-20">
+        {/* Eyebrow */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, ease: [0.2, 0, 0, 1] }}
-          className="flex items-center gap-2 font-mono text-mono-label uppercase tracking-[0.16em] text-t3 mb-10"
+          {...fade(0)}
+          className="flex items-center justify-between mb-10 md:mb-12"
         >
-          <span className="h-px w-8 bg-accent" aria-hidden />
-          <span className="text-accent">003</span>
-          <CornerDownRight className="w-3.5 h-3.5 text-t3" aria-hidden />
-          <span>Selected work · projet vedette</span>
+          <span className="font-mono text-mono-label uppercase tracking-[0.18em] text-t3">
+            Featured · Case 01
+          </span>
+          <span className="font-mono text-mono-label uppercase tracking-[0.18em] text-t3 hidden md:inline">
+            Musthane · 2026
+          </span>
         </motion.div>
 
-        {/* Featured card */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.2, 0, 0, 1] }}
+        {/* HÉROS TYPO · la décision avant le projet */}
+        <motion.h2
+          id="featured-musthane-title"
+          {...fade(0.05)}
+          className="font-display font-semibold text-t1 leading-[0.88] tracking-[-0.04em] max-md:leading-[0.95] max-md:tracking-[-0.02em]"
+          style={{ fontSize: "var(--text-display-l)" }}
         >
-          <Link
-            href="/musthane"
-            className="group block border border-border-subtle rounded-md overflow-hidden bg-bg-surface hover:border-accent transition-colors duration-200"
+          De{" "}
+          <span
+            className="font-mono text-t3 align-middle"
+            style={{ fontSize: "var(--text-display-m)" }}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-              {/* Left · content (8 cols) */}
-              <div className="lg:col-span-8 lg:border-r lg:border-border-subtle p-8 md:p-12 lg:p-14 flex flex-col justify-between gap-10">
-                <div>
-                  {/* Badge nouveau */}
-                  <div className="flex items-center gap-3 mb-8">
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 border border-accent/40 rounded-sm font-mono text-mono-label uppercase tracking-[0.18em] text-accent bg-accent/5">
-                      <Sparkle className="w-3 h-3" strokeWidth={1.5} aria-hidden />
-                      Nouveau
-                    </span>
-                    <span className="font-mono text-mono-label uppercase tracking-[0.14em] text-t3">
-                      // REF · MUST-2026-NAV
-                    </span>
-                  </div>
+            4
+          </span>{" "}
+          axes à <span className="text-accent">1 logique</span>.
+        </motion.h2>
 
-                  <h3
-                    className="font-display font-semibold text-t1 leading-[1.0] tracking-[-0.025em] mb-6"
-                    style={{ fontSize: "var(--text-display-m)" }}
-                  >
-                    Refonte navigation Musthane
-                    <br />
-                    <span className="text-t2">100+ produits remis en ordre.</span>
-                  </h3>
+        {/* Sub · 1 ligne dense */}
+        <motion.p
+          {...fade(0.1)}
+          className="mt-6 md:mt-8 max-w-[52ch] text-t2 leading-[1.5]"
+          style={{ fontSize: "var(--text-body)" }}
+        >
+          Refonte de l&apos;architecture de navigation Musthane · remapper plus
+          de cent produits autour d&apos;un parcours unique.
+        </motion.p>
 
-                  <p
-                    className="text-t2 max-w-2xl leading-relaxed"
-                    style={{ fontSize: "var(--text-body-l)" }}
-                  >
-                    Site B2B industriel · 4 axes de classification contradictoires
-                    démêlés en une logique unique. Audit heuristique, nouvelle
-                    arborescence, mega-menu desktop, drawer mobile et nouvelle accueil.
-                  </p>
-                </div>
+        {/* Mockup contained · aspect compact 21/9, cropé center pour tenir en 1 scroll */}
+        <motion.figure
+          {...fade(0.15)}
+          className="mt-10 md:mt-12 relative overflow-hidden rounded-md bg-bg-surface ring-1 ring-inset ring-border-subtle"
+        >
+          <div className="relative aspect-[21/9] w-full">
+            <Image
+              src="/musthane-mac-mockup.webp"
+              alt="Refonte de la navigation Musthane sur écran MacBook · nouvelle architecture à un seul axe."
+              fill
+              priority
+              sizes="(min-width: 1280px) 1200px, 100vw"
+              className="object-cover object-center"
+            />
+          </div>
+          <figcaption className="sr-only">
+            Mockup de la nouvelle navigation Musthane sur écran MacBook.
+          </figcaption>
+        </motion.figure>
 
-                {/* Tags + CTA */}
-                <div className="flex flex-wrap items-center justify-between gap-6">
-                  <div className="flex flex-wrap items-center gap-2">
-                    {TAGS.map((tag) => (
-                      <span
-                        key={tag}
-                        className="inline-flex items-center px-2.5 py-1 rounded-sm border border-border-subtle font-mono text-mono-label uppercase tracking-[0.14em] text-t3"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="inline-flex items-center gap-2 text-t1 group-hover:text-accent transition-colors duration-150 font-display font-medium text-[15px]">
-                    Ouvrir l&apos;étude
-                    <ArrowUpRight
-                      className="w-4 h-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-150"
-                      strokeWidth={1.5}
-                      aria-hidden
-                    />
-                  </span>
-                </div>
+        {/* Footer row · méta + tags + CTA tout aligné */}
+        <motion.div
+          {...fade(0.2)}
+          className="mt-10 md:mt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-8 lg:gap-x-12 items-end border-t border-border-subtle pt-8"
+        >
+          {/* Méta 3-col */}
+          <dl className="lg:col-span-6 grid grid-cols-3 gap-6 md:gap-8">
+            {META.map((item) => (
+              <div key={item.label}>
+                <dt className="font-mono text-mono-label uppercase tracking-[0.18em] text-t3 mb-1.5">
+                  {item.label}
+                </dt>
+                <dd className="font-display text-t1 leading-tight tracking-[-0.01em] text-[15px] md:text-[16px]">
+                  {item.value}
+                </dd>
               </div>
+            ))}
+          </dl>
 
-              {/* Right · stat punch (4 cols) */}
-              <div className="lg:col-span-4 p-8 md:p-12 lg:p-14 bg-bg-elevated/40 flex flex-col justify-between gap-8 relative overflow-hidden">
-                {/* Background grid */}
-                <div
-                  className="absolute inset-0 opacity-[0.5] pointer-events-none"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(var(--border-subtle) 1px, transparent 1px), linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px)",
-                    backgroundSize: "32px 32px",
-                  }}
-                  aria-hidden
-                />
+          {/* Tags */}
+          <ul
+            aria-label="Disciplines mobilisées"
+            className="lg:col-span-3 flex flex-wrap gap-x-4 gap-y-1.5 font-mono text-mono-label uppercase tracking-[0.16em] text-t2"
+          >
+            {TAGS.map((tag) => (
+              <li key={tag}>
+                <span aria-hidden className="text-t3 mr-2">·</span>
+                {tag}
+              </li>
+            ))}
+          </ul>
 
-                <span className="relative font-mono text-micro uppercase tracking-[0.18em] text-t3">
-                  // stat-key
-                </span>
-
-                <div className="relative flex items-baseline gap-3">
-                  <span
-                    className="font-display font-semibold text-t1 leading-none tracking-[-0.04em] tabular-nums"
-                    style={{ fontSize: "clamp(72px, 12vw, 144px)" }}
-                  >
-                    4
-                  </span>
-                  <span className="text-t3 font-display text-display-m">→</span>
-                  <span
-                    className="font-display font-semibold text-accent leading-none tracking-[-0.04em] tabular-nums"
-                    style={{ fontSize: "clamp(72px, 12vw, 144px)" }}
-                  >
-                    1
-                  </span>
-                </div>
-
-                <div className="relative">
-                  <span className="block font-mono text-mono-label uppercase tracking-[0.14em] text-t2">
-                    4 axes de nav
-                  </span>
-                  <span className="block font-mono text-mono-label uppercase tracking-[0.14em] text-t3 mt-1">
-                    → 1 logique par usage
-                  </span>
-                  <span className="block mt-4 font-mono text-mono-label uppercase tracking-[0.14em] text-t3">
-                    100+ produits remappés
-                  </span>
-                </div>
-              </div>
-            </div>
-          </Link>
+          {/* CTA */}
+          <div className="lg:col-span-3 flex lg:justify-end">
+            <Link
+              href="/musthane"
+              aria-label="Lire l'étude de cas Musthane"
+              className="group inline-flex items-center gap-3 outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-4 focus-visible:ring-offset-bg-base rounded-sm min-h-[44px]"
+            >
+              <span
+                className="font-display font-semibold text-t1 leading-[1.0] tracking-[-0.02em] underline underline-offset-[8px] decoration-1 decoration-border-strong group-hover:text-accent group-hover:decoration-accent transition-colors duration-200"
+                style={{ fontSize: "var(--text-display-xs)" }}
+              >
+                Ouvrir l&apos;étude
+              </span>
+              <ArrowUpRight
+                className="w-5 h-5 shrink-0 text-t2 group-hover:text-accent group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all duration-200"
+                strokeWidth={1.5}
+                aria-hidden
+              />
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>
