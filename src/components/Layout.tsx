@@ -23,6 +23,12 @@ export function Layout() {
     window.scrollTo(0, 0)
   }, [location])
 
+  // La nouvelle home (v2) embarque sa propre nav et son footer.
+  // Les pages projets gardent le chrome legacy en attendant leur refonte.
+  if (location.pathname === "/") {
+    return <Outlet />
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-bg text-t1 font-sans selection:bg-p5/30 selection:text-white">
       <Navbar />
