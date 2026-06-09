@@ -234,6 +234,19 @@
   border-bottom-color: currentColor;
 }
 
+/* ── Formes organiques chaudes du hero (nappes picturales) ── */
+.v2-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  /* Le falloff du gradient fait le flou — zéro filter, zéro coût GPU */
+  animation: v2-drift 16s ease-in-out infinite alternate;
+}
+@keyframes v2-drift {
+  from { transform: translate3d(0, -2.5%, 0) scale(1) rotate(0deg); }
+  to   { transform: translate3d(3%, 3.5%, 0) scale(1.12) rotate(8deg); }
+}
+
 /* ── Apparitions différées de l'intro ── */
 .v2-late {
   opacity: 0;
@@ -249,5 +262,6 @@
   .v2-bg { transition: none; }
   .v2-name .fill { animation: none; clip-path: polygon(0 -4%, 100% -4%, 100% 102%, 0 102%); }
   .v2-bob { animation: none; transform: rotate(var(--tilt, -3deg)); }
+  .v2-blob { animation: none; }
   .v2-late, .v2-later { animation: none; opacity: 1; }
 }

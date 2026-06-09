@@ -128,10 +128,58 @@ export function Home() {
 
 /* ─────────────────────────── Intro ─────────────────────────── */
 
+/* Nappes picturales chaudes — drift idle + parallax au scroll (vitesses étagées) */
+const BLOBS = [
+  {
+    size: "58vw",
+    style: { top: "-18%", left: "-14%" },
+    color: "rgba(232,193,143,0.55)", // ambre
+    speed: -0.18,
+    delay: "0s",
+    duration: "17s",
+  },
+  {
+    size: "48vw",
+    style: { top: "26%", right: "-16%" },
+    color: "rgba(226,160,122,0.45)", // terracotta
+    speed: -0.38,
+    delay: "-7s",
+    duration: "21s",
+  },
+  {
+    size: "40vw",
+    style: { bottom: "-24%", left: "16%" },
+    color: "rgba(235,189,170,0.5)", // rosé
+    speed: -0.6,
+    delay: "-12s",
+    duration: "14s",
+  },
+  {
+    size: "30vw",
+    style: { top: "8%", left: "38%" },
+    color: "rgba(220,229,236,0.6)", // souffle bleu pâle (annonce Musthane)
+    speed: -0.28,
+    delay: "-4s",
+    duration: "19s",
+  },
+] as const
+
 function Intro() {
+  const reduce = useReducedMotion()
+  const { scrollY } = useScroll()
+
   return (
-    <section className="relative flex min-h-screen flex-col justify-center bg-[#F4F2EE] px-[6vw]">
-      <h1 className="v2-name" aria-label="Quentin Singama">
+    <section className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[#F4F2EE] px-[6vw]">
+      {/* Fond organique */}
+      <div className="absolute inset-0" aria-hidden>
+        {BLOBS.map((b, i) => (
+          <React.Fragment key={i}>
+            <BlobLayer b={b} scrollY={scrollY} reduce={!!reduce} />
+          </React.Fragment>
+        ))}
+      </div>
+
+      <h1 className="v2-name relative" aria-label="Quentin Singama">
         <span className="outline" aria-hidden="true">
           Quentin
           <br />
@@ -144,7 +192,7 @@ function Intro() {
         </span>
       </h1>
 
-      <div className="v2-late mt-11 flex flex-wrap items-end justify-between gap-6">
+      <div className="v2-late relative mt-11 flex flex-wrap items-end justify-between gap-6">
         <p className="max-w-[400px] text-[17px] leading-relaxed lg:text-[19px]">
           UX/UI Designer à Bordeaux. Je démêle le complexe, jusqu'à l'évidence.
         </p>
@@ -158,6 +206,35 @@ function Intro() {
         Scroll — cinq projets
       </p>
     </section>
+  )
+}
+
+function BlobLayer({
+  b,
+  scrollY,
+  reduce,
+}: {
+  b: (typeof BLOBS)[number]
+  scrollY: MotionValue<number>
+  reduce: boolean
+}) {
+  // Chaque nappe glisse à sa propre vitesse quand on quitte le hero
+  const y = useTransform(scrollY, [0, 1000], reduce ? [0, 0] : [0, 1000 * b.speed])
+
+  return (
+    <motion.div style={{ y }} className="absolute inset-0">
+      <div
+        className="v2-blob"
+        style={{
+          ...b.style,
+          width: b.size,
+          height: b.size,
+          background: `radial-gradient(closest-side, ${b.color}, transparent 72%)`,
+          animationDelay: b.delay,
+          animationDuration: b.duration,
+        }}
+      />
+    </motion.div>
   )
 }
 
