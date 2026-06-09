@@ -4,17 +4,18 @@ import Lenis from "lenis"
 import {
   motion,
   useMotionValue,
+  useMotionValueEvent,
   useSpring,
   useScroll,
   useTransform,
   useReducedMotion,
+  type MotionValue,
 } from "motion/react"
 
 /* ═══════════════════════════════════════════════════════════
-   HOME V2 — système Robin Noguier
-   Fond continu qui prend la couleur de chaque study,
-   visuels inclinés flottants, nom en remplissage liquide.
-   Patches DA + perf/a11y appliqués (reviews croisées).
+   HOME V2.1 — slider scroll-driven (système Robin complet)
+   La page se fige : le scroll fait défiler les visuels,
+   le fond et le texte suivent en continu.
    ═══════════════════════════════════════════════════════════ */
 
 type Visual =
@@ -31,9 +32,8 @@ type Project = {
   bg: string
   accent: string
   theme: "light" | "dark"
-  tilt: string
+  ry: string // rotation perspective Y (carte de biais)
   visual: Visual
-  thumb?: { kind: "img"; src: string; w: number; h: number } | { kind: "stat"; big: string; lines: string }
 }
 
 const PROJECTS: Project[] = [
@@ -45,9 +45,8 @@ const PROJECTS: Project[] = [
     bg: "#DCE5EC",
     accent: "#1e3a5f",
     theme: "light",
-    tilt: "-3deg",
+    ry: "-7deg",
     visual: { kind: "img", src: "/work/musthane-hero.webp", w: 1500, h: 1125, alt: "Refonte navigation Musthane sur MacBook" },
-    thumb: { kind: "img", src: "/work/musthane-thumb.webp", w: 440, h: 956 },
   },
   {
     id: "research",
@@ -57,13 +56,12 @@ const PROJECTS: Project[] = [
     bg: "#1C2D3F",
     accent: "#8FB8E8",
     theme: "dark",
-    tilt: "2.5deg",
+    ry: "7deg",
     visual: {
       kind: "quote",
       text: "« Je sais qu'il y a un concert quelque part. Je sais pas où. Mais je sais. »",
       cite: "Léa, 21 ans — entretien n°4",
     },
-    thumb: { kind: "stat", big: "7", lines: "entretiens menés · 4 insights majeurs" },
   },
   {
     id: "ink",
@@ -73,9 +71,8 @@ const PROJECTS: Project[] = [
     bg: "#120E0E",
     accent: "#E33125",
     theme: "dark",
-    tilt: "-2.5deg",
+    ry: "-7deg",
     visual: { kind: "img", src: "/work/ink-hero.webp", w: 1440, h: 937, alt: "INK, identité dystopique rouge et noir" },
-    thumb: { kind: "img", src: "/work/ink-thumb.webp", w: 460, h: 258 },
   },
   {
     id: "lina",
@@ -85,9 +82,8 @@ const PROJECTS: Project[] = [
     bg: "#E9E7F4",
     accent: "#4338CA",
     theme: "light",
-    tilt: "3deg",
+    ry: "7deg",
     visual: { kind: "crop", src: "/work/lina-hero.webp", ratio: "4 / 3", alt: "Refonte desktop LINA" },
-    thumb: { kind: "img", src: "/work/lina-thumb.webp", w: 460, h: 276 },
   },
   {
     id: "happyjob",
@@ -97,19 +93,18 @@ const PROJECTS: Project[] = [
     bg: "#F4E9D8",
     accent: "#C2410C",
     theme: "light",
-    tilt: "-2deg",
+    ry: "-7deg",
     visual: { kind: "grid", srcs: ["/work/hj-1.webp", "/work/hj-2.webp", "/work/hj-3.webp", "/work/hj-4.webp"] },
   },
 ]
 
-const SECTION_BG = ["#F4F2EE", ...PROJECTS.map((p) => p.bg), "#141414"]
+const N = PROJECTS.length
 
-/* ─────────────────────────── Root (stateless) ─────────────────────────── */
+/* ─────────────────────────── Root ─────────────────────────── */
 
 export function Home() {
   const reduce = useReducedMotion()
 
-  // Scroll inertiel — Lenis gère son propre rAF
   React.useEffect(() => {
     if (reduce) {
       window.scrollTo(0, 0)
@@ -122,55 +117,12 @@ export function Home() {
 
   return (
     <div className="v2-root">
-      <BgLayer colors={SECTION_BG} />
       <V2Cursor />
       <V2Nav />
-
       <Intro />
-
-      {PROJECTS.map((p, i) => (
-        <React.Fragment key={p.id}>
-          <ProjectSection p={p} index={i} />
-        </React.Fragment>
-      ))}
-
-      <ContactFooter idx={SECTION_BG.length - 1} />
+      <WorkSlider />
+      <ContactFooter />
     </div>
-  )
-}
-
-/* ──────────── Calque de fond + dots (seul composant à re-render) ──────────── */
-
-function BgLayer({ colors }: { colors: string[] }) {
-  const [active, setActive] = React.useState(0)
-
-  React.useEffect(() => {
-    // Bande centrale du viewport : fiable quelle que soit la hauteur des sections
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(Number(e.target.getAttribute("data-idx")))
-        })
-      },
-      { rootMargin: "-45% 0% -45% 0%", threshold: 0 }
-    )
-    document.querySelectorAll("[data-idx]").forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [])
-
-  return (
-    <>
-      <div aria-hidden className="v2-bg" style={{ backgroundColor: colors[active] }} />
-      <div className="fixed right-6 top-1/2 z-[90] hidden -translate-y-1/2 flex-col gap-2.5 mix-blend-difference lg:flex">
-        {colors.map((_, i) => (
-          <span
-            key={i}
-            className="w-[5px] rounded-full bg-white transition-all duration-500"
-            style={{ height: i === active ? 24 : 5, opacity: i === active ? 1 : 0.4 }}
-          />
-        ))}
-      </div>
-    </>
   )
 }
 
@@ -178,7 +130,7 @@ function BgLayer({ colors }: { colors: string[] }) {
 
 function Intro() {
   return (
-    <section data-idx={0} className="relative flex min-h-screen flex-col justify-center px-[6vw]">
+    <section className="relative flex min-h-screen flex-col justify-center bg-[#F4F2EE] px-[6vw]">
       <h1 className="v2-name" aria-label="Quentin Singama">
         <span className="outline" aria-hidden="true">
           Quentin
@@ -209,111 +161,177 @@ function Intro() {
   )
 }
 
-/* ──────────────────────── Section projet ──────────────────────── */
+/* ──────────────── Slider scroll-driven (sticky) ──────────────── */
 
-function ProjectSection({ p, index }: { p: Project; index: number }) {
-  const ref = React.useRef<HTMLElement>(null)
+function WorkSlider() {
+  const trackRef = React.useRef<HTMLDivElement>(null)
+  const { scrollY } = useScroll()
+  const [bounds, setBounds] = React.useState({ top: 0, len: 1 })
+
+  // Mesure manuelle du track : fiable quel que soit le contexte (Lenis, overflow…)
+  React.useLayoutEffect(() => {
+    const measure = () => {
+      const el = trackRef.current
+      if (!el) return
+      const top = el.getBoundingClientRect().top + window.scrollY
+      setBounds({ top, len: Math.max(1, el.offsetHeight - window.innerHeight) })
+    }
+    measure()
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
+  }, [])
+
+  const scrollYProgress = useTransform(
+    scrollY,
+    [bounds.top, bounds.top + bounds.len],
+    [0, 1],
+    { clamp: true }
+  )
+
+  // Fond continu : interpolation de couleur pilotée par le scroll
+  const stops = [0, ...PROJECTS.map((_, i) => (i + 0.5) / N), 1]
+  const colors = ["#F4F2EE", ...PROJECTS.map((p) => p.bg), "#141414"]
+  const bg = useTransform(scrollYProgress, stops, colors)
+
+  return (
+    <div ref={trackRef} style={{ height: `${N * 120}vh` }}>
+      <motion.section
+        aria-label="Projets sélectionnés"
+        className="sticky top-0 h-screen overflow-hidden"
+        style={{ backgroundColor: bg }}
+      >
+        {PROJECTS.map((p, i) => (
+          <React.Fragment key={p.id}>
+            <Slide p={p} i={i} progress={scrollYProgress} />
+          </React.Fragment>
+        ))}
+        <SliderDots progress={scrollYProgress} />
+      </motion.section>
+    </div>
+  )
+}
+
+function Slide({ p, i, progress }: { p: Project; i: number; progress: MotionValue<number> }) {
   const reduce = useReducedMotion()
+  const c = (i + 0.5) / N
+  const span = 1 / N
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
+  // Le visuel traverse l'écran en continu (film strip vertical)
+  const imgY = useTransform(
+    progress,
+    [c - span, c, c + span],
+    reduce ? ["0vh", "0vh", "0vh"] : ["112vh", "0vh", "-112vh"]
+  )
+  // Le texte apparaît/disparaît autour du centre du segment
+  const txtOpacity = useTransform(
+    progress,
+    [c - span * 0.42, c - span * 0.16, c + span * 0.16, c + span * 0.42],
+    [0, 1, 1, 0]
+  )
+  const txtY = useTransform(
+    progress,
+    [c - span * 0.42, c, c + span * 0.42],
+    reduce ? [0, 0, 0] : [38, 0, -38]
+  )
+  // Crossfade des visuels en mode réduit
+  const imgOpacity = useTransform(
+    progress,
+    [c - span * 0.5, c - span * 0.2, c + span * 0.2, c + span * 0.5],
+    reduce ? [0, 1, 1, 0] : [1, 1, 1, 1]
+  )
+
+  // Seule la slide proche du centre capte les clics
+  const [interactive, setInteractive] = React.useState(i === 0)
+  useMotionValueEvent(txtOpacity, "change", (v) => {
+    const next = v > 0.5
+    setInteractive((prev) => (prev === next ? prev : next))
   })
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [70, -70])
 
   const ink = p.theme === "dark" ? "#EDE8E1" : "#141414"
   const muted = p.theme === "dark" ? "rgba(237,232,225,0.72)" : "rgba(20,20,20,0.78)"
-  // Vignette inclinée à l'opposé du visuel principal (jamais de parallèles)
-  const thumbTilt = p.tilt.startsWith("-") ? "2.5deg" : "-2.5deg"
 
   return (
-    <section
-      ref={ref}
-      data-idx={index + 1}
-      className="relative grid min-h-screen grid-cols-1 items-stretch px-5 lg:grid-cols-[minmax(340px,42%)_1fr] lg:pl-[6vw] lg:pr-0"
+    <div
+      className="absolute inset-0 grid grid-cols-1 grid-rows-[auto_1fr] lg:grid-cols-[minmax(340px,42%)_1fr] lg:grid-rows-1"
+      style={{ pointerEvents: interactive ? "auto" : "none" }}
     >
-      {/* Colonne gauche : texte en haut, vignette en bas — jamais de collision */}
-      <div className="z-10 flex flex-col justify-between gap-10 pt-[15vh] pb-[9vh]">
-        <div>
-          <h2
-            className="v2-serif"
-            style={{
-              color: p.accent,
-              fontSize: "clamp(50px, 7.2vw, 122px)",
-              lineHeight: 0.97,
-              fontWeight: 640,
-              letterSpacing: "-0.015em",
-            }}
-          >
-            {p.title.map((line, li) => (
-              <span key={line} className="block overflow-hidden pb-[0.06em]">
-                <motion.span
-                  className="block"
-                  initial={reduce ? false : { y: "112%" }}
-                  whileInView={{ y: "0%" }}
-                  viewport={{ once: true, margin: "-12%" }}
-                  transition={{ duration: 0.9, delay: li * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  {line}
-                </motion.span>
-              </span>
-            ))}
-          </h2>
+      {/* Texte */}
+      <motion.div
+        style={{ opacity: txtOpacity, y: txtY }}
+        className="z-10 self-end px-5 pb-2 lg:self-center lg:pl-[6vw] lg:pr-0 lg:pb-0"
+      >
+        <h2
+          className="v2-serif"
+          style={{
+            color: p.accent,
+            fontSize: "clamp(46px, 7.2vw, 122px)",
+            lineHeight: 0.97,
+            fontWeight: 640,
+            letterSpacing: "-0.015em",
+          }}
+        >
+          {p.title.map((line) => (
+            <span key={line} className="block">
+              {line}
+            </span>
+          ))}
+        </h2>
 
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-12%" }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <p className="mt-6 max-w-[390px] text-[15.5px] leading-relaxed lg:text-[17px]" style={{ color: muted }}>
-              {p.desc}
-            </p>
+        <p className="mt-5 max-w-[390px] text-[15px] leading-relaxed lg:mt-6 lg:text-[17px]" style={{ color: muted }}>
+          {p.desc}
+        </p>
 
-            <Link
-              to={p.href}
-              data-cursor
-              className="group mt-8 inline-flex items-center gap-2 border-b pb-1 text-[15px] font-medium"
-              style={{ color: ink, borderColor: ink }}
-            >
-              Voir le case study <span aria-hidden>→</span>
-            </Link>
-          </motion.div>
-        </div>
+        <Link
+          to={p.href}
+          data-cursor
+          className="v2-cta mt-7 lg:mt-9"
+          style={{ color: ink, "--cta-accent": p.accent } as React.CSSProperties}
+        >
+          <span className="v2-cta-circle">
+            <span className="v2-cta-arrow" aria-hidden>
+              →
+            </span>
+          </span>
+          <span className="v2-cta-label">Voir le case study</span>
+        </Link>
+      </motion.div>
 
-        {/* Vignette secondaire — dans le flux, flottante */}
-        {p.thumb && (
-          <div
-            className="v2-bob hidden w-[clamp(140px,13vw,210px)] lg:block"
-            style={{ "--tilt": thumbTilt, animationDelay: "-3.2s", border: `3px solid ${p.accent}`, boxShadow: "0 22px 44px -18px rgba(0,0,0,0.35)" } as React.CSSProperties}
-          >
-            {p.thumb.kind === "img" ? (
-              <img src={p.thumb.src} alt="" width={p.thumb.w} height={p.thumb.h} loading="lazy" decoding="async" className="block h-auto w-full" />
-            ) : (
-              <div className="bg-[#EDE8E1] px-4 py-4 text-[13px] leading-relaxed text-[#15202C]">
-                <strong className="v2-serif block text-[30px] leading-none" style={{ fontWeight: 640 }}>
-                  {p.thumb.big}
-                </strong>
-                {p.thumb.lines}
+      {/* Visuel — traverse l'écran au scroll */}
+      <div className="relative">
+        <motion.div
+          style={{ y: imgY, opacity: imgOpacity }}
+          className="absolute inset-x-5 top-1/2 -translate-y-1/2 lg:inset-x-auto lg:right-[4vw] lg:w-auto"
+        >
+          <Link to={p.href} tabIndex={-1} aria-hidden="true" data-cursor className="block">
+            <div className="v2-bob">
+              <div className="v2-tilt3d" style={{ "--ry": p.ry, "--rx": "1.5deg" } as React.CSSProperties}>
+                <ProjectVisual v={p.visual} eager={i === 0} />
               </div>
-            )}
-          </div>
-        )}
+            </div>
+          </Link>
+        </motion.div>
       </div>
+    </div>
+  )
+}
 
-      {/* Colonne droite : visuel flottant incliné, cliquable (curseur « Voir → ») */}
-      <div className="relative flex items-center justify-center py-8 lg:block lg:py-0">
-        <div className="w-full lg:absolute lg:right-[3.5vw] lg:top-1/2 lg:w-auto lg:-translate-y-1/2">
-          <motion.div style={{ y }}>
-            <Link to={p.href} tabIndex={-1} aria-hidden="true" data-cursor className="block">
-              <div className="v2-bob" style={{ "--tilt": p.tilt } as React.CSSProperties}>
-                <ProjectVisual v={p.visual} eager={index === 0} />
-              </div>
-            </Link>
-          </motion.div>
-        </div>
-      </div>
-    </section>
+function SliderDots({ progress }: { progress: MotionValue<number> }) {
+  const [active, setActive] = React.useState(0)
+  useMotionValueEvent(progress, "change", (v) => {
+    const idx = Math.min(N - 1, Math.max(0, Math.floor(v * N)))
+    setActive((prev) => (prev === idx ? prev : idx))
+  })
+
+  return (
+    <div className="absolute right-6 top-1/2 z-20 hidden -translate-y-1/2 flex-col gap-2.5 mix-blend-difference lg:flex">
+      {PROJECTS.map((p, i) => (
+        <span
+          key={p.id}
+          className="w-[5px] rounded-full bg-white transition-all duration-500"
+          style={{ height: i === active ? 24 : 5, opacity: i === active ? 1 : 0.4 }}
+        />
+      ))}
+    </div>
   )
 }
 
@@ -332,7 +350,7 @@ function ProjectVisual({ v, eager }: { v: Visual; eager?: boolean }) {
         loading={eager ? "eager" : "lazy"}
         fetchPriority={eager ? "low" : undefined}
         decoding="async"
-        className="block h-auto w-full lg:h-auto lg:max-h-[74vh] lg:w-auto lg:max-w-[50vw]"
+        className="mx-auto block h-auto w-full max-w-[92vw] lg:mx-0 lg:max-h-[72vh] lg:w-auto lg:max-w-[48vw]"
         style={{ boxShadow: VISUAL_SHADOW }}
       />
     )
@@ -341,7 +359,7 @@ function ProjectVisual({ v, eager }: { v: Visual; eager?: boolean }) {
   if (v.kind === "crop") {
     return (
       <div
-        className="w-full overflow-hidden lg:w-[min(48vw,860px)]"
+        className="mx-auto w-full max-w-[92vw] overflow-hidden lg:mx-0 lg:w-[min(46vw,840px)] lg:max-w-none"
         style={{ aspectRatio: v.ratio, boxShadow: VISUAL_SHADOW }}
       >
         <img src={v.src} alt={v.alt} loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
@@ -352,12 +370,12 @@ function ProjectVisual({ v, eager }: { v: Visual; eager?: boolean }) {
   if (v.kind === "quote") {
     return (
       <div
-        className="flex w-full flex-col justify-center bg-[#121C26] p-[8%] lg:w-[min(48vw,860px)]"
+        className="mx-auto flex w-full max-w-[92vw] flex-col justify-center bg-[#121C26] p-[8%] lg:mx-0 lg:w-[min(46vw,840px)] lg:max-w-none"
         style={{ aspectRatio: "16 / 10.5", boxShadow: VISUAL_SHADOW }}
       >
         <blockquote
           className="v2-serif max-w-[21ch] text-[#EDE8E1]"
-          style={{ fontSize: "clamp(19px, 2.5vw, 37px)", lineHeight: 1.2, fontWeight: 560 }}
+          style={{ fontSize: "clamp(17px, 2.5vw, 37px)", lineHeight: 1.2, fontWeight: 560 }}
         >
           {v.text}
         </blockquote>
@@ -368,7 +386,7 @@ function ProjectVisual({ v, eager }: { v: Visual; eager?: boolean }) {
 
   return (
     <div
-      className="grid w-full grid-cols-4 overflow-hidden lg:w-[min(48vw,860px)]"
+      className="mx-auto grid w-full max-w-[92vw] grid-cols-4 overflow-hidden lg:mx-0 lg:w-[min(46vw,840px)] lg:max-w-none"
       style={{ aspectRatio: "16 / 10.5", boxShadow: VISUAL_SHADOW }}
     >
       {v.srcs.map((s) => (
@@ -380,9 +398,9 @@ function ProjectVisual({ v, eager }: { v: Visual; eager?: boolean }) {
 
 /* ─────────────────────────── Footer ─────────────────────────── */
 
-function ContactFooter({ idx }: { idx: number }) {
+function ContactFooter() {
   return (
-    <footer data-idx={idx} className="relative flex min-h-[92vh] flex-col justify-center px-[6vw] text-[#F4F2EE]">
+    <footer className="relative flex min-h-[92vh] flex-col justify-center bg-[#141414] px-[6vw] text-[#F4F2EE]">
       <p className="max-w-[620px] text-[20px] leading-snug lg:text-[28px]">
         Une alternance, un stage court, ou juste envie de parler design — j'écoute.
       </p>

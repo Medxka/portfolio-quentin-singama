@@ -178,8 +178,60 @@
   animation: v2-bob 6.5s ease-in-out infinite alternate;
 }
 @keyframes v2-bob {
-  from { transform: rotate(var(--tilt, -3deg)) translateY(-9px); }
-  to   { transform: rotate(var(--tilt, -3deg)) translateY(11px); }
+  from { transform: translateY(-9px); }
+  to   { transform: translateY(11px); }
+}
+
+/* ── Inclinaison perspective 3D (carte vue de biais, à la Robin) ── */
+.v2-tilt3d {
+  transform: perspective(1200px) rotateY(var(--ry, -7deg)) rotateX(var(--rx, 1.5deg));
+  transform-style: preserve-3d;
+}
+
+/* ── CTA case study : label + cercle-flèche qui se remplit de l'accent ── */
+.v2-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.v2-cta-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition:
+    background-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.v2-cta-arrow {
+  font-size: 18px;
+  line-height: 1;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.v2-cta:hover .v2-cta-circle,
+.v2-cta:focus-visible .v2-cta-circle {
+  background-color: var(--cta-accent, currentColor);
+  border-color: var(--cta-accent, currentColor);
+}
+.v2-cta:hover .v2-cta-arrow,
+.v2-cta:focus-visible .v2-cta-arrow {
+  transform: rotate(-45deg);
+  color: #fff;
+}
+.v2-cta .v2-cta-label {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.35s;
+}
+.v2-cta:hover .v2-cta-label {
+  border-bottom-color: currentColor;
 }
 
 /* ── Apparitions différées de l'intro ── */
