@@ -24,6 +24,15 @@ type Visual =
   | { kind: "quote"; text: string; cite: string }
   | { kind: "grid"; srcs: string[] }
 
+type Glow = {
+  size: string
+  color: string
+  pos: React.CSSProperties
+  dur: string
+  delay: string
+  speed: number // déplacement vertical max en px (parallax interne)
+}
+
 type Project = {
   id: string
   href: string
@@ -34,6 +43,7 @@ type Project = {
   theme: "light" | "dark"
   ry: string // rotation perspective Y (carte de biais)
   visual: Visual
+  glows: Glow[]
 }
 
 const PROJECTS: Project[] = [
@@ -47,6 +57,10 @@ const PROJECTS: Project[] = [
     theme: "light",
     ry: "-7deg",
     visual: { kind: "img", src: "/work/musthane-hero.webp", w: 1500, h: 1125, alt: "Refonte navigation Musthane sur MacBook" },
+    glows: [
+      { size: "54vw", color: "rgba(30,58,95,0.16)", pos: { top: "-16%", right: "-10%" }, dur: "18s", delay: "0s", speed: 200 },
+      { size: "38vw", color: "rgba(232,193,143,0.42)", pos: { bottom: "-18%", left: "6%" }, dur: "14s", delay: "-6s", speed: 330 },
+    ],
   },
   {
     id: "research",
@@ -62,6 +76,10 @@ const PROJECTS: Project[] = [
       text: "« Je sais qu'il y a un concert quelque part. Je sais pas où. Mais je sais. »",
       cite: "Léa, 21 ans — entretien n°4",
     },
+    glows: [
+      { size: "58vw", color: "rgba(143,184,232,0.13)", pos: { top: "4%", right: "-14%" }, dur: "20s", delay: "-3s", speed: 210 },
+      { size: "34vw", color: "rgba(235,189,170,0.09)", pos: { bottom: "-12%", left: "-6%" }, dur: "15s", delay: "-9s", speed: 340 },
+    ],
   },
   {
     id: "ink",
@@ -73,6 +91,10 @@ const PROJECTS: Project[] = [
     theme: "dark",
     ry: "-7deg",
     visual: { kind: "img", src: "/work/ink-hero.webp", w: 1440, h: 937, alt: "INK, identité dystopique rouge et noir" },
+    glows: [
+      { size: "58vw", color: "rgba(227,49,37,0.15)", pos: { top: "-12%", right: "-12%" }, dur: "17s", delay: "-5s", speed: 220 },
+      { size: "36vw", color: "rgba(227,49,37,0.08)", pos: { bottom: "-16%", left: "2%" }, dur: "13s", delay: "-2s", speed: 350 },
+    ],
   },
   {
     id: "lina",
@@ -84,6 +106,10 @@ const PROJECTS: Project[] = [
     theme: "light",
     ry: "7deg",
     visual: { kind: "crop", src: "/work/lina-hero.webp", ratio: "4 / 3", alt: "Refonte desktop LINA" },
+    glows: [
+      { size: "50vw", color: "rgba(67,56,202,0.11)", pos: { top: "-12%", right: "-8%" }, dur: "19s", delay: "-7s", speed: 200 },
+      { size: "34vw", color: "rgba(232,160,122,0.24)", pos: { bottom: "-20%", left: "5%" }, dur: "14s", delay: "-4s", speed: 320 },
+    ],
   },
   {
     id: "happyjob",
@@ -95,6 +121,10 @@ const PROJECTS: Project[] = [
     theme: "light",
     ry: "-7deg",
     visual: { kind: "grid", srcs: ["/work/hj-1.webp", "/work/hj-2.webp", "/work/hj-3.webp", "/work/hj-4.webp"] },
+    glows: [
+      { size: "54vw", color: "rgba(194,65,12,0.13)", pos: { top: "-10%", right: "-10%" }, dur: "18s", delay: "-8s", speed: 210 },
+      { size: "40vw", color: "rgba(232,193,143,0.5)", pos: { bottom: "-16%", left: "-4%" }, dur: "15s", delay: "-3s", speed: 330 },
+    ],
   },
 ]
 
@@ -317,6 +347,23 @@ function Slide({ p, i, progress }: { p: Project; i: number; progress: MotionValu
     reduce ? [0, 1, 1, 0] : [1, 1, 1, 1]
   )
 
+  // Nappes : présentes un peu plus longtemps que le texte, parallax interne
+  const glowOpacity = useTransform(
+    progress,
+    [c - span * 0.6, c - span * 0.22, c + span * 0.22, c + span * 0.6],
+    [0, 1, 1, 0]
+  )
+  const glowYA = useTransform(
+    progress,
+    [c - span, c + span],
+    reduce ? [0, 0] : [p.glows[0]?.speed ?? 0, -(p.glows[0]?.speed ?? 0)]
+  )
+  const glowYB = useTransform(
+    progress,
+    [c - span, c + span],
+    reduce ? [0, 0] : [p.glows[1]?.speed ?? 0, -(p.glows[1]?.speed ?? 0)]
+  )
+
   // Seule la slide proche du centre capte les clics
   const [interactive, setInteractive] = React.useState(i === 0)
   useMotionValueEvent(txtOpacity, "change", (v) => {
@@ -332,6 +379,40 @@ function Slide({ p, i, progress }: { p: Project; i: number; progress: MotionValu
       className="absolute inset-0 grid grid-cols-1 grid-rows-[auto_1fr] lg:grid-cols-[minmax(340px,42%)_1fr] lg:grid-rows-1"
       style={{ pointerEvents: interactive ? "auto" : "none" }}
     >
+      {/* Nappes organiques du projet (derrière tout) */}
+      <motion.div className="absolute inset-0" style={{ opacity: glowOpacity }} aria-hidden>
+        {p.glows[0] && (
+          <motion.div style={{ y: glowYA }} className="absolute inset-0">
+            <div
+              className="v2-blob"
+              style={{
+                ...p.glows[0].pos,
+                width: p.glows[0].size,
+                height: p.glows[0].size,
+                background: `radial-gradient(closest-side, ${p.glows[0].color}, transparent 72%)`,
+                animationDuration: p.glows[0].dur,
+                animationDelay: p.glows[0].delay,
+              }}
+            />
+          </motion.div>
+        )}
+        {p.glows[1] && (
+          <motion.div style={{ y: glowYB }} className="absolute inset-0">
+            <div
+              className="v2-blob"
+              style={{
+                ...p.glows[1].pos,
+                width: p.glows[1].size,
+                height: p.glows[1].size,
+                background: `radial-gradient(closest-side, ${p.glows[1].color}, transparent 72%)`,
+                animationDuration: p.glows[1].dur,
+                animationDelay: p.glows[1].delay,
+              }}
+            />
+          </motion.div>
+        )}
+      </motion.div>
+
       {/* Texte */}
       <motion.div
         style={{ opacity: txtOpacity, y: txtY }}
