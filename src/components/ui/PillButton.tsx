@@ -3,13 +3,36 @@ import { cn } from "@/src/lib/utils"
 
 type Variant = "solid" | "ghost" | "dark"
 
+const Arrow = ({ className }: { className?: string }) => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 14 14"
+    fill="none"
+    className={className}
+    aria-hidden
+  >
+    <path
+      d="M2 7h9M7.5 3.5 11 7l-3.5 3.5"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
+
 /**
- * PillButton — bouton signature : pill radius 10px, mono uppercase,
- * chip flèche carrée accolée qui glisse au hover.
+ * PillButton — CTA signature (grammaire effortel, palette chaude).
  *
- * - solid : fond apricot, texte espresso (CTA primaire)
- * - ghost : bordure, texte courant (secondaire sur clair ou sombre)
- * - dark  : fond espresso-2, texte linen (secondaire sur sombre)
+ * Repos : pill + chip coloré à droite portant la flèche.
+ * Hover : le chip s'étend pour remplir toute la pill (0.65s, overshoot),
+ * le label recolore pour rester lisible, la flèche boucle (sort à droite,
+ * une seconde entre par la gauche). Tout piloté en CSS (voir index.css).
+ *
+ * - solid : pill apricot → remplissage espresso
+ * - dark  : pill espresso-2 → remplissage apricot
+ * - ghost : contour → remplissage apricot
  */
 export function PillButton({
   children,
@@ -26,59 +49,19 @@ export function PillButton({
   className?: string
   onClick?: React.MouseEventHandler<HTMLAnchorElement>
 }) {
-  const base =
-    "group inline-flex items-stretch font-mono text-mono-label uppercase select-none"
-
-  const bodyStyles: Record<Variant, string> = {
-    solid: "bg-apricot text-espresso group-hover:bg-apricot-bright",
-    ghost:
-      "border border-current/30 text-current group-hover:border-current/60",
-    dark: "bg-espresso-2 text-linen group-hover:bg-espresso-3",
-  }
-
-  const chipStyles: Record<Variant, string> = {
-    solid: "bg-apricot text-espresso group-hover:bg-apricot-bright",
-    ghost: "border border-current/30 group-hover:border-current/60",
-    dark: "bg-espresso-2 text-linen group-hover:bg-espresso-3",
-  }
-
   return (
     <a
       href={href}
       onClick={onClick}
+      data-variant={variant}
       {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
-      className={cn(base, className)}
+      className={cn("pill-btn group", className)}
     >
-      <span
-        className={cn(
-          "flex items-center rounded-l-pill px-4 py-3 transition-colors duration-300",
-          bodyStyles[variant]
-        )}
-      >
-        {children}
-      </span>
-      <span
-        aria-hidden
-        className={cn(
-          "ml-px flex w-10 items-center justify-center rounded-r-pill transition-colors duration-300",
-          chipStyles[variant]
-        )}
-      >
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-          className="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-0.5"
-        >
-          <path
-            d="M2 7h9M7.5 3.5 11 7l-3.5 3.5"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+      <span aria-hidden className="pill-fill" />
+      <span className="pill-label">{children}</span>
+      <span aria-hidden className="pill-arrows">
+        <Arrow className="pill-arrow pill-arrow-rest" />
+        <Arrow className="pill-arrow pill-arrow-in" />
       </span>
     </a>
   )

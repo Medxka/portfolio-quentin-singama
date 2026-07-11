@@ -125,6 +125,145 @@ p {
   padding-block: clamp(6rem, 12vh, 10rem);
 }
 
+/* ── PillButton : CTA signature (mécanisme effortel) ──────── */
+
+.pill-btn {
+  /* easing signature effortel (léger overshoot en fin de course) */
+  --ease-pill: cubic-bezier(0.579, 0.001, 0, 1.007);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--radius-pill);
+  padding: 0.85rem 3.35em 0.85rem 1.2em;
+  font-family: var(--font-mono);
+  font-size: var(--text-mono-label);
+  letter-spacing: var(--text-mono-label--letter-spacing);
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: var(--pill-bg);
+  color: var(--pill-fg);
+  border: 1px solid var(--pill-border, transparent);
+  transition:
+    color 0.5s,
+    border-color 0.45s var(--ease-pill);
+}
+
+/* remplissage : chip qui s'étend pour couvrir toute la pill */
+.pill-fill {
+  position: absolute;
+  z-index: -1;
+  inset: 3px 3px 3px auto;
+  width: 2.55em;
+  border-radius: calc(var(--radius-pill) - 2px);
+  background: var(--pill-fill);
+  transition: width 0.65s var(--ease-pill);
+  will-change: width;
+}
+.pill-btn:hover .pill-fill,
+.pill-btn:focus-visible .pill-fill {
+  width: calc(100% - 6px);
+}
+
+/* label : recolore quand le remplissage passe dessous */
+.pill-label {
+  position: relative;
+  display: inline-block;
+  transition:
+    color 0.5s,
+    transform 0.45s var(--ease-pill);
+}
+.pill-btn:hover .pill-label,
+.pill-btn:focus-visible .pill-label {
+  transform: translateX(0.12em);
+}
+/* recolore le label directement (tokens globaux, pas d'indirection scopée) */
+.pill-btn[data-variant="solid"]:hover .pill-label,
+.pill-btn[data-variant="solid"]:focus-visible .pill-label {
+  color: var(--color-linen);
+}
+.pill-btn[data-variant="dark"]:hover .pill-label,
+.pill-btn[data-variant="dark"]:focus-visible .pill-label,
+.pill-btn[data-variant="ghost"]:hover .pill-label,
+.pill-btn[data-variant="ghost"]:focus-visible .pill-label {
+  color: var(--color-espresso);
+}
+
+/* flèches : fenêtre étroite dans le chip, deux flèches en boucle */
+.pill-arrows {
+  position: absolute;
+  right: 1.2em;
+  top: 0;
+  bottom: 0;
+  width: 1.05em;
+  display: grid;
+  overflow: hidden;
+  color: var(--pill-arrow);
+}
+.pill-arrow {
+  grid-area: 1 / 1;
+  align-self: center;
+  transition: transform 0.55s var(--ease-pill);
+}
+.pill-arrow-rest {
+  transform: translateX(0);
+}
+.pill-arrow-in {
+  transform: translateX(-200%);
+}
+.pill-btn:hover .pill-arrow-rest,
+.pill-btn:focus-visible .pill-arrow-rest {
+  transform: translateX(200%);
+}
+.pill-btn:hover .pill-arrow-in,
+.pill-btn:focus-visible .pill-arrow-in {
+  transform: translateX(0);
+}
+
+/* Variantes : couleurs repos → remplissage */
+.pill-btn[data-variant="solid"] {
+  --pill-bg: var(--color-apricot);
+  --pill-fg: var(--color-espresso);
+  --pill-fill: var(--color-espresso);
+  --pill-fg-hover: var(--color-linen);
+  --pill-arrow: var(--color-linen);
+}
+.pill-btn[data-variant="dark"] {
+  --pill-bg: var(--color-espresso-2);
+  --pill-fg: var(--color-linen);
+  --pill-fill: var(--color-apricot);
+  --pill-fg-hover: var(--color-espresso);
+  --pill-arrow: var(--color-espresso);
+  --pill-border: color-mix(in oklch, var(--color-linen) 12%, transparent);
+}
+.pill-btn[data-variant="ghost"] {
+  --pill-bg: transparent;
+  --pill-fg: currentColor;
+  --pill-fill: var(--color-apricot);
+  --pill-fg-hover: var(--color-espresso);
+  --pill-arrow: var(--color-espresso);
+  --pill-border: color-mix(in oklch, currentColor 30%, transparent);
+}
+.pill-btn[data-variant="ghost"]:hover,
+.pill-btn[data-variant="ghost"]:focus-visible {
+  --pill-border: var(--color-apricot);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill-fill {
+    transition: width 0.001s;
+  }
+  .pill-label {
+    transition: color 0.2s;
+    transform: none !important;
+  }
+  .pill-arrow {
+    transition: none;
+  }
+}
+
 /* Lien nav mono */
 .nav-link {
   @apply font-mono text-mono-label uppercase;
