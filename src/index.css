@@ -191,14 +191,13 @@ p {
   color: var(--color-espresso);
 }
 
-/* flèches : fenêtre étroite dans le chip, deux flèches en boucle */
+/* flèches : fenêtre calée exactement sur le chip, deux flèches en boucle */
 .pill-arrows {
   position: absolute;
-  right: 1.2em;
-  top: 0;
-  bottom: 0;
-  width: 1.05em;
+  inset: 3px 3px 3px auto;
+  width: 2.55em;
   display: grid;
+  place-items: center;
   overflow: hidden;
   color: var(--pill-arrow);
 }
