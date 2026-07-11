@@ -41,20 +41,22 @@ const NAV_CSS = `
   position: relative;
   display: inline-block;
   width: 0.72em;
-  height: 0.72em;
-  margin-left: 0.15em;
-  transition: transform 0.28s ease-out, opacity 0.28s ease-out, color 0.28s;
+  height: 0.62em;
+  margin-left: 0.65em;
+  color: var(--color-apricot);
+  transition: transform 0.28s ease-out, opacity 0.28s ease-out;
 }
 .mega-plus::before,
 .mega-plus::after {
   content: "";
   position: absolute;
   background: currentColor;
+  border-radius: 1px;
 }
-.mega-plus::before { left: 0; right: 0; top: 50%; height: 1.5px; transform: translateY(-50%); }
-.mega-plus::after { top: 0; bottom: 0; left: 50%; width: 1.5px; transform: translateX(-50%); }
-.mega-btn[data-active="true"] .mega-plus { transform: rotate(45deg); color: var(--color-apricot); }
-.mega-btn[data-dim="true"] .mega-plus { opacity: 0.25; }
+.mega-plus::before { left: 0; right: 0; top: 50%; height: 1.4px; transform: translateY(-50%); }
+.mega-plus::after { top: 0; bottom: 0; left: 50%; width: 1.4px; transform: translateX(-50%); }
+.mega-btn[data-active="true"] .mega-plus { transform: rotate(45deg); }
+.mega-btn[data-dim="true"] .mega-plus { opacity: 0.3; }
 
 /* Overlay + panneau */
 .mega-root {
@@ -242,7 +244,7 @@ export function Nav() {
 
         <nav
           aria-label="Navigation principale"
-          className="shell flex h-16 items-center justify-between gap-4"
+          className="shell relative flex h-16 items-center justify-between gap-4"
         >
           <a
             href="#top"
@@ -253,21 +255,24 @@ export function Nav() {
             Quentin Singama
           </a>
 
-          <div className="nav-drop nav-drop-1 hidden items-center gap-6 md:flex">
-            {MENUS.map((m) => (
-              <button
-                key={m.id}
-                type="button"
-                onClick={() => toggle(m.id)}
-                aria-expanded={open === m.id}
-                data-active={open === m.id}
-                data-dim={open !== null && open !== m.id}
-                className="mega-btn inline-flex items-center font-mono text-mono-label uppercase text-greige transition-colors duration-300 hover:text-linen data-[active=true]:text-linen"
-              >
-                {m.label}
-                <span className="mega-plus" aria-hidden />
-              </button>
-            ))}
+          {/* liens centrés dead-center (.dropdown__wrapper d'effortel) */}
+          <div className="absolute left-1/2 hidden -translate-x-1/2 md:block">
+            <div className="nav-drop nav-drop-1 flex items-center gap-10">
+              {MENUS.map((m) => (
+                <button
+                  key={m.id}
+                  type="button"
+                  onClick={() => toggle(m.id)}
+                  aria-expanded={open === m.id}
+                  data-active={open === m.id}
+                  data-dim={open !== null && open !== m.id}
+                  className="mega-btn inline-flex items-center font-mono text-mono-label uppercase tracking-[0.04em] text-greige transition-colors duration-300 hover:text-linen data-[active=true]:text-linen"
+                >
+                  {m.label}
+                  <span className="mega-plus" aria-hidden />
+                </button>
+              ))}
+            </div>
           </div>
 
           <div className="nav-drop nav-drop-2">
