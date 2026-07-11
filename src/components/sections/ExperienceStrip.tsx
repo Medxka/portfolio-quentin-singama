@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useReducedMotion } from "motion/react"
 import { Reveal } from "../ui/Reveal"
 
 /**
@@ -10,12 +11,19 @@ import { Reveal } from "../ui/Reveal"
 
 const NAMES = ["ECV Bordeaux", "Happy Job", "EVA", "Yumie", "Musthane"]
 
+/**
+ * Passes de la liste par séquence : il faut qu'une séquence soit plus large
+ * que l'écran pour que le loop -50% n'expose jamais de vide (jusqu'à ~3000px).
+ * La durée suit REPEAT pour garder une vitesse de dérive constante.
+ */
+const REPEAT = 4
+
 const MARQUEE_CSS = `
 .xp-track {
   display: flex;
   align-items: center;
   width: max-content;
-  animation: xp-scroll 30s linear infinite;
+  animation: xp-scroll ${30 * REPEAT}s linear infinite;
   will-change: transform;
 }
 .xp-marquee:hover .xp-track {
@@ -60,14 +68,24 @@ const MARQUEE_CSS = `
 }
 `
 
-function WordmarkSequence({ duplicate = false }: { duplicate?: boolean }) {
+function WordmarkSequence({
+  duplicate = false,
+  passes,
+}: {
+  duplicate?: boolean
+  passes: number
+}) {
+  // Répète la liste `passes` fois pour qu'une séquence dépasse la largeur d'écran.
+  const items = Array.from({ length: passes }, (_, pass) =>
+    NAMES.map((name) => ({ name, key: `${pass}-${name}` }))
+  ).flat()
   return (
     <div
       className={duplicate ? "xp-seq xp-dup" : "xp-seq"}
       aria-hidden={duplicate || undefined}
     >
-      {NAMES.map((name) => (
-        <React.Fragment key={name}>
+      {items.map(({ name, key }) => (
+        <React.Fragment key={key}>
           <span className="whitespace-nowrap font-sans text-h5 font-bold text-taupe">
             {name}
           </span>
@@ -83,6 +101,9 @@ function WordmarkSequence({ duplicate = false }: { duplicate?: boolean }) {
 }
 
 export function ExperienceStrip() {
+  const reduce = useReducedMotion()
+  // Reduced motion : une seule passe, rangée statique centrée (pas de loop).
+  const passes = reduce ? 1 : REPEAT
   return (
     <section
       aria-labelledby="confiance-label"
@@ -104,8 +125,8 @@ export function ExperienceStrip() {
       <Reveal delay={0.08}>
         <div className="xp-marquee w-full overflow-hidden">
           <div className="xp-track">
-            <WordmarkSequence />
-            <WordmarkSequence duplicate />
+            <WordmarkSequence passes={passes} />
+            {!reduce && <WordmarkSequence duplicate passes={passes} />}
           </div>
         </div>
       </Reveal>
