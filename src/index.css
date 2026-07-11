@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════
+   V3 — Système technique chaud
+   Grammaire effortel (structure, composants) × palette espresso/apricot
+   ═══════════════════════════════════════════════════════════ */
+
+@theme {
+  /* Palette — committed warm. Zéro bleu, zéro cyan. */
+  --color-espresso: oklch(0.23 0.018 55);
+  --color-espresso-2: oklch(0.28 0.02 55);
+  --color-espresso-3: oklch(0.33 0.022 55);
+  --color-peach: oklch(0.93 0.045 65);
+  --color-peach-2: oklch(0.9 0.055 65);
+  --color-apricot: oklch(0.82 0.13 65);
+  --color-apricot-bright: oklch(0.87 0.11 70);
+  --color-sienna: oklch(0.52 0.12 50); /* accent chaud lisible sur fonds clairs */
+  --color-butter: oklch(0.95 0.055 95);
+  --color-taupe: oklch(0.46 0.028 55);
+  --color-taupe-2: oklch(0.49 0.03 55); /* ≥4.5:1 sur peach (labels) */
+  --color-linen: oklch(0.92 0.018 70);
+  --color-greige: oklch(0.75 0.025 60);
+
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Spline Sans Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* Échelle typographique (desktop 1440 → fluide) */
+  --text-display: clamp(2.6rem, 5.5vw, 4.1rem);
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 800;
+  --text-h3: clamp(2rem, 3.8vw, 3.05rem);
+  --text-h3--line-height: 1.1;
+  --text-h3--letter-spacing: -0.03em;
+  --text-h3--font-weight: 800;
+  --text-h4: 1.8rem;
+  --text-h4--line-height: 1.1;
+  --text-h4--letter-spacing: -0.04em;
+  --text-h4--font-weight: 800;
+  --text-h5: 1.16rem;
+  --text-h5--line-height: 1.3;
+  --text-h5--letter-spacing: -0.02em;
+  --text-h5--font-weight: 700;
+  --text-plarge: 1.28rem;
+  --text-plarge--line-height: 1.5;
+  --text-pbody: 1.16rem;
+  --text-pbody--line-height: 1.5;
+  --text-psmall: 1.03rem;
+  --text-psmall--line-height: 1.4;
+  --text-mono-label: 0.86rem;
+  --text-mono-label--line-height: 1;
+  --text-mono-label--letter-spacing: -0.03em;
+
+  /* Rayons du système */
+  --radius-pill: 10px;
+  --radius-card: 24px;
+
+  /* Easing signature */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  @apply bg-espresso text-linen font-sans antialiased;
+  font-weight: 450;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-apricot);
+  color: var(--color-espresso);
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-apricot);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ── Grammaire du système ─────────────────────────────────── */
+
+/* Kicker : ( LABEL ) — parenthèses écartées, mono uppercase */
+.kicker {
+  @apply font-mono text-mono-label uppercase inline-flex items-baseline;
+  gap: 0.9em;
+}
+.kicker::before {
+  content: "(";
+}
+.kicker::after {
+  content: ")";
+}
+
+/* Conteneur de section standard */
+.shell {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 4rem);
+}
+
+/* Espacement vertical entre sections */
+.section-pad {
+  padding-block: clamp(6rem, 12vh, 10rem);
+}
+
+/* Lien nav mono */
+.nav-link {
+  @apply font-mono text-mono-label uppercase;
+  transition: color 0.3s var(--ease-out-expo);
+}
+
+/* z-index sémantique */
+:root {
+  --z-nav: 50;
+  --z-overlay: 60;
+}
