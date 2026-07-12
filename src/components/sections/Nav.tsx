@@ -14,6 +14,7 @@ import {
   type LucideIcon,
 } from "lucide-react"
 import { PillButton } from "../ui/PillButton"
+import { cn } from "@/src/lib/utils"
 import { SKILLS } from "../../content"
 
 type MenuId = "projets" | "process"
@@ -155,6 +156,8 @@ const NAV_CSS = `
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .mega-root[data-open="true"] .mega-wrap { transform: translate(-50%, 0); opacity: 1; }
+/* nav en bas : le panneau s'ouvre au-dessus de la pill flottante */
+.mega-root[data-pos="bottom"] .mega-wrap { top: auto; bottom: 6rem; }
 /* Corps du panneau : la hauteur s'anime au changement de menu (JS mesure). */
 .mega-body {
   overflow: hidden;
@@ -423,6 +426,16 @@ export function Nav() {
     return () => window.clearTimeout(t)
   }, [open])
 
+  // Au scroll (desktop), la nav du haut se relève et la pill flottante du
+  // bas prend le relais (façon effortel).
+  const [scrolled, setScrolled] = React.useState(false)
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 140)
+    onScroll()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   // Anime la hauteur du panneau au changement de menu (instantané à
   // l'ouverture depuis fermé, le fade du panneau masque le saut).
   const bodyRef = React.useRef<HTMLDivElement>(null)
@@ -484,7 +497,12 @@ export function Nav() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 overflow-hidden bg-espresso/85 backdrop-blur-[30px]">
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 overflow-hidden bg-espresso/85 backdrop-blur-[30px] transition-[translate,opacity] duration-500 ease-[var(--ease-out-expo)]",
+          scrolled && "md:pointer-events-none md:-translate-y-full md:opacity-0"
+        )}
+      >
         <style>{NAV_CSS}</style>
 
         <nav
@@ -541,8 +559,49 @@ export function Nav() {
         />
       </header>
 
+      {/* Nav flottante en bas au scroll (desktop), facon effortel */}
+      <div className="fixed bottom-6 left-1/2 z-50 hidden -translate-x-1/2 md:block">
+        <div
+          className={cn(
+            "transition-[translate,opacity] duration-500 ease-[var(--ease-out-expo)]",
+            scrolled
+              ? "translate-y-0 opacity-100"
+              : "pointer-events-none translate-y-[160%] opacity-0"
+          )}
+        >
+          <div
+            onMouseLeave={scheduleClose}
+            className="flex items-center gap-8 rounded-full border border-linen/10 bg-espresso/80 py-2 pl-7 pr-2 shadow-2xl backdrop-blur-[30px]"
+          >
+            {MENUS.map((m) => (
+              <NavLink
+                key={m.id}
+                menu={m}
+                active={open === m.id}
+                dim={open !== null && open !== m.id}
+                onOpen={openNow}
+                onNavigate={navigateTo}
+              />
+            ))}
+            <NavPageLink
+              label="À propos"
+              to="/about"
+              onHover={() => openNow(null)}
+            />
+            <PillButton href="#contact" variant="solid">
+              Me contacter
+            </PillButton>
+          </div>
+        </div>
+      </div>
+
       {/* Méga-menu : overlay flou + panneau glassy (.nav__overlay / modules) */}
-      <div className="mega-root" data-open={open !== null} onClick={close}>
+      <div
+        className="mega-root"
+        data-open={open !== null}
+        data-pos={scrolled ? "bottom" : "top"}
+        onClick={close}
+      >
         <div className="mega-overlay" aria-hidden />
         <div
           className="mega-wrap"
