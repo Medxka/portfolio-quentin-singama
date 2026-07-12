@@ -3,30 +3,55 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
   Plus,
   ArrowRight,
-  Compass,
   Search,
   Sparkles,
-  BookOpen,
   Palette,
   PenTool,
   MousePointerClick,
   Boxes,
   ScanSearch,
+  Clapperboard,
   type LucideIcon,
 } from "lucide-react"
 import { PillButton } from "../ui/PillButton"
-import { PROJECTS, SKILLS } from "../../content"
+import { SKILLS } from "../../content"
 
 type MenuId = "projets" | "process"
 
-/** Icônes Lucide par contenu (projets par id, compétences par ordre). */
-const PROJECT_ICONS: Record<string, LucideIcon> = {
-  musthane: Compass,
-  research: Search,
-  ink: Sparkles,
-  lina: BookOpen,
-  happyjob: Palette,
+type Discipline = {
+  id: string
+  name: string
+  desc: string
+  image?: string
+  Icon?: LucideIcon
 }
+/** Disciplines montrées dans le méga-menu Projets (par type de travail). */
+const DISCIPLINES: Discipline[] = [
+  {
+    id: "uxui",
+    name: "UX/UI Design",
+    desc: "Interfaces, apps, refontes — de la recherche au design system.",
+    image: "/work/musthane-hero.webp",
+  },
+  {
+    id: "research",
+    name: "UX Research",
+    desc: "Entretiens, tests, synthèse. Comprendre avant de dessiner.",
+    Icon: Search,
+  },
+  {
+    id: "graphisme",
+    name: "Graphisme & Identité",
+    desc: "Direction artistique, identités de marque, print, affiches.",
+    Icon: Palette,
+  },
+  {
+    id: "video",
+    name: "Montage vidéo",
+    desc: "Contenu vidéo pour réseaux et campagnes. Montage, rythme.",
+    Icon: Clapperboard,
+  },
+]
 const SKILL_ICONS: LucideIcon[] = [
   Search,
   PenTool,
@@ -90,79 +115,6 @@ const NAV_CSS = `
 }
 .tile-badge { transition: background-color 0.3s ease; }
 
-/* Accordéon Projets : l'item survolé s'agrandit et révèle son image,
-   les autres se réduisent (spine vertical). */
-.acc-item {
-  flex: 1 1 0%;
-  min-width: 0;
-  transition: flex-grow 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.acc-item[data-active="true"] { flex-grow: 3.4; }
-.acc-img,
-.acc-grad {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-.acc-img {
-  object-fit: cover;
-  opacity: 0.22;
-  filter: brightness(0.7) saturate(0.85);
-  transform: scale(1.06);
-  transition: opacity 0.55s ease, filter 0.55s ease,
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.acc-item[data-active="true"] .acc-img {
-  opacity: 1;
-  filter: brightness(0.85) saturate(1);
-  transform: scale(1);
-}
-.acc-grad {
-  background: linear-gradient(135deg, oklch(0.42 0.09 60), oklch(0.28 0.05 38));
-  opacity: 0.4;
-  transition: opacity 0.55s ease;
-}
-.acc-item[data-active="true"] .acc-grad { opacity: 0.9; }
-.acc-veil {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to top,
-    oklch(0.18 0.015 55 / 0.92) 6%,
-    oklch(0.18 0.015 55 / 0.35) 52%,
-    transparent 88%
-  );
-}
-.acc-vlabel {
-  position: absolute;
-  left: 50%;
-  bottom: 1.5rem;
-  writing-mode: vertical-rl;
-  transform: translateX(-50%) rotate(180deg);
-  white-space: nowrap;
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  letter-spacing: 0.03em;
-  color: var(--color-linen);
-  transition: opacity 0.35s ease 0.1s;
-}
-.acc-item[data-active="true"] .acc-vlabel { opacity: 0; pointer-events: none; }
-/* largeur FIXE : le contenu ne se recompose pas quand l'item rétrécit,
-   il est simplement clippé (overflow hidden) et fondu. */
-.acc-content {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: clamp(15rem, 30vw, 24rem);
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.acc-item[data-active="true"] .acc-content { opacity: 1; }
 
 /* Overlay + panneau */
 .mega-root {
@@ -217,12 +169,7 @@ const NAV_CSS = `
   .mega-wrap,
   .mega-plus,
   .tile-icon,
-  .tile-arrow,
-  .acc-item,
-  .acc-img,
-  .acc-grad,
-  .acc-vlabel,
-  .acc-content { transition: none; }
+  .tile-arrow { transition: none; }
 }
 `
 
@@ -345,69 +292,51 @@ function Tile({
 }
 
 function ProjetsPanel({ onNav }: { onNav: () => void }) {
-  const [hovered, setHovered] = React.useState<string | null>(null)
-  const activeId = hovered ?? PROJECTS[0].id
+  const [featured, ...rest] = DISCIPLINES
   return (
-    <div
-      className="flex h-[clamp(300px,42vh,360px)] gap-2"
-      onMouseLeave={() => setHovered(null)}
-    >
-      {PROJECTS.map((p) => {
-        const active = p.id === activeId
-        const Icon = PROJECT_ICONS[p.id] ?? Sparkles
-        return (
-          <a
-            key={p.id}
+    <div className="grid gap-3 md:grid-cols-[1.15fr_1fr]">
+      <a
+        href="#projets"
+        onClick={onNav}
+        className="mega-tile group relative flex flex-col overflow-hidden rounded-2xl bg-espresso-3"
+      >
+        <div className="relative h-44 overflow-hidden">
+          {featured.image && (
+            <img
+              src={featured.image}
+              alt=""
+              loading="lazy"
+              className="h-full w-full object-cover opacity-90 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-105"
+            />
+          )}
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-t from-espresso-3 via-espresso-3/30 to-transparent"
+          />
+        </div>
+        <div className="flex flex-1 flex-col gap-2 p-5">
+          <span className="font-mono text-mono-label uppercase text-apricot">
+            Discipline principale
+          </span>
+          <span className="font-sans text-h4 text-linen">{featured.name}</span>
+          <span className="max-w-[34ch] text-psmall text-greige">
+            {featured.desc}
+          </span>
+        </div>
+      </a>
+
+      <div className="grid gap-3">
+        {rest.map((d) => (
+          <Tile
+            key={d.id}
+            Icon={d.Icon ?? Sparkles}
+            title={d.name}
+            sub={d.desc}
             href="#projets"
-            onClick={onNav}
-            onMouseEnter={() => setHovered(p.id)}
-            onFocus={() => setHovered(p.id)}
-            data-active={active}
-            aria-label={`${p.title} — ${p.role}`}
-            className="acc-item relative block overflow-hidden rounded-2xl bg-espresso-3"
-          >
-            {p.image ? (
-              <img
-                src={p.image}
-                alt={p.imageAlt}
-                loading="lazy"
-                className="acc-img"
-              />
-            ) : (
-              <div className="acc-grad" aria-hidden />
-            )}
-            <div className="acc-veil" aria-hidden />
-
-            {/* spine vertical (item réduit) */}
-            <span className="acc-vlabel" aria-hidden>
-              <span className="text-apricot">{p.num}</span>
-              {" "}
-              {p.title}
-            </span>
-
-            {/* contenu (item actif) */}
-            <div className="acc-content">
-              <span className="inline-flex items-center gap-2 font-mono text-mono-label text-apricot">
-                <Icon size={14} strokeWidth={1.75} aria-hidden />
-                {p.num}
-              </span>
-              <span className="mt-2 whitespace-nowrap font-sans text-h4 text-linen">
-                {p.title}
-              </span>
-              <span className="mt-1 whitespace-nowrap font-mono text-mono-label uppercase text-apricot-bright">
-                {p.role}
-              </span>
-              <span className="mt-2.5 max-w-[32ch] text-psmall text-linen/80">
-                {p.desc}
-              </span>
-              <span className="mt-4 inline-flex items-center gap-1.5 whitespace-nowrap font-mono text-mono-label uppercase text-linen">
-                Voir le projet
-                <ArrowRight size={14} strokeWidth={2} aria-hidden />
-              </span>
-            </div>
-          </a>
-        )
-      })}
+            onNav={onNav}
+          />
+        ))}
+      </div>
     </div>
   )
 }
