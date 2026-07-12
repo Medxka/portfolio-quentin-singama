@@ -1,25 +1,11 @@
 import * as React from "react"
+import { ArrowRight } from "lucide-react"
 import { cn } from "@/src/lib/utils"
 
 type Variant = "solid" | "ghost" | "dark"
 
 const Arrow = ({ className }: { className?: string }) => (
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 14 14"
-    fill="none"
-    className={className}
-    aria-hidden
-  >
-    <path
-      d="M2 7h9M7.5 3.5 11 7l-3.5 3.5"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
+  <ArrowRight className={className} size={15} strokeWidth={1.75} aria-hidden />
 )
 
 /**

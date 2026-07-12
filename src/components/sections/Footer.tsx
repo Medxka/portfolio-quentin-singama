@@ -1,3 +1,4 @@
+import { Mail, Linkedin, MapPin } from "lucide-react"
 import { Reveal } from "../ui/Reveal"
 import { DotGrid } from "../ui/DotGrid"
 import { CONTACT } from "../../content"
@@ -48,8 +49,14 @@ export function Footer() {
                 <li>
                   <a
                     href={`mailto:${CONTACT.email}`}
-                    className="text-psmall text-linen transition-colors duration-300 hover:text-apricot"
+                    className="group inline-flex items-center gap-2.5 text-psmall text-linen transition-colors duration-300 hover:text-apricot"
                   >
+                    <Mail
+                      size={15}
+                      strokeWidth={1.75}
+                      className="text-greige transition-colors duration-300 group-hover:text-apricot"
+                      aria-hidden
+                    />
                     {CONTACT.email}
                   </a>
                 </li>
@@ -58,12 +65,21 @@ export function Footer() {
                     href={CONTACT.linkedin}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-psmall text-linen transition-colors duration-300 hover:text-apricot"
+                    className="group inline-flex items-center gap-2.5 text-psmall text-linen transition-colors duration-300 hover:text-apricot"
                   >
+                    <Linkedin
+                      size={15}
+                      strokeWidth={1.75}
+                      className="text-greige transition-colors duration-300 group-hover:text-apricot"
+                      aria-hidden
+                    />
                     LinkedIn
                   </a>
                 </li>
-                <li className="text-psmall text-greige">{CONTACT.location}</li>
+                <li className="inline-flex items-center gap-2.5 text-psmall text-greige">
+                  <MapPin size={15} strokeWidth={1.75} aria-hidden />
+                  {CONTACT.location}
+                </li>
               </ul>
             </div>
 

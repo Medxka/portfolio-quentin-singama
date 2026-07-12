@@ -1,8 +1,47 @@
 import * as React from "react"
+import {
+  Plus,
+  Compass,
+  Search,
+  Sparkles,
+  BookOpen,
+  Palette,
+  PenTool,
+  MousePointerClick,
+  Boxes,
+  ScanSearch,
+  Briefcase,
+  Clapperboard,
+  GraduationCap,
+  type LucideIcon,
+} from "lucide-react"
 import { PillButton } from "../ui/PillButton"
 import { PROJECTS, SKILLS, TIMELINE } from "../../content"
 
 type MenuId = "projets" | "process" | "parcours"
+
+/** Icônes Lucide par contenu (projets par id, compétences/parcours par ordre). */
+const PROJECT_ICONS: Record<string, LucideIcon> = {
+  musthane: Compass,
+  research: Search,
+  ink: Sparkles,
+  lina: BookOpen,
+  happyjob: Palette,
+}
+const SKILL_ICONS: LucideIcon[] = [
+  Search,
+  PenTool,
+  MousePointerClick,
+  Boxes,
+  ScanSearch,
+  Palette,
+]
+const TIMELINE_ICONS: LucideIcon[] = [
+  Briefcase,
+  Clapperboard,
+  GraduationCap,
+  PenTool,
+]
 
 const MENUS: { id: MenuId; label: string; href: string }[] = [
   { id: "projets", label: "Projets", href: "#projets" },
@@ -36,25 +75,12 @@ const NAV_CSS = `
   animation: nav-line 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 }
 
-/* Bouton de menu : texte + "+" */
+/* Bouton de menu : texte + "+" (icône Lucide Plus qui tourne en "×") */
 .mega-plus {
-  position: relative;
-  display: inline-block;
-  width: 0.72em;
-  height: 0.62em;
-  margin-left: 0.65em;
+  margin-left: 0.55em;
   color: var(--color-apricot);
   transition: transform 0.28s ease-out, opacity 0.28s ease-out;
 }
-.mega-plus::before,
-.mega-plus::after {
-  content: "";
-  position: absolute;
-  background: currentColor;
-  border-radius: 1px;
-}
-.mega-plus::before { left: 0; right: 0; top: 50%; height: 1.4px; transform: translateY(-50%); }
-.mega-plus::after { top: 0; bottom: 0; left: 50%; width: 1.4px; transform: translateX(-50%); }
 .mega-btn[data-active="true"] .mega-plus { transform: rotate(45deg); }
 .mega-btn[data-dim="true"] .mega-plus { opacity: 0.3; }
 
@@ -101,14 +127,22 @@ const NAV_CSS = `
 
 /* ── Panneaux ─────────────────────────────────────────────── */
 
+function IconBadge({ Icon }: { Icon: LucideIcon }) {
+  return (
+    <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-linen/10 bg-linen/[0.04] text-apricot transition-colors duration-300 group-hover:border-apricot/40">
+      <Icon size={17} strokeWidth={1.75} aria-hidden />
+    </span>
+  )
+}
+
 function Tile({
-  num,
+  Icon,
   title,
   sub,
   href,
   onNav,
 }: {
-  num?: string
+  Icon: LucideIcon
   title: string
   sub: string
   href: string
@@ -119,11 +153,9 @@ function Tile({
     <a
       href={href}
       onClick={onNav}
-      className="group flex flex-col gap-2 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
+      className="group flex flex-col gap-3 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
     >
-      {num && (
-        <span className="font-mono text-mono-label text-apricot">{num}</span>
-      )}
+      <IconBadge Icon={Icon} />
       <span className="font-sans text-h5 text-linen">{title}</span>
       <span className="text-psmall text-greige">{sub}</span>
     </a>
@@ -150,7 +182,8 @@ function ProjetsPanel({ onNav }: { onNav: () => void }) {
           </div>
         )}
         <div className="flex flex-col gap-1.5 p-5">
-          <span className="font-mono text-mono-label text-apricot">
+          <span className="mb-1 inline-flex items-center gap-2 font-mono text-mono-label text-apricot">
+            <Compass size={15} strokeWidth={1.75} aria-hidden />
             {featured.num} · Projet phare
           </span>
           <span className="font-sans text-h4 text-linen">{featured.title}</span>
@@ -162,7 +195,7 @@ function ProjetsPanel({ onNav }: { onNav: () => void }) {
         {rest.map((p) => (
           <Tile
             key={p.id}
-            num={p.num}
+            Icon={PROJECT_ICONS[p.id] ?? Sparkles}
             title={p.title}
             sub={p.role}
             href="#projets"
@@ -180,7 +213,7 @@ function ProcessPanel({ onNav }: { onNav: () => void }) {
       {SKILLS.map((s, i) => (
         <Tile
           key={s.name}
-          num={String(i + 1).padStart(2, "0")}
+          Icon={SKILL_ICONS[i] ?? Boxes}
           title={s.name}
           sub={s.desc}
           href="#process"
@@ -194,20 +227,24 @@ function ProcessPanel({ onNav }: { onNav: () => void }) {
 function ParcoursPanel({ onNav }: { onNav: () => void }) {
   return (
     <div className="flex flex-col gap-2">
-      {TIMELINE.map((t) => (
-        <a
-          key={t.year + t.role}
-          href="#parcours"
-          onClick={onNav}
-          className="grid grid-cols-[auto_1fr] items-baseline gap-x-6 gap-y-1 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06] md:grid-cols-[6rem_1fr_1.4fr]"
-        >
-          <span className="font-mono text-psmall text-apricot">{t.year}</span>
-          <span className="font-sans text-h5 text-linen">{t.role}</span>
-          <span className="col-span-2 text-psmall text-greige md:col-span-1">
-            {t.company}
-          </span>
-        </a>
-      ))}
+      {TIMELINE.map((t, i) => {
+        const Icon = TIMELINE_ICONS[i] ?? Briefcase
+        return (
+          <a
+            key={t.year + t.role}
+            href="#parcours"
+            onClick={onNav}
+            className="group flex items-center gap-4 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
+          >
+            <IconBadge Icon={Icon} />
+            <div className="flex flex-1 flex-col gap-0.5 md:grid md:grid-cols-[5rem_1fr_1.5fr] md:items-center md:gap-5">
+              <span className="font-mono text-psmall text-apricot">{t.year}</span>
+              <span className="font-sans text-h5 text-linen">{t.role}</span>
+              <span className="text-psmall text-greige">{t.company}</span>
+            </div>
+          </a>
+        )
+      })}
     </div>
   )
 }
@@ -269,7 +306,12 @@ export function Nav() {
                   className="mega-btn inline-flex items-center font-mono text-mono-label uppercase tracking-[0.04em] text-greige transition-colors duration-300 hover:text-linen data-[active=true]:text-linen"
                 >
                   {m.label}
-                  <span className="mega-plus" aria-hidden />
+                  <Plus
+                    className="mega-plus"
+                    size={14}
+                    strokeWidth={2}
+                    aria-hidden
+                  />
                 </button>
               ))}
             </div>
