@@ -47,7 +47,7 @@ const TIMELINE_ICONS: LucideIcon[] = [
 const MENUS: { id: MenuId; label: string; href: string }[] = [
   { id: "projets", label: "Projets", href: "#projets" },
   { id: "process", label: "Process", href: "#process" },
-  { id: "parcours", label: "Parcours", href: "#parcours" },
+  { id: "parcours", label: "À propos", href: "#parcours" },
 ]
 
 /**
@@ -250,7 +250,11 @@ function useScramble(text: string) {
         text
           .split("")
           .map((c, i) =>
-            i < it ? text[i] : chars[Math.floor(Math.random() * chars.length)]
+            c === " "
+              ? " "
+              : i < it
+                ? text[i]
+                : chars[Math.floor(Math.random() * chars.length)]
           )
           .join("")
       )

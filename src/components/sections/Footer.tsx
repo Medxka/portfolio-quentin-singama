@@ -6,7 +6,7 @@ import { CONTACT } from "../../content"
 const NAV_LINKS = [
   { label: "Projets", href: "#projets" },
   { label: "Process", href: "#process" },
-  { label: "Parcours", href: "#parcours" },
+  { label: "À propos", href: "#parcours" },
   { label: "Contact", href: "#contact" },
 ]
 

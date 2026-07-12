@@ -11,7 +11,7 @@ export function Timeline() {
     <section id="parcours" className="section-pad">
       <div className="shell">
         <Reveal>
-          <Kicker className="text-taupe-2">Parcours</Kicker>
+          <Kicker className="text-taupe-2">À propos</Kicker>
           <h2 className="mt-6 text-h3 text-espresso">
             Quatre années à apprendre en faisant.
           </h2>
