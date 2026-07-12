@@ -85,17 +85,20 @@ const NAV_CSS = `
 .mega-btn[data-active="true"] .mega-plus { transform: rotate(45deg); }
 .mega-btn[data-dim="true"] .mega-plus { opacity: 0.3; }
 
-/* Tuile au hover : la flèche glisse depuis la gauche par-dessus l'icône
-   (repris de .blog__thumb-arrow d'effortel) */
-.tile-icon { transition: opacity 0.3s ease; }
-.mega-tile:hover .tile-icon { opacity: 0; }
+/* Tuile au hover : swap vertical icône → flèche (l'icône sort par le haut,
+   la flèche monte depuis le bas). Roll propre, pas de bloc qui balaye. */
+.tile-icon,
 .tile-arrow {
-  opacity: 0;
-  transform: translateX(-110%);
-  transition: opacity 0.3s ease,
-    transform 0.55s cubic-bezier(0.433, 0.001, 0.14, 1.007);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
 }
-.mega-tile:hover .tile-arrow { opacity: 1; transform: translateX(0); }
+.tile-arrow { opacity: 0; transform: translateY(115%); }
+.mega-tile:hover .tile-icon { opacity: 0; transform: translateY(-115%); }
+.mega-tile:hover .tile-arrow { opacity: 1; transform: translateY(0); }
+.mega-tile:hover .tile-badge {
+  border-color: color-mix(in oklch, var(--color-apricot) 45%, transparent);
+  background-color: color-mix(in oklch, var(--color-apricot) 10%, transparent);
+}
+.tile-badge { transition: border-color 0.3s ease, background-color 0.3s ease; }
 
 /* Overlay + panneau */
 .mega-root {
@@ -216,10 +219,12 @@ function NavLink({
 
 function IconBadge({ Icon }: { Icon: LucideIcon }) {
   return (
-    <span className="relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-linen/10 bg-linen/[0.04] text-apricot transition-colors duration-300">
-      <Icon size={17} strokeWidth={1.75} aria-hidden className="tile-icon" />
-      <span className="tile-arrow absolute inset-0 grid place-items-center bg-apricot text-espresso">
-        <ArrowRight size={16} strokeWidth={2} aria-hidden />
+    <span className="tile-badge relative inline-flex h-9 w-9 shrink-0 overflow-hidden rounded-xl border border-linen/10 bg-linen/[0.04]">
+      <span className="tile-icon absolute inset-0 grid place-items-center text-apricot">
+        <Icon size={17} strokeWidth={1.75} aria-hidden />
+      </span>
+      <span className="tile-arrow absolute inset-0 grid place-items-center text-apricot">
+        <ArrowRight size={17} strokeWidth={2} aria-hidden />
       </span>
     </span>
   )
@@ -343,6 +348,17 @@ function ParcoursPanel({ onNav }: { onNav: () => void }) {
 
 export function Nav() {
   const [open, setOpen] = React.useState<MenuId | null>(null)
+  // `shown` retarde le démontage du contenu pour qu'il fade avec le panneau
+  // au lieu de disparaître d'un coup à la fermeture.
+  const [shown, setShown] = React.useState<MenuId | null>(null)
+  React.useEffect(() => {
+    if (open) {
+      setShown(open)
+      return
+    }
+    const t = window.setTimeout(() => setShown(null), 480)
+    return () => window.clearTimeout(t)
+  }, [open])
 
   // Escape ferme le menu.
   React.useEffect(() => {
@@ -440,13 +456,13 @@ export function Nav() {
           onMouseLeave={scheduleClose}
         >
           <div className="max-h-[72vh] overflow-auto rounded-3xl border border-linen/10 bg-espresso-2/90 p-5 shadow-2xl backdrop-blur-2xl">
-            <div className="mega-panel" data-active={open === "projets"}>
+            <div className="mega-panel" data-active={shown === "projets"}>
               <ProjetsPanel onNav={close} />
             </div>
-            <div className="mega-panel" data-active={open === "process"}>
+            <div className="mega-panel" data-active={shown === "process"}>
               <ProcessPanel onNav={close} />
             </div>
-            <div className="mega-panel" data-active={open === "parcours"}>
+            <div className="mega-panel" data-active={shown === "parcours"}>
               <ParcoursPanel onNav={close} />
             </div>
           </div>
