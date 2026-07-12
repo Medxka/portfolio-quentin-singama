@@ -1,6 +1,7 @@
 import * as React from "react"
 import {
   Plus,
+  ArrowRight,
   Compass,
   Search,
   Sparkles,
@@ -84,6 +85,18 @@ const NAV_CSS = `
 .mega-btn[data-active="true"] .mega-plus { transform: rotate(45deg); }
 .mega-btn[data-dim="true"] .mega-plus { opacity: 0.3; }
 
+/* Tuile au hover : la flèche glisse depuis la gauche par-dessus l'icône
+   (repris de .blog__thumb-arrow d'effortel) */
+.tile-icon { transition: opacity 0.3s ease; }
+.mega-tile:hover .tile-icon { opacity: 0; }
+.tile-arrow {
+  opacity: 0;
+  transform: translateX(-110%);
+  transition: opacity 0.3s ease,
+    transform 0.55s cubic-bezier(0.433, 0.001, 0.14, 1.007);
+}
+.mega-tile:hover .tile-arrow { opacity: 1; transform: translateX(0); }
+
 /* Overlay + panneau */
 .mega-root {
   position: fixed;
@@ -121,16 +134,93 @@ const NAV_CSS = `
   .nav-line { animation: none; }
   .mega-overlay,
   .mega-wrap,
-  .mega-plus { transition: none; }
+  .mega-plus,
+  .tile-icon,
+  .tile-arrow { transition: none; }
 }
 `
+
+/* Effet scramble/decode sur le texte des liens (façon effortel). */
+function useScramble(text: string) {
+  const [out, setOut] = React.useState(text)
+  const timer = React.useRef<number | null>(null)
+
+  const run = React.useCallback(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%$/"
+    let it = 0
+    if (timer.current) window.clearInterval(timer.current)
+    timer.current = window.setInterval(() => {
+      setOut(
+        text
+          .split("")
+          .map((c, i) =>
+            i < it ? text[i] : chars[Math.floor(Math.random() * chars.length)]
+          )
+          .join("")
+      )
+      if (it >= text.length) {
+        if (timer.current) window.clearInterval(timer.current)
+        setOut(text)
+      }
+      it += 0.5
+    }, 35)
+  }, [text])
+
+  React.useEffect(
+    () => () => {
+      if (timer.current) window.clearInterval(timer.current)
+    },
+    []
+  )
+
+  return { out, run }
+}
+
+function NavLink({
+  menu,
+  active,
+  dim,
+  onOpen,
+  onNavigate,
+}: {
+  menu: { id: MenuId; label: string; href: string }
+  active: boolean
+  dim: boolean
+  onOpen: (id: MenuId) => void
+  onNavigate: (href: string) => void
+  key?: React.Key | null
+}) {
+  const { out, run } = useScramble(menu.label)
+  return (
+    <button
+      type="button"
+      onMouseEnter={() => {
+        run()
+        onOpen(menu.id)
+      }}
+      onFocus={() => run()}
+      onClick={() => onNavigate(menu.href)}
+      aria-expanded={active}
+      data-active={active}
+      data-dim={dim}
+      className="mega-btn inline-flex items-center font-mono text-mono-label uppercase tracking-[0.04em] text-greige transition-colors duration-300 hover:text-linen data-[active=true]:text-linen"
+    >
+      {out}
+      <Plus className="mega-plus" size={14} strokeWidth={2} aria-hidden />
+    </button>
+  )
+}
 
 /* ── Panneaux ─────────────────────────────────────────────── */
 
 function IconBadge({ Icon }: { Icon: LucideIcon }) {
   return (
-    <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-linen/10 bg-linen/[0.04] text-apricot transition-colors duration-300 group-hover:border-apricot/40">
-      <Icon size={17} strokeWidth={1.75} aria-hidden />
+    <span className="relative inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl border border-linen/10 bg-linen/[0.04] text-apricot transition-colors duration-300">
+      <Icon size={17} strokeWidth={1.75} aria-hidden className="tile-icon" />
+      <span className="tile-arrow absolute inset-0 grid place-items-center bg-apricot text-espresso">
+        <ArrowRight size={16} strokeWidth={2} aria-hidden />
+      </span>
     </span>
   )
 }
@@ -153,7 +243,7 @@ function Tile({
     <a
       href={href}
       onClick={onNav}
-      className="group flex flex-col gap-3 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
+      className="mega-tile group flex flex-col gap-3 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
     >
       <IconBadge Icon={Icon} />
       <span className="font-sans text-h5 text-linen">{title}</span>
@@ -234,7 +324,7 @@ function ParcoursPanel({ onNav }: { onNav: () => void }) {
             key={t.year + t.role}
             href="#parcours"
             onClick={onNav}
-            className="group flex items-center gap-4 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
+            className="mega-tile group flex items-center gap-4 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
           >
             <IconBadge Icon={Icon} />
             <div className="flex flex-1 flex-col gap-0.5 md:grid md:grid-cols-[5rem_1fr_1.5fr] md:items-center md:gap-5">
@@ -263,16 +353,29 @@ export function Nav() {
     return () => window.removeEventListener("keydown", onKey)
   }, [])
 
-  // Verrou du scroll pendant l'ouverture.
-  React.useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : ""
-    return () => {
-      document.body.style.overflow = ""
-    }
-  }, [open])
-
-  const toggle = (id: MenuId) => setOpen((cur) => (cur === id ? null : id))
-  const close = () => setOpen(null)
+  // Hover-intent : ouvre au survol, ferme avec un léger délai (le curseur
+  // peut traverser le vide entre la barre et le panneau sans refermer).
+  const closeTimer = React.useRef<number | null>(null)
+  const cancelClose = () => {
+    if (closeTimer.current) window.clearTimeout(closeTimer.current)
+  }
+  const openNow = (id: MenuId) => {
+    cancelClose()
+    setOpen(id)
+  }
+  const scheduleClose = () => {
+    cancelClose()
+    closeTimer.current = window.setTimeout(() => setOpen(null), 160)
+  }
+  const close = () => {
+    cancelClose()
+    setOpen(null)
+  }
+  const navigateTo = (href: string) => {
+    close()
+    const el = document.querySelector(href)
+    if (el) el.scrollIntoView({ behavior: "smooth" })
+  }
 
   return (
     <>
@@ -293,26 +396,20 @@ export function Nav() {
           </a>
 
           {/* liens centrés dead-center (.dropdown__wrapper d'effortel) */}
-          <div className="absolute left-1/2 hidden -translate-x-1/2 md:block">
+          <div
+            className="absolute left-1/2 hidden -translate-x-1/2 md:block"
+            onMouseLeave={scheduleClose}
+          >
             <div className="nav-drop nav-drop-1 flex items-center gap-10">
               {MENUS.map((m) => (
-                <button
+                <NavLink
                   key={m.id}
-                  type="button"
-                  onClick={() => toggle(m.id)}
-                  aria-expanded={open === m.id}
-                  data-active={open === m.id}
-                  data-dim={open !== null && open !== m.id}
-                  className="mega-btn inline-flex items-center font-mono text-mono-label uppercase tracking-[0.04em] text-greige transition-colors duration-300 hover:text-linen data-[active=true]:text-linen"
-                >
-                  {m.label}
-                  <Plus
-                    className="mega-plus"
-                    size={14}
-                    strokeWidth={2}
-                    aria-hidden
-                  />
-                </button>
+                  menu={m}
+                  active={open === m.id}
+                  dim={open !== null && open !== m.id}
+                  onOpen={openNow}
+                  onNavigate={navigateTo}
+                />
               ))}
             </div>
           </div>
@@ -339,6 +436,8 @@ export function Nav() {
           aria-modal="true"
           aria-label="Menu de navigation"
           onClick={(e) => e.stopPropagation()}
+          onMouseEnter={cancelClose}
+          onMouseLeave={scheduleClose}
         >
           <div className="max-h-[72vh] overflow-auto rounded-3xl border border-linen/10 bg-espresso-2/90 p-5 shadow-2xl backdrop-blur-2xl">
             <div className="mega-panel" data-active={open === "projets"}>
