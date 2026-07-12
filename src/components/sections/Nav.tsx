@@ -129,12 +129,26 @@ const NAV_CSS = `
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .mega-root[data-open="true"] .mega-wrap { transform: translate(-50%, 0); opacity: 1; }
+/* Corps du panneau : la hauteur s'anime au changement de menu (JS mesure). */
+.mega-body {
+  overflow: hidden;
+  transition: height 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes mega-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 .mega-panel { display: none; }
-.mega-panel[data-active="true"] { display: block; }
+.mega-panel[data-active="true"] {
+  display: block;
+  animation: mega-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
 
 @media (prefers-reduced-motion: reduce) {
   .nav-drop,
   .nav-line { animation: none; }
+  .mega-body { transition: none; }
+  .mega-panel[data-active="true"] { animation: none; }
   .mega-overlay,
   .mega-wrap,
   .mega-plus,
@@ -360,6 +374,26 @@ export function Nav() {
     return () => window.clearTimeout(t)
   }, [open])
 
+  // Anime la hauteur du panneau au changement de menu (instantané à
+  // l'ouverture depuis fermé, le fade du panneau masque le saut).
+  const bodyRef = React.useRef<HTMLDivElement>(null)
+  const innerRef = React.useRef<HTMLDivElement>(null)
+  const prevShown = React.useRef<MenuId | null>(null)
+  React.useLayoutEffect(() => {
+    const body = bodyRef.current
+    const inner = innerRef.current
+    if (body && inner && shown) {
+      const openingFromClosed = prevShown.current === null
+      if (openingFromClosed) body.style.transition = "none"
+      body.style.height = `${inner.offsetHeight}px`
+      if (openingFromClosed) {
+        void body.offsetHeight
+        body.style.transition = ""
+      }
+    }
+    prevShown.current = shown
+  }, [shown])
+
   // Escape ferme le menu.
   React.useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -455,15 +489,20 @@ export function Nav() {
           onMouseEnter={cancelClose}
           onMouseLeave={scheduleClose}
         >
-          <div className="max-h-[72vh] overflow-auto rounded-3xl border border-linen/10 bg-espresso-2/90 p-5 shadow-2xl backdrop-blur-2xl">
-            <div className="mega-panel" data-active={shown === "projets"}>
-              <ProjetsPanel onNav={close} />
-            </div>
-            <div className="mega-panel" data-active={shown === "process"}>
-              <ProcessPanel onNav={close} />
-            </div>
-            <div className="mega-panel" data-active={shown === "parcours"}>
-              <ParcoursPanel onNav={close} />
+          <div
+            ref={bodyRef}
+            className="mega-body rounded-3xl border border-linen/10 bg-espresso-2/90 shadow-2xl backdrop-blur-2xl"
+          >
+            <div ref={innerRef} className="max-h-[72vh] overflow-auto p-5">
+              <div className="mega-panel" data-active={shown === "projets"}>
+                <ProjetsPanel onNav={close} />
+              </div>
+              <div className="mega-panel" data-active={shown === "process"}>
+                <ProcessPanel onNav={close} />
+              </div>
+              <div className="mega-panel" data-active={shown === "parcours"}>
+                <ParcoursPanel onNav={close} />
+              </div>
             </div>
           </div>
         </div>
