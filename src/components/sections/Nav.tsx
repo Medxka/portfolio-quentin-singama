@@ -38,7 +38,7 @@ const SKILL_ICONS: LucideIcon[] = [
 
 const MENUS: { id: MenuId; label: string; href: string }[] = [
   { id: "projets", label: "Projets", href: "#projets" },
-  { id: "process", label: "Process", href: "#process" },
+  { id: "process", label: "Savoir-faire", href: "#process" },
 ]
 
 /**
@@ -241,8 +241,8 @@ function useScramble(text: string) {
         text
           .split("")
           .map((c, i) =>
-            c === " "
-              ? " "
+            c === " " || c === "-"
+              ? c
               : i < it
                 ? text[i]
                 : chars[Math.floor(Math.random() * chars.length)]
