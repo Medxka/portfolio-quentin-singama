@@ -1,39 +1,42 @@
 import * as React from "react"
+import { Routes, Route, useLocation } from "react-router-dom"
 import Lenis from "lenis"
 import { Nav } from "./components/sections/Nav"
-import { Hero } from "./components/sections/Hero"
-import { ExperienceStrip } from "./components/sections/ExperienceStrip"
-import { Intro } from "./components/sections/Intro"
-import { Projects } from "./components/sections/Projects"
-import { Process } from "./components/sections/Process"
-import { Timeline } from "./components/sections/Timeline"
-import { Contact } from "./components/sections/Contact"
 import { Footer } from "./components/sections/Footer"
+import { Home } from "./pages/Home"
+import { About } from "./pages/About"
 
 export function App() {
+  const { pathname, hash } = useLocation()
+
+  // Smooth scroll global (Lenis).
   React.useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     const lenis = new Lenis({ autoRaf: true, lerp: 0.09 })
     return () => lenis.destroy()
   }, [])
 
+  // Scroll vers l'ancre si présente, sinon remonte en haut à chaque page.
+  React.useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(hash)
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" })
+        return
+      }
+    }
+    window.scrollTo(0, 0)
+  }, [pathname, hash])
+
   return (
     <>
       <Nav />
-      <main id="top">
-        <Hero />
-        <div className="bg-peach text-taupe">
-          <ExperienceStrip />
-          <Intro />
-          <Projects />
-        </div>
-        <Process />
-        <div className="bg-peach text-taupe">
-          <Timeline />
-        </div>
-        <Contact />
-        <Footer />
-      </main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<Home />} />
+      </Routes>
+      <Footer />
     </>
   )
 }

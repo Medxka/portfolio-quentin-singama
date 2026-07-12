@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
   Plus,
   ArrowRight,
@@ -11,17 +12,14 @@ import {
   MousePointerClick,
   Boxes,
   ScanSearch,
-  Briefcase,
-  Clapperboard,
-  GraduationCap,
   type LucideIcon,
 } from "lucide-react"
 import { PillButton } from "../ui/PillButton"
-import { PROJECTS, SKILLS, TIMELINE } from "../../content"
+import { PROJECTS, SKILLS } from "../../content"
 
-type MenuId = "projets" | "process" | "parcours"
+type MenuId = "projets" | "process"
 
-/** Icônes Lucide par contenu (projets par id, compétences/parcours par ordre). */
+/** Icônes Lucide par contenu (projets par id, compétences par ordre). */
 const PROJECT_ICONS: Record<string, LucideIcon> = {
   musthane: Compass,
   research: Search,
@@ -37,17 +35,10 @@ const SKILL_ICONS: LucideIcon[] = [
   ScanSearch,
   Palette,
 ]
-const TIMELINE_ICONS: LucideIcon[] = [
-  Briefcase,
-  Clapperboard,
-  GraduationCap,
-  PenTool,
-]
 
 const MENUS: { id: MenuId; label: string; href: string }[] = [
   { id: "projets", label: "Projets", href: "#projets" },
   { id: "process", label: "Process", href: "#process" },
-  { id: "parcours", label: "À propos", href: "#parcours" },
 ]
 
 /**
@@ -438,34 +429,38 @@ function ProcessPanel({ onNav }: { onNav: () => void }) {
   )
 }
 
-function ParcoursPanel({ onNav }: { onNav: () => void }) {
+/* Lien de page (À propos) : même effet scramble, mais navigue au lieu
+   d'ouvrir un méga-menu. */
+function NavPageLink({
+  label,
+  to,
+  onHover,
+}: {
+  label: string
+  to: string
+  onHover: () => void
+}) {
+  const { out, run } = useScramble(label)
   return (
-    <div className="flex flex-col gap-2">
-      {TIMELINE.map((t, i) => {
-        const Icon = TIMELINE_ICONS[i] ?? Briefcase
-        return (
-          <a
-            key={t.year + t.role}
-            href="#parcours"
-            onClick={onNav}
-            className="mega-tile group flex items-center gap-4 rounded-2xl bg-linen/[0.03] p-4 transition-colors duration-300 hover:bg-linen/[0.07]"
-          >
-            <IconBadge Icon={Icon} />
-            <div className="flex flex-1 flex-col gap-0.5 md:grid md:grid-cols-[5rem_1fr_1.5fr] md:items-center md:gap-5">
-              <span className="font-mono text-psmall text-apricot">{t.year}</span>
-              <span className="font-sans text-h5 text-linen">{t.role}</span>
-              <span className="text-psmall text-greige">{t.company}</span>
-            </div>
-          </a>
-        )
-      })}
-    </div>
+    <Link
+      to={to}
+      onMouseEnter={() => {
+        run()
+        onHover()
+      }}
+      onFocus={() => run()}
+      className="mega-btn inline-flex items-center font-mono text-mono-label uppercase tracking-[0.04em] text-greige transition-colors duration-300 hover:text-linen"
+    >
+      {out}
+    </Link>
   )
 }
 
 /* ── Nav ──────────────────────────────────────────────────── */
 
 export function Nav() {
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [open, setOpen] = React.useState<MenuId | null>(null)
   // `shown` retarde le démontage du contenu pour qu'il fade avec le panneau
   // au lieu de disparaître d'un coup à la fermeture.
@@ -514,7 +509,7 @@ export function Nav() {
   const cancelClose = () => {
     if (closeTimer.current) window.clearTimeout(closeTimer.current)
   }
-  const openNow = (id: MenuId) => {
+  const openNow = (id: MenuId | null) => {
     cancelClose()
     setOpen(id)
   }
@@ -526,10 +521,16 @@ export function Nav() {
     cancelClose()
     setOpen(null)
   }
+  // Ancre de section : sur l'accueil on scrolle, sinon on y navigue (le
+  // routeur gère le scroll vers l'ancre via le hash de l'URL).
   const navigateTo = (href: string) => {
     close()
-    const el = document.querySelector(href)
-    if (el) el.scrollIntoView({ behavior: "smooth" })
+    if (pathname === "/") {
+      const el = document.querySelector(href)
+      if (el) el.scrollIntoView({ behavior: "smooth" })
+    } else {
+      navigate(`/${href}`)
+    }
   }
 
   return (
@@ -541,14 +542,18 @@ export function Nav() {
           aria-label="Navigation principale"
           className="shell relative flex h-16 items-center justify-between gap-4"
         >
-          <a
-            href="#top"
-            onClick={close}
+          <Link
+            to="/"
+            onClick={() => {
+              close()
+              if (pathname === "/")
+                window.scrollTo({ top: 0, behavior: "smooth" })
+            }}
             className="nav-drop nav-drop-0 inline-flex items-center gap-2.5 font-sans font-bold tracking-tight text-linen"
           >
             <span aria-hidden className="h-2 w-2 rounded-[2px] bg-apricot" />
             Quentin Singama
-          </a>
+          </Link>
 
           {/* liens centrés dead-center (.dropdown__wrapper d'effortel) */}
           <div
@@ -566,6 +571,11 @@ export function Nav() {
                   onNavigate={navigateTo}
                 />
               ))}
+              <NavPageLink
+                label="À propos"
+                to="/about"
+                onHover={() => openNow(null)}
+              />
             </div>
           </div>
 
@@ -604,9 +614,6 @@ export function Nav() {
               </div>
               <div className="mega-panel" data-active={shown === "process"}>
                 <ProcessPanel onNav={close} />
-              </div>
-              <div className="mega-panel" data-active={shown === "parcours"}>
-                <ParcoursPanel onNav={close} />
               </div>
             </div>
           </div>

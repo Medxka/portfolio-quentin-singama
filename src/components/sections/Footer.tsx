@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom"
 import { Mail, Linkedin, MapPin } from "lucide-react"
 import { Reveal } from "../ui/Reveal"
 import { DotGrid } from "../ui/DotGrid"
 import { CONTACT } from "../../content"
 
 const NAV_LINKS = [
-  { label: "Projets", href: "#projets" },
-  { label: "Process", href: "#process" },
-  { label: "À propos", href: "#parcours" },
-  { label: "Contact", href: "#contact" },
+  { label: "Projets", to: "/#projets" },
+  { label: "Process", to: "/#process" },
+  { label: "À propos", to: "/about" },
+  { label: "Contact", to: "/#contact" },
 ]
 
 /**
@@ -29,13 +30,13 @@ export function Footer() {
               </h2>
               <ul className="space-y-3">
                 {NAV_LINKS.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
+                  <li key={link.to}>
+                    <Link
+                      to={link.to}
                       className="text-psmall text-linen transition-colors duration-300 hover:text-apricot"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
