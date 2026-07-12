@@ -95,10 +95,79 @@ const NAV_CSS = `
 .mega-tile:hover .tile-icon { opacity: 0; transform: translateY(-115%); }
 .mega-tile:hover .tile-arrow { opacity: 1; transform: translateY(0); }
 .mega-tile:hover .tile-badge {
-  border-color: color-mix(in oklch, var(--color-apricot) 45%, transparent);
-  background-color: color-mix(in oklch, var(--color-apricot) 10%, transparent);
+  background-color: color-mix(in oklch, var(--color-apricot) 14%, transparent);
 }
-.tile-badge { transition: border-color 0.3s ease, background-color 0.3s ease; }
+.tile-badge { transition: background-color 0.3s ease; }
+
+/* Accordéon Projets : l'item survolé s'agrandit et révèle son image,
+   les autres se réduisent (spine vertical). */
+.acc-item {
+  flex: 1 1 0%;
+  min-width: 0;
+  transition: flex-grow 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.acc-item[data-active="true"] { flex-grow: 3.4; }
+.acc-img,
+.acc-grad {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.acc-img {
+  object-fit: cover;
+  opacity: 0.22;
+  filter: brightness(0.7) saturate(0.85);
+  transform: scale(1.06);
+  transition: opacity 0.55s ease, filter 0.55s ease,
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.acc-item[data-active="true"] .acc-img {
+  opacity: 1;
+  filter: brightness(0.85) saturate(1);
+  transform: scale(1);
+}
+.acc-grad {
+  background: linear-gradient(135deg, oklch(0.42 0.09 60), oklch(0.28 0.05 38));
+  opacity: 0.4;
+  transition: opacity 0.55s ease;
+}
+.acc-item[data-active="true"] .acc-grad { opacity: 0.9; }
+.acc-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    oklch(0.18 0.015 55 / 0.92) 6%,
+    oklch(0.18 0.015 55 / 0.35) 52%,
+    transparent 88%
+  );
+}
+.acc-vlabel {
+  position: absolute;
+  left: 50%;
+  bottom: 1.5rem;
+  writing-mode: vertical-rl;
+  transform: translateX(-50%) rotate(180deg);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  color: var(--color-linen);
+  transition: opacity 0.3s ease;
+}
+.acc-item[data-active="true"] .acc-vlabel { opacity: 0; pointer-events: none; }
+.acc-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.12s;
+}
+.acc-item[data-active="true"] .acc-content { opacity: 1; }
 
 /* Overlay + panneau */
 .mega-root {
@@ -153,7 +222,12 @@ const NAV_CSS = `
   .mega-wrap,
   .mega-plus,
   .tile-icon,
-  .tile-arrow { transition: none; }
+  .tile-arrow,
+  .acc-item,
+  .acc-img,
+  .acc-grad,
+  .acc-vlabel,
+  .acc-content { transition: none; }
 }
 `
 
@@ -233,7 +307,7 @@ function NavLink({
 
 function IconBadge({ Icon }: { Icon: LucideIcon }) {
   return (
-    <span className="tile-badge relative inline-flex h-9 w-9 shrink-0 overflow-hidden rounded-xl border border-linen/10 bg-linen/[0.04]">
+    <span className="tile-badge relative inline-flex h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-linen/[0.06]">
       <span className="tile-icon absolute inset-0 grid place-items-center text-apricot">
         <Icon size={17} strokeWidth={1.75} aria-hidden />
       </span>
@@ -262,7 +336,7 @@ function Tile({
     <a
       href={href}
       onClick={onNav}
-      className="mega-tile group flex flex-col gap-3 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
+      className="mega-tile group flex flex-col gap-3 rounded-2xl bg-linen/[0.03] p-4 transition-colors duration-300 hover:bg-linen/[0.07]"
     >
       <IconBadge Icon={Icon} />
       <span className="font-sans text-h5 text-linen">{title}</span>
@@ -272,46 +346,69 @@ function Tile({
 }
 
 function ProjetsPanel({ onNav }: { onNav: () => void }) {
-  const [featured, ...rest] = PROJECTS
+  const [hovered, setHovered] = React.useState<string | null>(null)
+  const activeId = hovered ?? PROJECTS[0].id
   return (
-    <div className="grid gap-3 md:grid-cols-2">
-      <a
-        href="#projets"
-        onClick={onNav}
-        className="group flex flex-col overflow-hidden rounded-2xl border border-linen/10 bg-linen/[0.03] transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
-      >
-        {featured.image && (
-          <div className="overflow-hidden">
-            <img
-              src={featured.image}
-              alt={featured.imageAlt}
-              loading="lazy"
-              className="h-44 w-full object-cover transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-105"
-            />
-          </div>
-        )}
-        <div className="flex flex-col gap-1.5 p-5">
-          <span className="mb-1 inline-flex items-center gap-2 font-mono text-mono-label text-apricot">
-            <Compass size={15} strokeWidth={1.75} aria-hidden />
-            {featured.num} · Projet phare
-          </span>
-          <span className="font-sans text-h4 text-linen">{featured.title}</span>
-          <span className="text-psmall text-greige">{featured.desc}</span>
-        </div>
-      </a>
-
-      <div className="grid grid-cols-2 gap-3">
-        {rest.map((p) => (
-          <Tile
+    <div
+      className="flex h-[clamp(300px,42vh,360px)] gap-2"
+      onMouseLeave={() => setHovered(null)}
+    >
+      {PROJECTS.map((p) => {
+        const active = p.id === activeId
+        const Icon = PROJECT_ICONS[p.id] ?? Sparkles
+        return (
+          <a
             key={p.id}
-            Icon={PROJECT_ICONS[p.id] ?? Sparkles}
-            title={p.title}
-            sub={p.role}
             href="#projets"
-            onNav={onNav}
-          />
-        ))}
-      </div>
+            onClick={onNav}
+            onMouseEnter={() => setHovered(p.id)}
+            onFocus={() => setHovered(p.id)}
+            data-active={active}
+            aria-label={`${p.title} — ${p.role}`}
+            className="acc-item relative block overflow-hidden rounded-2xl bg-espresso-3"
+          >
+            {p.image ? (
+              <img
+                src={p.image}
+                alt={p.imageAlt}
+                loading="lazy"
+                className="acc-img"
+              />
+            ) : (
+              <div className="acc-grad" aria-hidden />
+            )}
+            <div className="acc-veil" aria-hidden />
+
+            {/* spine vertical (item réduit) */}
+            <span className="acc-vlabel" aria-hidden>
+              <span className="text-apricot">{p.num}</span>
+              {" "}
+              {p.title}
+            </span>
+
+            {/* contenu (item actif) */}
+            <div className="acc-content">
+              <span className="inline-flex items-center gap-2 font-mono text-mono-label text-apricot">
+                <Icon size={14} strokeWidth={1.75} aria-hidden />
+                {p.num}
+              </span>
+              <span className="mt-2 whitespace-nowrap font-sans text-h4 text-linen">
+                {p.title}
+              </span>
+              <span className="mt-1 whitespace-nowrap font-mono text-mono-label uppercase text-apricot-bright">
+                {p.role}
+              </span>
+              <span className="mt-2.5 max-w-[32ch] text-psmall text-linen/80">
+                {p.desc}
+              </span>
+              <span className="mt-4 inline-flex items-center gap-1.5 whitespace-nowrap font-mono text-mono-label uppercase text-linen">
+                Voir le projet
+                <ArrowRight size={14} strokeWidth={2} aria-hidden />
+              </span>
+            </div>
+          </a>
+        )
+      })}
     </div>
   )
 }
@@ -343,7 +440,7 @@ function ParcoursPanel({ onNav }: { onNav: () => void }) {
             key={t.year + t.role}
             href="#parcours"
             onClick={onNav}
-            className="mega-tile group flex items-center gap-4 rounded-2xl border border-linen/10 bg-linen/[0.03] p-4 transition-colors duration-300 hover:border-linen/20 hover:bg-linen/[0.06]"
+            className="mega-tile group flex items-center gap-4 rounded-2xl bg-linen/[0.03] p-4 transition-colors duration-300 hover:bg-linen/[0.07]"
           >
             <IconBadge Icon={Icon} />
             <div className="flex flex-1 flex-col gap-0.5 md:grid md:grid-cols-[5rem_1fr_1.5fr] md:items-center md:gap-5">
@@ -491,7 +588,7 @@ export function Nav() {
         >
           <div
             ref={bodyRef}
-            className="mega-body rounded-3xl border border-linen/10 bg-espresso-2/90 shadow-2xl backdrop-blur-2xl"
+            className="mega-body rounded-3xl bg-espresso-2/90 shadow-2xl ring-1 ring-linen/[0.04] backdrop-blur-2xl"
           >
             <div ref={innerRef} className="max-h-[72vh] overflow-auto p-5">
               <div className="mega-panel" data-active={shown === "projets"}>
