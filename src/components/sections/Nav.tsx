@@ -336,7 +336,7 @@ function ProjetsPanel({ onNav }: { onNav: () => void }) {
           </div>
           <div className="-ml-6 w-[54%] translate-y-3 rotate-2 overflow-hidden rounded-lg shadow-2xl ring-1 ring-linen/10 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-y-1 group-hover:rotate-[4deg]">
             <img
-              src="/work/musthane-hero.webp"
+              src="/work/lina-cover.png"
               alt=""
               loading="lazy"
               className="aspect-[4/3] w-full object-cover"
