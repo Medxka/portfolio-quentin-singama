@@ -154,18 +154,22 @@ const NAV_CSS = `
   font-size: 0.82rem;
   letter-spacing: 0.03em;
   color: var(--color-linen);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.35s ease 0.1s;
 }
 .acc-item[data-active="true"] .acc-vlabel { opacity: 0; pointer-events: none; }
+/* largeur FIXE : le contenu ne se recompose pas quand l'item rétrécit,
+   il est simplement clippé (overflow hidden) et fondu. */
 .acc-content {
   position: absolute;
-  inset: 0;
+  left: 0;
+  bottom: 0;
+  width: clamp(15rem, 30vw, 24rem);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: flex-start;
   padding: 1.5rem;
   opacity: 0;
-  transition: opacity 0.4s ease 0.12s;
+  transition: opacity 0.3s ease;
 }
 .acc-item[data-active="true"] .acc-content { opacity: 1; }
 
