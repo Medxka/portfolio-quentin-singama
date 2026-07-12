@@ -115,6 +115,16 @@ const NAV_CSS = `
 }
 .tile-badge { transition: background-color 0.3s ease; }
 
+/* Texture pointillée (fond de la carte featured, façon effortel) */
+.dot-texture {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--color-linen) 7%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 15px 15px;
+}
+
 
 /* Overlay + panneau */
 .mega-root {
@@ -298,30 +308,40 @@ function ProjetsPanel({ onNav }: { onNav: () => void }) {
       <a
         href="#projets"
         onClick={onNav}
-        className="mega-tile group relative flex flex-col overflow-hidden rounded-2xl bg-espresso-3"
+        className="mega-tile group relative flex flex-col overflow-hidden rounded-2xl bg-espresso-3 p-6"
       >
-        <div className="relative h-44 overflow-hidden">
-          {featured.image && (
-            <img
-              src={featured.image}
-              alt=""
-              loading="lazy"
-              className="h-full w-full object-cover opacity-90 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:scale-105"
-            />
-          )}
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-t from-espresso-3 via-espresso-3/30 to-transparent"
-          />
-        </div>
-        <div className="flex flex-1 flex-col gap-2 p-5">
+        <span
+          aria-hidden
+          className="dot-texture pointer-events-none absolute inset-0"
+        />
+        {/* texte en haut */}
+        <div className="relative z-10">
           <span className="font-mono text-mono-label uppercase text-apricot">
             Discipline principale
           </span>
-          <span className="font-sans text-h4 text-linen">{featured.name}</span>
-          <span className="max-w-[34ch] text-psmall text-greige">
+          <h3 className="mt-2 font-sans text-h4 text-linen">{featured.name}</h3>
+          <p className="mt-1.5 max-w-[30ch] text-psmall text-greige">
             {featured.desc}
-          </span>
+          </p>
+        </div>
+        {/* mockups projets UI/UX en bas (façon carte EMS d'effortel) */}
+        <div className="relative z-10 mt-auto flex items-end justify-center pt-9">
+          <div className="w-[46%] -rotate-2 overflow-hidden rounded-lg shadow-2xl ring-1 ring-linen/10 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-1.5 group-hover:-rotate-[4deg]">
+            <img
+              src="/work/lina-thumb.webp"
+              alt=""
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover"
+            />
+          </div>
+          <div className="-ml-6 w-[54%] translate-y-3 rotate-2 overflow-hidden rounded-lg shadow-2xl ring-1 ring-linen/10 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-y-1 group-hover:rotate-[4deg]">
+            <img
+              src="/work/musthane-hero.webp"
+              alt=""
+              loading="lazy"
+              className="aspect-[4/3] w-full object-cover"
+            />
+          </div>
         </div>
       </a>
 
