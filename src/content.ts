@@ -67,7 +67,7 @@ export const PROJECTS: Project[] = [
     role: "Graphic Design · Stage 2 mois",
     year: "2026",
     desc: "Deux mois de stage en graphic design : campagnes de recrutement saisonnières pour un réseau d'agences.",
-    image: "/work/happyjob-affiche.png",
+    image: "/work/happyjob-affiche.webp",
     imageAlt: "Affiche Happy Job — emplois saisonniers toute l'année",
     tags: ["Campagnes", "Print", "Multi-agences"],
   },
