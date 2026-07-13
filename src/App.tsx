@@ -6,6 +6,7 @@ import { Footer } from "./components/sections/Footer"
 import { Home } from "./pages/Home"
 import { About } from "./pages/About"
 import { ProjectMusthane } from "./pages/ProjectMusthane"
+import { ProjectLINA } from "./pages/ProjectLINA"
 
 export function App() {
   const { pathname, hash } = useLocation()
@@ -36,6 +37,7 @@ export function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/projets/musthane" element={<ProjectMusthane />} />
+        <Route path="/projets/lina" element={<ProjectLINA />} />
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />

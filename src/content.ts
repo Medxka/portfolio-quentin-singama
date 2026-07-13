@@ -56,6 +56,7 @@ export const PROJECTS: Project[] = [
     id: "lina",
     num: "04",
     title: "LINA",
+    href: "/projets/lina",
     role: "UI Design · Sprint 3 jours",
     year: "2024",
     desc: "Repenser la découverte en librairie indépendante. Refonte desktop et système d'icônes, en trois jours.",

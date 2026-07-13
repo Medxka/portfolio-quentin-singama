@@ -1,6 +1,6 @@
 import * as React from "react"
-import { Link } from "react-router-dom"
-import { ArrowRight, ArrowLeft } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
+import { ArrowLeft } from "lucide-react"
 import { Kicker } from "../components/ui/Kicker"
 import { Reveal } from "../components/ui/Reveal"
 import { DotGrid } from "../components/ui/DotGrid"
@@ -233,6 +233,8 @@ function MobileRow() {
 
 /* ── Page ─────────────────────────────────────────────────── */
 export function ProjectMusthane() {
+  const navigate = useNavigate()
+
   React.useEffect(() => {
     document.title = "Musthane — Cas d'étude · Quentin Singama"
     return () => {
@@ -482,8 +484,15 @@ export function ProjectMusthane() {
             </Reveal>
           </div>
           <Reveal delay={0.08}>
-            <PillButton variant="solid" href="/#projets">
-              Voir les projets
+            <PillButton
+              variant="solid"
+              href="/projets/lina"
+              onClick={(e) => {
+                e.preventDefault()
+                navigate("/projets/lina")
+              }}
+            >
+              Voir LINA
             </PillButton>
           </Reveal>
         </div>
