@@ -407,22 +407,22 @@ export function ProjectLINA() {
         <div className="shell relative z-10 flex flex-wrap items-end justify-between gap-8">
           <div>
             <Reveal>
-              <Kicker className="text-greige">Projet précédent</Kicker>
+              <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                Musthane — Remettre de l'ordre dans 100+ produits
+                INK — La chute du print
               </h2>
             </Reveal>
           </div>
           <Reveal delay={0.08}>
             <PillButton
               variant="solid"
-              href="/projets/musthane"
+              href="/projets/ink"
               onClick={(e) => {
                 e.preventDefault()
-                navigate("/projets/musthane")
+                navigate("/projets/ink")
               }}
             >
-              Voir Musthane
+              Voir INK
             </PillButton>
           </Reveal>
         </div>

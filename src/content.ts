@@ -45,6 +45,7 @@ export const PROJECTS: Project[] = [
     id: "ink",
     num: "03",
     title: "INK",
+    href: "/projets/ink",
     role: "Identité · Hackathon 48h",
     year: "2024",
     desc: "Une marque de résistance née en 48h de hackathon. Deux identités opposées, un univers complet. 2ᵉ place.",
