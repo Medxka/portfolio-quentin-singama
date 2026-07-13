@@ -22,6 +22,22 @@ export function Intro() {
             <Reveal>
               <Kicker className="text-taupe-2">La démarche</Kicker>
             </Reveal>
+            <Reveal delay={0.12}>
+              <figure className="relative mt-8 max-w-[320px]">
+                <div
+                  aria-hidden
+                  className="absolute -inset-6 -z-10 rounded-[45%] bg-apricot/25 blur-3xl"
+                />
+                <img
+                  src="/portrait.jpg"
+                  alt="Quentin Singama, UX/UI Designer à Bordeaux"
+                  className="aspect-[4/5] w-full rounded-2xl object-cover shadow-xl ring-1 ring-espresso/5"
+                />
+                <figcaption className="mt-3 font-mono text-mono-label uppercase text-taupe-2">
+                  Quentin · Bordeaux
+                </figcaption>
+              </figure>
+            </Reveal>
           </div>
 
           <div className="md:col-span-7">
