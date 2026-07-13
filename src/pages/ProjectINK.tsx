@@ -506,20 +506,20 @@ export function ProjectINK() {
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                Musthane — Remettre de l'ordre dans 100+ produits
+                LINA — Repenser la librairie indépendante
               </h2>
             </Reveal>
           </div>
           <Reveal delay={0.08}>
             <PillButton
               variant="solid"
-              href="/projets/musthane"
+              href="/projets/lina"
               onClick={(e) => {
                 e.preventDefault()
-                navigate("/projets/musthane")
+                navigate("/projets/lina")
               }}
             >
-              Voir Musthane
+              Voir LINA
             </PillButton>
           </Reveal>
         </div>

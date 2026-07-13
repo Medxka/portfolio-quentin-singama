@@ -479,20 +479,20 @@ export function ProjectMusthane() {
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                LINA — Repenser la librairie indépendante
+                Concerts 18-25 — La découverte de concerts chez les étudiants
               </h2>
             </Reveal>
           </div>
           <Reveal delay={0.08}>
             <PillButton
               variant="solid"
-              href="/projets/lina"
+              href="/projets/research"
               onClick={(e) => {
                 e.preventDefault()
-                navigate("/projets/lina")
+                navigate("/projets/research")
               }}
             >
-              Voir LINA
+              Voir l'étude
             </PillButton>
           </Reveal>
         </div>

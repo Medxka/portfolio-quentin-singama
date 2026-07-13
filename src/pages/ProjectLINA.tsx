@@ -409,20 +409,20 @@ export function ProjectLINA() {
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                INK — La chute du print
+                Happy Job — Recruter pour les saisons, toute l'année
               </h2>
             </Reveal>
           </div>
           <Reveal delay={0.08}>
             <PillButton
               variant="solid"
-              href="/projets/ink"
+              href="/projets/happyjob"
               onClick={(e) => {
                 e.preventDefault()
-                navigate("/projets/ink")
+                navigate("/projets/happyjob")
               }}
             >
-              Voir INK
+              Voir Happy Job
             </PillButton>
           </Reveal>
         </div>
