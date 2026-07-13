@@ -11,24 +11,32 @@ import { ProjectINK } from "./pages/ProjectINK"
 
 export function App() {
   const { pathname, hash } = useLocation()
+  const lenisRef = React.useRef<Lenis | null>(null)
 
   // Smooth scroll global (Lenis).
   React.useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
     const lenis = new Lenis({ autoRaf: true, lerp: 0.09 })
-    return () => lenis.destroy()
+    lenisRef.current = lenis
+    return () => {
+      lenis.destroy()
+      lenisRef.current = null
+    }
   }, [])
 
   // Scroll vers l'ancre si présente, sinon remonte en haut à chaque page.
   React.useEffect(() => {
+    const lenis = lenisRef.current
     if (hash) {
       const el = document.querySelector(hash)
       if (el) {
-        el.scrollIntoView({ behavior: "smooth" })
+        if (lenis) lenis.scrollTo(el as HTMLElement, { offset: -112 })
+        else el.scrollIntoView({ behavior: "smooth" })
         return
       }
     }
-    window.scrollTo(0, 0)
+    if (lenis) lenis.scrollTo(0, { immediate: true })
+    else window.scrollTo(0, 0)
   }, [pathname, hash])
 
   return (
