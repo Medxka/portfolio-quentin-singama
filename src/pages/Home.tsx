@@ -3,7 +3,6 @@ import { ExperienceStrip } from "../components/sections/ExperienceStrip"
 import { Intro } from "../components/sections/Intro"
 import { Projects } from "../components/sections/Projects"
 import { Process } from "../components/sections/Process"
-import { Contact } from "../components/sections/Contact"
 
 export function Home() {
   return (
@@ -12,9 +11,6 @@ export function Home() {
       <div className="bg-peach text-taupe">
         <ExperienceStrip />
         <Intro />
-      </div>
-      <Contact />
-      <div className="bg-peach text-taupe">
         <Projects />
       </div>
       <Process />

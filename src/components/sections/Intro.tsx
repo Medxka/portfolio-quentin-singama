@@ -1,5 +1,6 @@
 import { Kicker } from "../ui/Kicker"
 import { Reveal } from "../ui/Reveal"
+import { ContactCTA } from "../ui/ContactCTA"
 
 /**
  * Intro — "Disponibilité" : portrait à gauche, fiche alternance à droite
@@ -84,6 +85,12 @@ export function Intro() {
             </Reveal>
           </div>
         </div>
+
+        <Reveal delay={0.3}>
+          <div id="contact" className="scroll-mt-28">
+            <ContactCTA className="mt-14 max-w-2xl" />
+          </div>
+        </Reveal>
       </div>
     </section>
   )
