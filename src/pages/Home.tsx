@@ -12,10 +12,12 @@ export function Home() {
       <div className="bg-peach text-taupe">
         <ExperienceStrip />
         <Intro />
+      </div>
+      <Contact />
+      <div className="bg-peach text-taupe">
         <Projects />
       </div>
       <Process />
-      <Contact />
     </main>
   )
 }
