@@ -5,6 +5,7 @@ import { Nav } from "./components/sections/Nav"
 import { Footer } from "./components/sections/Footer"
 import { Home } from "./pages/Home"
 import { About } from "./pages/About"
+import { ProjectMusthane } from "./pages/ProjectMusthane"
 
 export function App() {
   const { pathname, hash } = useLocation()
@@ -34,6 +35,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/projets/musthane" element={<ProjectMusthane />} />
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />

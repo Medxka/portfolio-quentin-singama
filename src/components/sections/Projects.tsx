@@ -1,4 +1,6 @@
 import * as React from "react"
+import { Link } from "react-router-dom"
+import { ArrowRight } from "lucide-react"
 import { Kicker } from "../ui/Kicker"
 import { Reveal } from "../ui/Reveal"
 import { DotGrid } from "../ui/DotGrid"
@@ -127,11 +129,32 @@ function ProjectCard({
               </li>
             ))}
           </ul>
+
+          {project.href && (
+            <p className="mt-7 inline-flex items-center gap-2 font-mono text-mono-label uppercase text-linen">
+              Voir le cas d'étude
+              <ArrowRight
+                size={14}
+                strokeWidth={2}
+                aria-hidden
+                className="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:translate-x-1"
+              />
+            </p>
+          )}
         </div>
       </div>
 
       {/* voile de recul (opacité pilotée par --recede) */}
       <span className="proj-veil" aria-hidden />
+
+      {/* carte cliquable vers le cas d'étude */}
+      {project.href && (
+        <Link
+          to={project.href}
+          aria-label={`Voir le cas d'étude ${project.title}`}
+          className="absolute inset-0 z-30"
+        />
+      )}
     </article>
   )
 }

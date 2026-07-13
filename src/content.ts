@@ -13,6 +13,8 @@ export type Project = {
   image: string | null
   imageAlt: string
   tags: string[]
+  /** Route du cas d'étude (la carte devient cliquable si présent). */
+  href?: string
 }
 
 export const PROJECTS: Project[] = [
@@ -20,6 +22,7 @@ export const PROJECTS: Project[] = [
     id: "musthane",
     num: "01",
     title: "Musthane",
+    href: "/projets/musthane",
     role: "UX Research · Refonte navigation",
     year: "2025",
     desc: "Refondre la navigation d'un industriel B2B : 100+ produits, 4 logiques contradictoires, une seule évidence à la fin.",
