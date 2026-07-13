@@ -278,6 +278,15 @@ export function ProjectINK() {
                   justifie l'existence des deux marques.
                 </p>
               </Reveal>
+              <Reveal delay={0.1}>
+                <div className="mt-10">
+                  <Figure
+                    src="/work/ink/ink-contexte.webp"
+                    alt="Contexte narratif — le 13ᵉ Ordre"
+                    caption="Le contexte narratif — le 13ᵉ Ordre"
+                  />
+                </div>
+              </Reveal>
               <ol className="mt-10">
                 {TIMELINE.map((t, i) => (
                   <Reveal as="li" key={t.year} delay={Math.min(i * 0.04, 0.2)}>
@@ -327,6 +336,13 @@ export function ProjectINK() {
                     caption="INK — le réseau · ce que l'Ordre cherche à effacer"
                   />
                 </div>
+                <div className="mt-6">
+                  <Figure
+                    src="/work/ink/ink-cover-13ordre.webp"
+                    alt="File cover du 13ᵉ Ordre, l'autorité de l'univers"
+                    caption="Le 13ᵉ Ordre — l'antagoniste qui relie les deux marques"
+                  />
+                </div>
               </Reveal>
             </section>
 
@@ -364,9 +380,21 @@ export function ProjectINK() {
                       caption="Typographies"
                     />
                     <Figure
+                      src="/work/ink/ink-typo-utilisee.webp"
+                      alt="Détail des typographies utilisées"
+                      caption="Typographies utilisées"
+                    />
+                  </div>
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <Figure
                       src="/work/ink/ink-moodboard.webp"
                       alt="Moodboard dystopique du projet"
                       caption="Moodboard — références dystopiques"
+                    />
+                    <Figure
+                      src="/work/ink/ink-sommaire.webp"
+                      alt="Planche de synthèse du dossier INK"
+                      caption="La planche de synthèse du dossier"
                     />
                   </div>
                 </div>
@@ -404,6 +432,33 @@ export function ProjectINK() {
                     src="/work/ink/ink-enchere.webp"
                     alt="Détail d'une enchère de print sur le site INK"
                     caption="Détail — une enchère de print"
+                  />
+                </div>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h3 className="mt-14 font-mono text-mono-label uppercase tracking-[0.04em] text-taupe-2">
+                  Les pages complètes
+                </h3>
+                <div className="mt-6 grid gap-6 md:grid-cols-2">
+                  <Figure
+                    src="/work/ink/ink-home-kni.webp"
+                    alt="KNI — page d'accueil complète"
+                    caption="KNI — page d'accueil"
+                  />
+                  <Figure
+                    src="/work/ink/ink-produit-kni.webp"
+                    alt="KNI — page produits nutritionnels"
+                    caption="KNI — produits nutritionnels"
+                  />
+                  <Figure
+                    src="/work/ink/ink-enchere-full.webp"
+                    alt="INK — plateforme de mise aux enchères complète"
+                    caption="INK — plateforme d'enchères"
+                  />
+                  <Figure
+                    src="/work/ink/ink-produits-print.webp"
+                    alt="INK — collection de prints"
+                    caption="INK — collection de prints"
                   />
                 </div>
               </Reveal>
