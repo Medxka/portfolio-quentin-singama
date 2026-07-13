@@ -116,16 +116,16 @@ export function Hero() {
         </Rise>
 
         <Rise index={1}>
-          <h1 className="mx-auto mt-6 max-w-[17ch] text-display">
-            Je démêle le complexe, jusqu’à{" "}
-            <span className="text-apricot">l’évidence</span>.
+          <h1 className="mx-auto mt-6 max-w-[16ch] text-display">
+            Je suis{" "}
+            <span className="text-apricot">Quentin Singama</span>.
           </h1>
         </Rise>
 
         <Rise index={2}>
-          <p className="mx-auto mt-6 max-w-[42ch] text-plarge text-greige">
+          <p className="mx-auto mt-6 max-w-[44ch] text-plarge text-greige">
             UX/UI Designer &amp; Researcher à Bordeaux. J’explore, je
-            prototype, je teste — jusqu’à ce que ça devienne simple.
+            prototype, je teste.
           </p>
         </Rise>
 
