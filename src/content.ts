@@ -56,8 +56,8 @@ export const PROJECTS: Project[] = [
     role: "UI Design · Sprint 3 jours",
     year: "2024",
     desc: "Repenser la découverte en librairie indépendante. Refonte desktop et système d'icônes, en trois jours.",
-    image: "/work/lina-hero.webp",
-    imageAlt: "Refonte desktop LINA",
+    image: "/work/lina-cover.png",
+    imageAlt: "LINA — Librairies Indépendantes, identité orange",
     tags: ["UI Design", "Iconographie", "Sprint"],
   },
   {
