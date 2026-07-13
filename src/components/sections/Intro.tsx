@@ -2,28 +2,36 @@ import { Kicker } from "../ui/Kicker"
 import { Reveal } from "../ui/Reveal"
 
 /**
- * Intro — "La démarche". Asymmetric two-column layout: kicker on the
- * left, statement + method + a quiet inline stat row on the right.
- * No cards, no borders: the numbers breathe on the bare peach ground.
+ * Intro — "Disponibilité" : portrait à gauche, fiche alternance à droite
+ * (le candidat publie sa propre annonce). Grille label / valeur en mono.
  */
-
-const STATS = [
-  { value: "05", label: "projets livrés" },
-  { value: "03", label: "expériences studio" },
-  { value: "2026", label: "dispo alternance" },
+const INFO = [
+  { label: "Poste", value: "UX/UI Designer · Product Design" },
+  { label: "Contrat", value: "Alternance M2 · 4 j entreprise / 1 j école" },
+  { label: "Début", value: "Septembre 2026 · 12 mois" },
+  { label: "En attendant", value: "Stages courts ouverts (avr. → août 2026)" },
+  { label: "Localisation", value: "Bordeaux · Remote · Hybride" },
 ]
 
 export function Intro() {
   return (
     <section id="intro" className="section-pad">
       <div className="shell">
-        <div className="grid gap-8 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <Reveal>
-              <Kicker className="text-taupe-2">La démarche</Kicker>
-            </Reveal>
-            <Reveal delay={0.12}>
-              <figure className="relative mt-8 max-w-[320px]">
+        <Reveal>
+          <Kicker className="inline-flex items-center gap-3 text-taupe-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-apricot opacity-75 motion-reduce:hidden" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-apricot" />
+            </span>
+            Disponibilité
+          </Kicker>
+        </Reveal>
+
+        <div className="mt-10 grid gap-x-14 gap-y-12 md:grid-cols-12 md:items-start">
+          {/* Portrait */}
+          <div className="md:col-span-4">
+            <Reveal delay={0.08}>
+              <figure className="relative max-w-[300px]">
                 <div
                   aria-hidden
                   className="absolute -inset-6 -z-10 rounded-[45%] bg-apricot/25 blur-3xl"
@@ -40,34 +48,40 @@ export function Intro() {
             </Reveal>
           </div>
 
-          <div className="md:col-span-7">
-            <Reveal delay={0.08}>
-              <h2 className="text-h3 text-espresso">
-                Explorer, prototyper, tester — jusqu'à ce que ce soit évident.
+          {/* Fiche alternance */}
+          <div className="md:col-span-8">
+            <Reveal delay={0.12}>
+              <h2 className="max-w-[18ch] text-h3 text-espresso">
+                Alternance UX/UI Designer{" "}
+                <span className="text-sienna">· septembre 2026</span>
               </h2>
             </Reveal>
-
-            <Reveal delay={0.16}>
-              <p className="mt-8 max-w-[60ch] text-plarge text-taupe">
-                Diplômé Concepteur UI à l'ECV Bordeaux, je crois qu'un bon
-                design ne se remarque pas&nbsp;: il rend les choses simples. Ma
-                méthode tient en trois gestes — comprendre le vrai problème par
-                la recherche, structurer par le système, valider par le test.
+            <Reveal delay={0.18}>
+              <p className="mt-6 max-w-[54ch] text-pbody text-taupe">
+                Master 2 Design &amp; UX/UI à l'ECV Bordeaux. Je recherche une
+                entreprise pour une alternance d'un an, orientée Product Design
+                / UX-UI. Disponible aussi pour des stages courts d'ici
+                septembre.
               </p>
             </Reveal>
 
-            <ul className="mt-12 flex flex-wrap gap-12">
-              {STATS.map((stat, index) => (
-                <Reveal as="li" key={stat.label} delay={0.24 + index * 0.08}>
-                  <p className="font-mono text-[1.8rem] font-medium leading-none text-sienna">
-                    {stat.value}
-                  </p>
-                  <p className="mt-3 font-mono text-mono-label uppercase text-taupe-2">
-                    {stat.label}
-                  </p>
-                </Reveal>
-              ))}
-            </ul>
+            <Reveal delay={0.24}>
+              <dl className="mt-9 border-b border-espresso/10">
+                {INFO.map((row) => (
+                  <div
+                    key={row.label}
+                    className="grid grid-cols-1 gap-1 border-t border-espresso/10 py-4 sm:grid-cols-[10rem_1fr] sm:gap-6"
+                  >
+                    <dt className="font-mono text-mono-label uppercase text-taupe-2">
+                      {row.label}
+                    </dt>
+                    <dd className="font-sans text-psmall text-espresso">
+                      {row.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
           </div>
         </div>
       </div>
