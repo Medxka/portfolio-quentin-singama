@@ -3,6 +3,17 @@
  * Zéro lorem : tout vient du parcours de Quentin.
  */
 
+export type DisciplineId = "uxui" | "research" | "graphisme" | "video"
+
+export type Discipline = {
+  id: DisciplineId
+  name: string
+  /** Phrase courte (tuile du méga-menu). */
+  desc: string
+  /** Sous-titre de la page /discipline/:id. */
+  intro: string
+}
+
 export type Project = {
   id: string
   num: string
@@ -13,6 +24,8 @@ export type Project = {
   image: string | null
   imageAlt: string
   tags: string[]
+  /** Disciplines auxquelles le projet appartient (pages /discipline/:id). */
+  disciplines: DisciplineId[]
   /** Route du cas d'étude (la carte devient cliquable si présent). */
   href?: string
 }
@@ -29,6 +42,7 @@ export const PROJECTS: Project[] = [
     image: "/work/musthane-hero.webp",
     imageAlt: "Refonte de la navigation Musthane affichée sur MacBook",
     tags: ["Arborescence", "Tests utilisateurs", "Mega-menu"],
+    disciplines: ["uxui", "research"],
   },
   {
     id: "research",
@@ -41,6 +55,7 @@ export const PROJECTS: Project[] = [
     image: null,
     imageAlt: "",
     tags: ["Entretiens", "Insights", "Synthèse"],
+    disciplines: ["research"],
   },
   {
     id: "ink",
@@ -53,6 +68,7 @@ export const PROJECTS: Project[] = [
     image: "/work/ink-hero.webp",
     imageAlt: "INK, identité dystopique rouge et noir",
     tags: ["Branding", "Direction artistique", "2ᵉ place"],
+    disciplines: ["uxui", "graphisme"],
   },
   {
     id: "lina",
@@ -65,6 +81,7 @@ export const PROJECTS: Project[] = [
     image: "/work/lina-cover.png",
     imageAlt: "LINA — Librairies Indépendantes, identité orange",
     tags: ["UI Design", "Iconographie", "Sprint"],
+    disciplines: ["uxui"],
   },
   {
     id: "happyjob",
@@ -77,8 +94,42 @@ export const PROJECTS: Project[] = [
     image: "/work/happyjob-affiche.webp",
     imageAlt: "Affiche Happy Job — emplois saisonniers toute l'année",
     tags: ["Campagnes", "Print", "Multi-agences"],
+    disciplines: ["graphisme"],
   },
 ]
+
+/** Disciplines — source unique pour le méga-menu et les pages /discipline/:id. */
+export const DISCIPLINES: Discipline[] = [
+  {
+    id: "uxui",
+    name: "UX/UI Design",
+    desc: "Interfaces, apps, refontes — de la recherche au design system.",
+    intro: "De la recherche à l'interface : refontes, apps et design systems.",
+  },
+  {
+    id: "research",
+    name: "UX Research",
+    desc: "Entretiens, tests, synthèse. Comprendre avant de dessiner.",
+    intro: "Comprendre avant de dessiner. Entretiens, tests et synthèses qui orientent les décisions.",
+  },
+  {
+    id: "graphisme",
+    name: "Graphisme & Identité",
+    desc: "Direction artistique, identités de marque, print, affiches.",
+    intro: "Identités de marque, direction artistique et print. Le fond autant que la forme.",
+  },
+  {
+    id: "video",
+    name: "Montage vidéo",
+    desc: "Contenu vidéo pour réseaux et campagnes. Montage, rythme.",
+    intro: "Montage et rythme pour les réseaux et les campagnes.",
+  },
+]
+
+/** Projets rattachés à une discipline (ordre du portfolio conservé). */
+export function projectsByDiscipline(id: DisciplineId): Project[] {
+  return PROJECTS.filter((p) => p.disciplines.includes(id))
+}
 
 export const SKILLS = [
   {

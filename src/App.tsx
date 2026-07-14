@@ -10,6 +10,7 @@ import { ProjectLINA } from "./pages/ProjectLINA"
 import { ProjectINK } from "./pages/ProjectINK"
 import { ProjectResearch } from "./pages/ProjectResearch"
 import { ProjectHappyJob } from "./pages/ProjectHappyJob"
+import { ProjectsByDiscipline } from "./pages/ProjectsByDiscipline"
 
 export function App() {
   const { pathname, hash } = useLocation()
@@ -59,6 +60,7 @@ export function App() {
         <Route path="/projets/ink" element={<ProjectINK />} />
         <Route path="/projets/research" element={<ProjectResearch />} />
         <Route path="/projets/happyjob" element={<ProjectHappyJob />} />
+        <Route path="/discipline/:id" element={<ProjectsByDiscipline />} />
         <Route path="*" element={<Home />} />
       </Routes>
       <Footer />

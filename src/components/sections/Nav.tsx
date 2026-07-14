@@ -16,44 +16,17 @@ import {
 } from "lucide-react"
 import { PillButton } from "../ui/PillButton"
 import { cn } from "@/src/lib/utils"
-import { SKILLS } from "../../content"
+import { SKILLS, DISCIPLINES } from "../../content"
 
 type MenuId = "projets" | "process"
 
-type Discipline = {
-  id: string
-  name: string
-  desc: string
-  image?: string
-  Icon?: LucideIcon
+/** Icône de chaque tuile discipline (les données viennent de content.ts). */
+const DISCIPLINE_ICONS: Record<string, LucideIcon> = {
+  uxui: MousePointerClick,
+  research: Search,
+  graphisme: Palette,
+  video: Clapperboard,
 }
-/** Disciplines montrées dans le méga-menu Projets (par type de travail). */
-const DISCIPLINES: Discipline[] = [
-  {
-    id: "uxui",
-    name: "UX/UI Design",
-    desc: "Interfaces, apps, refontes — de la recherche au design system.",
-    image: "/work/musthane-hero.webp",
-  },
-  {
-    id: "research",
-    name: "UX Research",
-    desc: "Entretiens, tests, synthèse. Comprendre avant de dessiner.",
-    Icon: Search,
-  },
-  {
-    id: "graphisme",
-    name: "Graphisme & Identité",
-    desc: "Direction artistique, identités de marque, print, affiches.",
-    Icon: Palette,
-  },
-  {
-    id: "video",
-    name: "Montage vidéo",
-    desc: "Contenu vidéo pour réseaux et campagnes. Montage, rythme.",
-    Icon: Clapperboard,
-  },
-]
 const SKILL_ICONS: LucideIcon[] = [
   Search,
   PenTool,
@@ -289,7 +262,7 @@ function Tile({
   title: string
   sub: string
   href: string
-  onNav: () => void
+  onNav: (e: React.MouseEvent) => void
   key?: React.Key | null
 }) {
   return (
@@ -305,13 +278,16 @@ function Tile({
   )
 }
 
-function ProjetsPanel({ onNav }: { onNav: () => void }) {
+function ProjetsPanel({ onGo }: { onGo: (id: string) => void }) {
   const [featured, ...rest] = DISCIPLINES
   return (
     <div className="grid gap-3 md:grid-cols-[1.15fr_1fr]">
       <a
-        href="#projets"
-        onClick={onNav}
+        href={`/discipline/${featured.id}`}
+        onClick={(e) => {
+          e.preventDefault()
+          onGo(featured.id)
+        }}
         className="mega-tile group relative flex flex-col overflow-hidden rounded-2xl bg-espresso-3 p-6"
       >
         <span
@@ -353,11 +329,14 @@ function ProjetsPanel({ onNav }: { onNav: () => void }) {
         {rest.map((d) => (
           <Tile
             key={d.id}
-            Icon={d.Icon ?? Sparkles}
+            Icon={DISCIPLINE_ICONS[d.id] ?? Sparkles}
             title={d.name}
             sub={d.desc}
-            href="#projets"
-            onNav={onNav}
+            href={`/discipline/${d.id}`}
+            onNav={(e) => {
+              e.preventDefault()
+              onGo(d.id)
+            }}
           />
         ))}
       </div>
@@ -495,6 +474,11 @@ export function Nav({ onScrollTop }: { onScrollTop: () => void }) {
       navigate(`/${href}`)
     }
   }
+  // Tuile de discipline → page dédiée /discipline/:id.
+  const goToDiscipline = (id: string) => {
+    close()
+    navigate(`/discipline/${id}`)
+  }
 
   return (
     <>
@@ -631,7 +615,7 @@ export function Nav({ onScrollTop }: { onScrollTop: () => void }) {
           >
             <div ref={innerRef} className="max-h-[72vh] overflow-auto p-5">
               <div className="mega-panel" data-active={shown === "projets"}>
-                <ProjetsPanel onNav={close} />
+                <ProjetsPanel onGo={goToDiscipline} />
               </div>
               <div className="mega-panel" data-active={shown === "process"}>
                 <ProcessPanel onNav={close} />
