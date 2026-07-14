@@ -15,7 +15,7 @@
   --color-apricot: oklch(0.82 0.13 65);
   --color-apricot-bright: oklch(0.87 0.11 70);
   --color-sienna: oklch(0.52 0.12 50); /* accent chaud lisible sur fonds clairs */
-  --color-butter: oklch(0.95 0.055 95);
+  --color-cream: oklch(0.97 0.018 72); /* surface de carte claire sur fond peach */
   --color-taupe: oklch(0.46 0.028 55);
   --color-taupe-2: oklch(0.49 0.03 55); /* ≥4.5:1 sur peach (labels) */
   --color-linen: oklch(0.92 0.018 70);

@@ -74,7 +74,7 @@ function DisciplineCard({ project }: { project: Project; key?: React.Key | null 
     return (
       <Link
         to={project.href}
-        className="group block rounded-card p-3 transition-colors duration-300 hover:bg-butter/60"
+        className="group block rounded-card p-3 transition-colors duration-300 hover:bg-cream/60"
       >
         {body}
       </Link>
@@ -158,7 +158,7 @@ export function ProjectsByDiscipline() {
           ) : (
             /* État « bientôt » — discipline sans projet publié */
             <Reveal>
-              <div className="mx-auto max-w-2xl rounded-card border border-espresso/10 bg-butter px-8 py-16 text-center shadow-sm">
+              <div className="mx-auto max-w-2xl rounded-card border border-espresso/10 bg-cream px-8 py-16 text-center shadow-sm">
                 <span className="font-mono text-mono-label uppercase text-taupe-2">
                   Bientôt
                 </span>

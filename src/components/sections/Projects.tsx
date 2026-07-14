@@ -123,7 +123,7 @@ function ProjectCard({
             {project.tags.map((tag) => (
               <li
                 key={tag}
-                className="rounded-pill border border-butter/25 px-3 py-1.5 font-mono text-mono-label uppercase text-butter"
+                className="rounded-pill border border-cream/25 px-3 py-1.5 font-mono text-mono-label uppercase text-cream"
               >
                 {tag}
               </li>

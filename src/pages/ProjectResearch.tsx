@@ -271,7 +271,7 @@ function HypothesisCard({
   key?: React.Key | null
 }) {
   return (
-    <div className="flex h-full flex-col rounded-card border border-espresso/10 bg-butter p-6 shadow-sm">
+    <div className="flex h-full flex-col rounded-card border border-espresso/10 bg-cream p-6 shadow-sm">
       <span className="font-mono text-mono-label uppercase text-taupe-2">
         Hypothèse {tag}
       </span>
@@ -296,7 +296,7 @@ function MethodStep({
   key?: React.Key | null
 }) {
   return (
-    <div className="rounded-card border border-espresso/10 bg-butter p-6 shadow-sm md:p-8">
+    <div className="rounded-card border border-espresso/10 bg-cream p-6 shadow-sm md:p-8">
       <span className="font-mono text-mono-label uppercase text-taupe-2">
         {step}
       </span>
@@ -329,7 +329,7 @@ function InsightCard({
   key?: React.Key | null
 }) {
   return (
-    <div className="rounded-card border border-espresso/10 bg-butter p-6 shadow-sm md:p-8">
+    <div className="rounded-card border border-espresso/10 bg-cream p-6 shadow-sm md:p-8">
       <div className="flex items-baseline gap-4">
         <span className="font-mono text-h4 leading-none text-sienna">{num}</span>
         <span className="font-mono text-mono-label uppercase text-taupe-2">
@@ -368,7 +368,7 @@ function ProfileCard({
       className={`flex h-full flex-col rounded-card p-6 shadow-sm ${
         dark
           ? "bg-espresso text-linen sm:col-span-2 lg:col-span-2"
-          : "border border-espresso/10 bg-butter"
+          : "border border-espresso/10 bg-cream"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
@@ -603,7 +603,7 @@ export function ProjectResearch() {
               <div className="mt-10 space-y-4">
                 {IMPLICATIONS.map((rec, i) => (
                   <Reveal key={rec.id} delay={Math.min(i * 0.06, 0.18)}>
-                    <div className="flex items-start gap-5 rounded-card border border-espresso/10 bg-butter p-5 shadow-sm md:p-6">
+                    <div className="flex items-start gap-5 rounded-card border border-espresso/10 bg-cream p-5 shadow-sm md:p-6">
                       <span className="shrink-0 font-mono text-h4 leading-none text-sienna">
                         {rec.id}
                       </span>
