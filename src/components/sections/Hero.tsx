@@ -133,7 +133,7 @@ export function Hero() {
           <PillButton variant="dark" href="#projets">
             Voir les projets
           </PillButton>
-          <PillButton variant="solid" href="#contact">
+          <PillButton variant="solid" href={`mailto:${CONTACT.email}`}>
             Me contacter
           </PillButton>
         </Rise>

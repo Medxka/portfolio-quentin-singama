@@ -16,7 +16,7 @@ import {
 } from "lucide-react"
 import { PillButton } from "../ui/PillButton"
 import { cn } from "@/src/lib/utils"
-import { SKILLS, DISCIPLINES } from "../../content"
+import { SKILLS, DISCIPLINES, CONTACT } from "../../content"
 
 type MenuId = "projets" | "process"
 
@@ -571,7 +571,7 @@ export function Nav({ onScrollTop }: { onScrollTop: () => void }) {
           </div>
 
           <div className="nav-drop nav-drop-2">
-            <PillButton href="#contact" variant="solid">
+            <PillButton href={`mailto:${CONTACT.email}`} variant="solid">
               Me contacter
             </PillButton>
           </div>
@@ -625,7 +625,7 @@ export function Nav({ onScrollTop }: { onScrollTop: () => void }) {
               to="/about"
               onHover={() => openNow(null)}
             />
-            <PillButton href="#contact" variant="solid">
+            <PillButton href={`mailto:${CONTACT.email}`} variant="solid">
               Me contacter
             </PillButton>
           </div>

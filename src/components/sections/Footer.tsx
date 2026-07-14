@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Mail, Linkedin, MapPin } from "lucide-react"
+import { Mail, Linkedin, MapPin, Download } from "lucide-react"
 import { Reveal } from "../ui/Reveal"
 import { DotGrid } from "../ui/DotGrid"
 import { CONTACT } from "../../content"
@@ -82,6 +82,14 @@ export function Footer() {
                   {CONTACT.location}
                 </li>
               </ul>
+              <a
+                href="/cv-quentin-singama.pdf"
+                download="Quentin-Singama-CV-UX-UI.pdf"
+                className="mt-6 inline-flex items-center gap-2 rounded-pill border border-apricot/40 px-4 py-2 font-mono text-mono-label uppercase text-apricot transition-colors duration-300 ease-[var(--ease-out-expo)] hover:border-apricot hover:bg-apricot hover:text-espresso"
+              >
+                <Download size={14} strokeWidth={2} aria-hidden />
+                Télécharger le CV
+              </a>
             </div>
 
             <div>
