@@ -96,6 +96,19 @@ export const PROJECTS: Project[] = [
     tags: ["Campagnes", "Print", "Multi-agences"],
     disciplines: ["graphisme"],
   },
+  {
+    id: "metal-access",
+    num: "06",
+    title: "Metal Access",
+    href: "/projets/metal-access",
+    role: "UX/UI Design & Dév · Sprint équipe",
+    year: "2026",
+    desc: "Rendre les festivals metal accessibles aux personnes en situation de handicap : plateforme, outil d'audit et signalétique. UX/UI de toutes les maquettes + développement.",
+    image: "/work/metal-access/ma-cover.webp",
+    imageAlt: "Metal Access — l'accessibilité au cœur du festival",
+    tags: ["Accessibilité", "Design system", "Signalétique"],
+    disciplines: ["uxui", "research"],
+  },
 ]
 
 /** Disciplines — source unique pour le méga-menu et les pages /discipline/:id. */

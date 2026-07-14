@@ -12,6 +12,7 @@ import { ProjectResearch } from "./pages/ProjectResearch"
 import { ProjectHappyJob } from "./pages/ProjectHappyJob"
 import { ProjectsByDiscipline } from "./pages/ProjectsByDiscipline"
 import { ProjectVideo } from "./pages/ProjectVideo"
+import { ProjectMetalAccess } from "./pages/ProjectMetalAccess"
 
 export function App() {
   const { pathname, hash } = useLocation()
@@ -61,6 +62,7 @@ export function App() {
         <Route path="/projets/ink" element={<ProjectINK />} />
         <Route path="/projets/research" element={<ProjectResearch />} />
         <Route path="/projets/happyjob" element={<ProjectHappyJob />} />
+        <Route path="/projets/metal-access" element={<ProjectMetalAccess />} />
         <Route path="/discipline/video" element={<ProjectVideo />} />
         <Route path="/discipline/:id" element={<ProjectsByDiscipline />} />
         <Route path="*" element={<Home />} />

@@ -331,20 +331,20 @@ export function ProjectHappyJob() {
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                Musthane — Remettre de l'ordre dans 100+ produits
+                Metal Access — Rendre les festivals metal accessibles
               </h2>
             </Reveal>
           </div>
           <Reveal delay={0.08}>
             <PillButton
               variant="solid"
-              href="/projets/musthane"
+              href="/projets/metal-access"
               onClick={(e) => {
                 e.preventDefault()
-                navigate("/projets/musthane")
+                navigate("/projets/metal-access")
               }}
             >
-              Voir Musthane
+              Voir Metal Access
             </PillButton>
           </Reveal>
         </div>
