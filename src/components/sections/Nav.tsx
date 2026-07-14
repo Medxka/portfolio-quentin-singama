@@ -83,9 +83,12 @@ const NAV_CSS = `
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
 }
 .tile-arrow { opacity: 0; transform: translateY(115%); }
-.mega-tile:hover .tile-icon { opacity: 0; transform: translateY(-115%); }
-.mega-tile:hover .tile-arrow { opacity: 1; transform: translateY(0); }
-.mega-tile:hover .tile-badge {
+.mega-tile:hover .tile-icon,
+.mega-tile[data-active="true"] .tile-icon { opacity: 0; transform: translateY(-115%); }
+.mega-tile:hover .tile-arrow,
+.mega-tile[data-active="true"] .tile-arrow { opacity: 1; transform: translateY(0); }
+.mega-tile:hover .tile-badge,
+.mega-tile[data-active="true"] .tile-badge {
   background-color: color-mix(in oklch, var(--color-apricot) 14%, transparent);
 }
 .tile-badge { transition: background-color 0.3s ease; }
@@ -272,6 +275,7 @@ function Tile({
   href,
   onNav,
   onHover,
+  active,
 }: {
   Icon: LucideIcon
   title: string
@@ -279,6 +283,7 @@ function Tile({
   href: string
   onNav: (e: React.MouseEvent) => void
   onHover?: () => void
+  active?: boolean
   key?: React.Key | null
 }) {
   return (
@@ -286,7 +291,13 @@ function Tile({
       href={href}
       onClick={onNav}
       onMouseEnter={onHover}
-      className="mega-tile group flex flex-col gap-3 rounded-2xl bg-linen/[0.03] p-4 transition-colors duration-300 hover:bg-linen/[0.07]"
+      data-active={active}
+      className={cn(
+        "mega-tile group flex flex-col gap-3 rounded-2xl p-4 transition-colors duration-300",
+        active
+          ? "bg-linen/[0.08] ring-1 ring-apricot/25"
+          : "bg-linen/[0.03] hover:bg-linen/[0.07]"
+      )}
     >
       <IconBadge Icon={Icon} />
       <span className="font-sans text-h5 text-linen">{title}</span>
@@ -299,7 +310,9 @@ function ProjetsPanel({ onGo }: { onGo: (id: string) => void }) {
   const mainId = DISCIPLINES[0].id
   const [activeId, setActiveId] = React.useState(mainId)
   const active = DISCIPLINES.find((d) => d.id === activeId) ?? DISCIPLINES[0]
-  const rest = DISCIPLINES.filter((d) => d.id !== active.id)
+  // Tuiles FIXES (jamais déplacées) : les 3 disciplines hors principale.
+  // Survoler une tuile met juste à jour la grande carte (master-detail).
+  const rest = DISCIPLINES.filter((d) => d.id !== mainId)
 
   // Précharge les covers pour un swap sans flash au survol.
   React.useEffect(() => {
@@ -363,7 +376,7 @@ function ProjetsPanel({ onGo }: { onGo: (id: string) => void }) {
         </div>
       </a>
 
-      {/* Tuiles = les autres disciplines ; survol → deviennent la grande carte */}
+      {/* Tuiles fixes ; survol → aperçu dans la grande carte, sans les déplacer */}
       <div className="disc-tiles grid gap-3">
         {rest.map((d) => (
           <Tile
@@ -372,6 +385,7 @@ function ProjetsPanel({ onGo }: { onGo: (id: string) => void }) {
             title={d.name}
             sub={d.desc}
             href={`/discipline/${d.id}`}
+            active={active.id === d.id}
             onHover={() => setActiveId(d.id)}
             onNav={(e) => {
               e.preventDefault()
