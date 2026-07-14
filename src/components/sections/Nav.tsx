@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import {
   Plus,
   ArrowRight,
+  ArrowUp,
   Search,
   Sparkles,
   Palette,
@@ -410,7 +411,7 @@ function NavPageLink({
 
 /* ── Nav ──────────────────────────────────────────────────── */
 
-export function Nav() {
+export function Nav({ onScrollTop }: { onScrollTop: () => void }) {
   const navigate = useNavigate()
   const { pathname } = useLocation()
   const [open, setOpen] = React.useState<MenuId | null>(null)
@@ -513,8 +514,7 @@ export function Nav() {
             to="/"
             onClick={() => {
               close()
-              if (pathname === "/")
-                window.scrollTo({ top: 0, behavior: "smooth" })
+              if (pathname === "/") onScrollTop()
             }}
             className="nav-drop nav-drop-0 inline-flex items-center gap-2.5 font-sans font-bold tracking-tight text-linen"
           >
@@ -571,8 +571,21 @@ export function Nav() {
         >
           <div
             onMouseLeave={scheduleClose}
-            className="flex items-center gap-8 rounded-full border border-linen/10 bg-espresso/80 py-2 pl-7 pr-2 shadow-2xl backdrop-blur-[30px]"
+            className="flex items-center gap-8 rounded-full border border-linen/10 bg-espresso/80 px-2 py-2 shadow-2xl backdrop-blur-[30px]"
           >
+            <button
+              type="button"
+              onClick={onScrollTop}
+              aria-label="Remonter en haut"
+              className="group grid h-10 w-10 shrink-0 place-items-center rounded-full bg-linen/[0.06] text-apricot transition-colors duration-300 hover:bg-linen/[0.12]"
+            >
+              <ArrowUp
+                size={17}
+                strokeWidth={2}
+                aria-hidden
+                className="transition-transform duration-300 ease-[var(--ease-out-expo)] group-hover:-translate-y-0.5"
+              />
+            </button>
             {MENUS.map((m) => (
               <NavLink
                 key={m.id}
