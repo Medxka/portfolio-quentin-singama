@@ -7,7 +7,7 @@ import { DotGrid } from "../components/ui/DotGrid"
 import { PillButton } from "../components/ui/PillButton"
 
 /**
- * Cas d'étude Happy Job — stage graphic design (2 mois).
+ * Cas d'étude Happy Job, stage graphic design (2 mois).
  * Campagne de recrutement saisonnier déclinée par secteur autour d'un
  * ressort simple : le jeu de mots. Même gabarit que les autres projets.
  */
@@ -31,25 +31,25 @@ type Poster = { src: string; alt: string; sector: string; line: string }
 const CAMPAIGN: Poster[] = [
   {
     src: "/work/hj-2.webp",
-    alt: "Affiche Happy Job — femme dans un verger de pommes, offres agricoles",
+    alt: "Affiche Happy Job, femme dans un verger de pommes, offres agricoles",
     sector: "Agriculture",
     line: "« Des offres à vous faire tomber dans les pommes »",
   },
   {
     src: "/work/hj-1.webp",
-    alt: "Affiche Happy Job — cartes à jouer par secteur : tourisme, restauration, agriculture",
+    alt: "Affiche Happy Job, cartes à jouer par secteur : tourisme, restauration, agriculture",
     sector: "Tous secteurs",
     line: "« Quelle carte allez-vous tirer cette saison ? »",
   },
   {
     src: "/work/hj-3.webp",
-    alt: "Affiche Happy Job — menu de restaurant, « pas besoin d'un CV étoilé »",
+    alt: "Affiche Happy Job, menu de restaurant, « pas besoin d'un CV étoilé »",
     sector: "Restauration",
     line: "« Pas besoin d'un CV étoilé pour décrocher un contrat »",
   },
   {
     src: "/work/hj-4.webp",
-    alt: "Affiche Happy Job — cuisiniers en service, « mets ton énergie au menu »",
+    alt: "Affiche Happy Job, cuisiniers en service, « mets ton énergie au menu »",
     sector: "Restauration",
     line: "« Mets ton énergie au menu. On a les missions »",
   },
@@ -143,9 +143,9 @@ export function ProjectHappyJob() {
   const navigate = useNavigate()
 
   React.useEffect(() => {
-    document.title = "Happy Job — Cas d'étude · Quentin Singama"
+    document.title = "Happy Job · Cas d'étude · Quentin Singama"
     return () => {
-      document.title = "Quentin Singama — UX/UI Designer & Researcher"
+      document.title = "Quentin Singama · UX/UI Designer & Researcher"
     }
   }, [])
 
@@ -173,7 +173,7 @@ export function ProjectHappyJob() {
           <Reveal delay={0.08}>
             <div className="mt-10">
               <Kicker className="text-greige">
-                Cas d'étude — Graphic Design · 2026
+                Cas d'étude · Graphic Design · 2026
               </Kicker>
             </div>
           </Reveal>
@@ -189,8 +189,7 @@ export function ProjectHappyJob() {
             <p className="mt-7 max-w-[62ch] text-plarge text-greige">
               Deux mois de stage en graphic design chez Happy Job, un réseau
               d'agences de recrutement. Ma mission : décliner une campagne
-              d'affichage qui rend désirables les emplois saisonniers —
-              agriculture, restauration, tourisme — avec un même système de
+              d'affichage qui rend désirables les emplois saisonniers (agriculture, restauration, tourisme) avec un même système de
               marque et un ressort simple, le jeu de mots.
             </p>
           </Reveal>
@@ -226,8 +225,7 @@ export function ProjectHappyJob() {
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Happy Job recrute des saisonniers pour ses entreprises
                   partenaires. Le problème est structurel : ces offres peinent à
-                  attirer, et la concurrence est rude au moment des pics —
-                  vendanges, saison touristique, coups de feu en cuisine. La
+                  attirer, et la concurrence est rude au moment des pics, vendanges, saison touristique, coups de feu en cuisine. La
                   campagne devait rendre ces offres désirables, tout en restant
                   déclinable sur plusieurs secteurs et plusieurs agences.
                 </p>
@@ -246,7 +244,7 @@ export function ProjectHappyJob() {
                   Un même langage visuel tient toute la campagne : la vague de
                   papier déchiré rouge, le motif « C » en fond, et la signature
                   « Des emplois saisonniers toute l'année ». Sur cette base,
-                  chaque secteur reçoit son accroche — le message fait sourire,
+                  chaque secteur reçoit son accroche, le message fait sourire,
                   la marque reste reconnaissable d'un visuel à l'autre.
                 </p>
               </Reveal>
@@ -254,8 +252,8 @@ export function ProjectHappyJob() {
                 <div className="mt-10">
                   <Figure
                     src="/work/happyjob-affiche.webp"
-                    alt="Visuel signature Happy Job — emplois saisonniers toute l'année"
-                    caption="Le visuel signature — vague rouge, motif « C », signature saisonnière"
+                    alt="Visuel signature Happy Job, emplois saisonniers toute l'année"
+                    caption="Le visuel signature, vague rouge, motif « C », signature saisonnière"
                   />
                 </div>
               </Reveal>
@@ -270,7 +268,7 @@ export function ProjectHappyJob() {
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Chaque affiche existe en print (agence, vitrine) et en social,
-                  avec un QR code vers l'inscription en ligne — pour que chaque
+                  avec un QR code vers l'inscription en ligne, pour que chaque
                   agence partenaire puisse l'activer sur ses propres canaux.
                 </p>
               </Reveal>
@@ -281,7 +279,7 @@ export function ProjectHappyJob() {
                       key={p.src}
                       src={p.src}
                       alt={p.alt}
-                      caption={`${p.sector} — ${p.line}`}
+                      caption={`${p.sector}, ${p.line}`}
                     />
                   ))}
                 </div>
@@ -331,7 +329,7 @@ export function ProjectHappyJob() {
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                Metal Access — Rendre les festivals metal accessibles
+                Metal Access, Rendre les festivals metal accessibles
               </h2>
             </Reveal>
           </div>

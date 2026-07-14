@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "motion/react"
 import { EASE } from "@/src/lib/utils"
 
 /**
- * Reveal — entrée y+fade au scroll. Le contenu est visible par défaut
+ * Reveal, entrée y+fade au scroll. Le contenu est visible par défaut
  * (initial appliqué seulement si motion OK) : jamais de section blanche.
  */
 export function Reveal({

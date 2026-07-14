@@ -7,7 +7,7 @@ import { EASE } from "../../lib/utils"
 import { CONTACT } from "../../content"
 
 /**
- * Rise — page-load entrance (not scroll-tied): y+fade, staggered by index.
+ * Rise, page-load entrance (not scroll-tied): y+fade, staggered by index.
  * Renders static when prefers-reduced-motion is on.
  */
 function Rise({
@@ -38,7 +38,7 @@ function Rise({
 }
 
 /**
- * Hero — full-viewport dark opening. A warm horizon glow (sunrise arc)
+ * Hero, full-viewport dark opening. A warm horizon glow (sunrise arc)
  * breathes at the bottom under a dot-grid texture; the pitch sits on top.
  */
 export function Hero() {
@@ -98,18 +98,18 @@ export function Hero() {
         }
       `}</style>
 
-      {/* Layer 1 — warm horizon backdrop */}
+      {/* Layer 1, warm horizon backdrop */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="hero-halo" />
         <div className="hero-planet" />
       </div>
 
-      {/* Layer 2 — dot-grid texture over the horizon area */}
+      {/* Layer 2, dot-grid texture over the horizon area */}
       <div aria-hidden className="absolute bottom-0 left-0 h-1/2 w-full">
         <DotGrid baseAlpha={0.08} />
       </div>
 
-      {/* Layer 3 — content */}
+      {/* Layer 3, content */}
       <div className="shell relative z-10 text-center">
         <Rise index={0}>
           <Kicker className="text-greige">{CONTACT.status}</Kicker>

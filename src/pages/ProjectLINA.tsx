@@ -7,7 +7,7 @@ import { DotGrid } from "../components/ui/DotGrid"
 import { PillButton } from "../components/ui/PillButton"
 
 /**
- * Cas d'étude LINA — même gabarit que Musthane : hero + méta, sommaire
+ * Cas d'étude LINA, même gabarit que Musthane : hero + méta, sommaire
  * latéral scrollspy, sections ancrées, bilan, projet suivant.
  */
 
@@ -30,7 +30,7 @@ const PROBLEMS = [
   {
     num: "01",
     title: "Navigation orientée achat",
-    desc: "Le site est construit pour ceux qui savent déjà ce qu'ils veulent — il ne favorise pas la découverte.",
+    desc: "Le site est construit pour ceux qui savent déjà ce qu'ils veulent, il ne favorise pas la découverte.",
   },
   {
     num: "02",
@@ -40,7 +40,7 @@ const PROBLEMS = [
   {
     num: "03",
     title: "Prescription invisible",
-    desc: "La recommandation des libraires — leur plus grande force — est noyée dans un site trop fonctionnel.",
+    desc: "La recommandation des libraires, leur plus grande force, est noyée dans un site trop fonctionnel.",
   },
 ]
 
@@ -194,9 +194,9 @@ export function ProjectLINA() {
   const navigate = useNavigate()
 
   React.useEffect(() => {
-    document.title = "LINA — Cas d'étude · Quentin Singama"
+    document.title = "LINA · Cas d'étude · Quentin Singama"
     return () => {
-      document.title = "Quentin Singama — UX/UI Designer & Researcher"
+      document.title = "Quentin Singama · UX/UI Designer & Researcher"
     }
   }, [])
 
@@ -224,7 +224,7 @@ export function ProjectLINA() {
           <Reveal delay={0.08}>
             <div className="mt-10">
               <Kicker className="text-greige">
-                Cas d'étude — UX/UI Design · 2024
+                Cas d'étude · UX/UI Design · 2024
               </Kicker>
             </div>
           </Reveal>
@@ -299,8 +299,7 @@ export function ProjectLINA() {
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Remplacer la navigation textuelle par des icônes expressives
-                  et colorées. Chaque genre a sa couleur et son pictogramme —
-                  une barre d'icônes remplace une sidebar de 18 lignes de
+                  et colorées. Chaque genre a sa couleur et son pictogramme, une barre d'icônes remplace une sidebar de 18 lignes de
                   texte.
                 </p>
               </Reveal>
@@ -308,8 +307,8 @@ export function ProjectLINA() {
                 <div className="mt-10">
                   <Figure
                     src="/work/lina/lina-icones.webp"
-                    alt="Système d'icônes LINA — un pictogramme coloré par genre littéraire"
-                    caption="Le système d'icônes — un genre, une couleur, un pictogramme"
+                    alt="Système d'icônes LINA, un pictogramme coloré par genre littéraire"
+                    caption="Le système d'icônes, un genre, une couleur, un pictogramme"
                   />
                 </div>
               </Reveal>
@@ -326,7 +325,7 @@ export function ProjectLINA() {
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   L'architecture a été repensée selon une logique de
                   découverte, pas de catalogue. Des bandeaux colorés rythment
-                  le scroll, et les coups de cœur sont incarnés — nom et avis
+                  le scroll, et les coups de cœur sont incarnés, nom et avis
                   du libraire visibles, la prescription redevient humaine.
                 </p>
               </Reveal>
@@ -335,12 +334,12 @@ export function ProjectLINA() {
                   <Figure
                     src="/work/lina/lina-desktop.webp"
                     alt="Refonte desktop du site LINA"
-                    caption="La refonte desktop — logique de découverte"
+                    caption="La refonte desktop, logique de découverte"
                   />
                   <Figure
                     src="/work/lina/lina-notes.webp"
                     alt="Notes d'intention : choix chromatiques et architecturaux"
-                    caption="Choix chromatiques & architecturaux — notes d'intention"
+                    caption="Choix chromatiques & architecturaux, notes d'intention"
                   />
                 </div>
               </Reveal>
@@ -367,19 +366,19 @@ export function ProjectLINA() {
                   <Figure
                     src="/work/lina/lina-heretic-poster.webp"
                     alt="Publicité The First Heretic sur site partenaire"
-                    caption="La pub — site partenaire"
+                    caption="La pub, site partenaire"
                   />
                   <Figure
                     src="/work/lina/lina-pub-landing.webp"
                     alt="Vue d'ensemble du parcours pub vers landing page"
-                    caption="Vue d'ensemble — pub → landing"
+                    caption="Vue d'ensemble, pub → landing"
                   />
                 </div>
                 <div className="mt-8">
                   <Figure
                     src="/work/lina/lina-heretic-landing.webp"
                     alt="Landing page The First Heretic complète"
-                    caption="La landing page — univers dark et cinématique"
+                    caption="La landing page, univers dark et cinématique"
                   />
                 </div>
               </Reveal>
@@ -409,7 +408,7 @@ export function ProjectLINA() {
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                Happy Job — Recruter pour les saisons, toute l'année
+                Happy Job, Recruter pour les saisons, toute l'année
               </h2>
             </Reveal>
           </div>

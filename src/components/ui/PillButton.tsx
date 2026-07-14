@@ -9,7 +9,7 @@ const Arrow = ({ className }: { className?: string }) => (
 )
 
 /**
- * PillButton — CTA signature (grammaire effortel, palette chaude).
+ * PillButton, CTA signature (grammaire effortel, palette chaude).
  *
  * Repos : pill + chip coloré à droite portant la flèche.
  * Hover : le chip s'étend pour remplir toute la pill (0.65s, overshoot),

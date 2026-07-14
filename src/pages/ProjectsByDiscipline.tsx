@@ -11,7 +11,7 @@ import {
 } from "../content"
 
 /**
- * Page /discipline/:id — présente les projets d'une discipline.
+ * Page /discipline/:id, présente les projets d'une discipline.
  * Une seule page paramétrée : hero espresso + grille des projets, ou
  * état « bientôt » si la discipline n'a pas encore de projet.
  */
@@ -90,9 +90,9 @@ export function ProjectsByDiscipline() {
   const discipline = DISCIPLINES.find((d) => d.id === id)
 
   React.useEffect(() => {
-    if (discipline) document.title = `${discipline.name} — Quentin Singama`
+    if (discipline) document.title = `${discipline.name}, Quentin Singama`
     return () => {
-      document.title = "Quentin Singama — UX/UI Designer & Researcher"
+      document.title = "Quentin Singama · UX/UI Designer & Researcher"
     }
   }, [discipline])
 
@@ -126,7 +126,7 @@ export function ProjectsByDiscipline() {
           <Reveal delay={0.08}>
             <div className="mt-10">
               <Kicker className="text-greige">
-                Discipline — {projects.length}{" "}
+                Discipline, {projects.length}{" "}
                 {projects.length > 1 ? "projets" : "projet"}
               </Kicker>
             </div>
@@ -156,7 +156,7 @@ export function ProjectsByDiscipline() {
               ))}
             </div>
           ) : (
-            /* État « bientôt » — discipline sans projet publié */
+            /* État « bientôt », discipline sans projet publié */
             <Reveal>
               <div className="mx-auto max-w-2xl rounded-card border border-espresso/10 bg-cream px-8 py-16 text-center shadow-sm">
                 <span className="font-mono text-mono-label uppercase text-taupe-2">
@@ -166,8 +166,7 @@ export function ProjectsByDiscipline() {
                   Les cas d'étude arrivent.
                 </h2>
                 <p className="mx-auto mt-4 max-w-[42ch] text-pbody text-taupe">
-                  {discipline.intro} Les projets sont en cours de préparation —
-                  reviens bientôt, ou explore les autres disciplines.
+                  {discipline.intro} Les projets sont en cours de préparation, reviens bientôt, ou explore les autres disciplines.
                 </p>
               </div>
             </Reveal>

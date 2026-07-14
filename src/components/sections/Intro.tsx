@@ -3,7 +3,7 @@ import { Reveal } from "../ui/Reveal"
 import { ContactCTA } from "../ui/ContactCTA"
 
 /**
- * Intro — "Disponibilité" : portrait à gauche, fiche alternance à droite
+ * Intro, "Disponibilité" : portrait à gauche, fiche alternance à droite
  * (le candidat publie sa propre annonce). Grille label / valeur en mono.
  */
 const INFO = [

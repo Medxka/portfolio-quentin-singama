@@ -12,7 +12,7 @@ const PRINCIPLES = [
   {
     Icon: Search,
     title: "Comprendre",
-    desc: "Partir du vrai problème, pas du brief. Entretiens, tests, observation — écouter avant de dessiner.",
+    desc: "Partir du vrai problème, pas du brief. Entretiens, tests, observation, écouter avant de dessiner.",
   },
   {
     Icon: Boxes,
@@ -22,7 +22,7 @@ const PRINCIPLES = [
   {
     Icon: ClipboardCheck,
     title: "Valider",
-    desc: "Confronter au réel. Prototyper, tester, itérer — jusqu'à ce que ça devienne évident pour l'utilisateur.",
+    desc: "Confronter au réel. Prototyper, tester, itérer, jusqu'à ce que ça devienne évident pour l'utilisateur.",
   },
 ]
 
@@ -65,7 +65,7 @@ export function About() {
             <Reveal delay={0.24}>
               <p className="mt-4 max-w-[54ch] text-pbody text-greige">
                 Avant le design produit, j'ai fait mes armes en direction
-                artistique et graphisme — chez Happy Job, EVA, Yumie. Cette
+                artistique et graphisme, chez Happy Job, EVA, Yumie. Cette
                 double culture, image et système, nourrit ma façon de
                 concevoir&nbsp;: rigoureuse dans la structure, sensible dans le
                 détail.

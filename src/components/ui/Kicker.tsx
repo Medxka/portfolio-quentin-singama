@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "@/src/lib/utils"
 
 /**
- * Kicker — ( LABEL ) en mono uppercase, grammaire signature du système.
+ * Kicker, ( LABEL ) en mono uppercase, grammaire signature du système.
  * Un seul par section. Couleur héritée (text-*).
  */
 export function Kicker({

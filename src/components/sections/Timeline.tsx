@@ -3,7 +3,7 @@ import { Reveal } from "../ui/Reveal"
 import { TIMELINE } from "../../content"
 
 /**
- * Timeline — career entries as hairline rows on the light background
+ * Timeline, career entries as hairline rows on the light background
  * (parent wrapper sets bg-peach / text-taupe).
  */
 export function Timeline() {

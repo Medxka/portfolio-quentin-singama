@@ -7,7 +7,7 @@ import { DotGrid } from "../components/ui/DotGrid"
 import { PillButton } from "../components/ui/PillButton"
 
 /**
- * Cas d'étude Metal Access — plateforme d'accessibilité des festivals metal.
+ * Cas d'étude Metal Access, plateforme d'accessibilité des festivals metal.
  * Projet de groupe (sprint RNCP UX, ECV). Contribution de Quentin : UX/UI de
  * toutes les maquettes + développement de la partie accessibilité. Même
  * gabarit que les autres cas d'étude.
@@ -65,23 +65,23 @@ const THEMATIQUES = [
 const MAQUETTES = [
   {
     src: "/work/metal-access/ma-bonnes-pratiques.webp",
-    alt: "Page Bonnes pratiques — bibliothèque filtrable par pratique et par handicap",
-    caption: "Bonnes pratiques — biblio filtrable par pratique × type de handicap",
+    alt: "Page Bonnes pratiques, bibliothèque filtrable par pratique et par handicap",
+    caption: "Bonnes pratiques, biblio filtrable par pratique × type de handicap",
   },
   {
     src: "/work/metal-access/ma-handicaps.webp",
-    alt: "Page Les handicaps — connaître les publics pour mieux les accueillir",
-    caption: "Les handicaps — connaître les publics (la page que j'ai aussi développée)",
+    alt: "Page Les handicaps, connaître les publics pour mieux les accueillir",
+    caption: "Les handicaps, connaître les publics (la page que j'ai aussi développée)",
   },
   {
     src: "/work/metal-access/ma-ressources.webp",
-    alt: "Page Ressources — signalétique et guides prêts à déployer",
-    caption: "Ressources — tout ce qui est prêt à déployer",
+    alt: "Page Ressources, signalétique et guides prêts à déployer",
+    caption: "Ressources, tout ce qui est prêt à déployer",
   },
   {
     src: "/work/metal-access/ma-audit.webp",
-    alt: "Outil d'audit d'accessibilité — analyse du parcours de l'événement",
-    caption: "L'outil d'audit — le diagnostic de maturité, fonctionnalité phare",
+    alt: "Outil d'audit d'accessibilité, analyse du parcours de l'événement",
+    caption: "L'outil d'audit, le diagnostic de maturité, fonctionnalité phare",
   },
 ]
 
@@ -173,9 +173,9 @@ export function ProjectMetalAccess() {
   const navigate = useNavigate()
 
   React.useEffect(() => {
-    document.title = "Metal Access — Cas d'étude · Quentin Singama"
+    document.title = "Metal Access · Cas d'étude · Quentin Singama"
     return () => {
-      document.title = "Quentin Singama — UX/UI Designer & Researcher"
+      document.title = "Quentin Singama · UX/UI Designer & Researcher"
     }
   }, [])
 
@@ -203,7 +203,7 @@ export function ProjectMetalAccess() {
           <Reveal delay={0.08}>
             <div className="mt-10">
               <Kicker className="text-greige">
-                Cas d'étude — UX/UI Design · 2026
+                Cas d'étude · UX/UI Design · 2026
               </Kicker>
             </div>
           </Reveal>
@@ -288,7 +288,7 @@ export function ProjectMetalAccess() {
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   On a démarré par une veille et un benchmark (sites de
                   festivals, références d'accessibilité), puis on a cadré les
-                  cibles. Trois niveaux de maturité, trois besoins — l'interface
+                  cibles. Trois niveaux de maturité, trois besoins, l'interface
                   devait parler à chacun.
                 </p>
               </Reveal>
@@ -338,26 +338,26 @@ export function ProjectMetalAccess() {
               <Reveal>
                 <Kicker className="text-taupe-2">Concept</Kicker>
                 <h2 className="mt-5 max-w-[24ch] text-h3 text-espresso">
-                  Metal Access — l'outillage de l'inclusivité.
+                  Metal Access, l'outillage de l'inclusivité.
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Une plateforme qui rend l'accessibilité désirable et
                   actionnable : un guide de bonnes pratiques filtrable, un pack
                   de signalétique prêt à imprimer, et un outil d'audit qui
                   diagnostique la maturité d'un événement. Le tout dans une DA
-                  metal assumée — sombre, électrique — mais pensée lisible.
+                  metal assumée (sombre, électrique) mais pensée lisible.
                 </p>
               </Reveal>
               <Reveal delay={0.1}>
                 <div className="mt-10 grid gap-6 lg:grid-cols-2">
                   <Figure
                     src="/work/metal-access/ma-fede.webp"
-                    alt="Page La Fédé — identité Metal Access sur fond sombre et bleu électrique"
+                    alt="Page La Fédé, identité Metal Access sur fond sombre et bleu électrique"
                     caption="L'identité & la fédération"
                   />
                   <Figure
                     src="/work/metal-access/ma-homepage.webp"
-                    alt="Page d'accueil Metal Access — l'accessibilité au cœur du festival"
+                    alt="Page d'accueil Metal Access, l'accessibilité au cœur du festival"
                     caption="La page d'accueil"
                   />
                 </div>
@@ -409,12 +409,12 @@ export function ProjectMetalAccess() {
                   <Figure
                     src="/work/metal-access/ma-signaletique.webp"
                     alt="Système de codage : forme + couleur par public (artiste, bénévole, prod, festivalier)"
-                    caption="Le codage forme + couleur — pensé pour les daltoniens"
+                    caption="Le codage forme + couleur, pensé pour les daltoniens"
                   />
                   <Figure
                     src="/work/metal-access/ma-bracelets.webp"
                     alt="Bracelets Metal Access déclinés par public, forme et couleur"
-                    caption="Les bracelets — le même système, porté au poignet"
+                    caption="Les bracelets, le même système, porté au poignet"
                   />
                 </div>
               </Reveal>
@@ -429,7 +429,7 @@ export function ProjectMetalAccess() {
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Au-delà des maquettes, j'ai développé la partie accessibilité
-                  du site — la page « Les handicaps », qui présente chaque public
+                  du site, la page « Les handicaps », qui présente chaque public
                   et ses besoins. Passer de la maquette au code intégré, avec des
                   tests d'accessibilité, était la meilleure façon de vérifier que
                   le design tenait la route pour de vrai.
@@ -446,8 +446,8 @@ export function ProjectMetalAccess() {
                 </h2>
                 <p className="mt-6 max-w-[60ch] text-plarge text-taupe">
                   Dans une équipe pluridisciplinaire et un timing serré, j'ai
-                  tenu le fil UX/UI de bout en bout — de la recherche aux
-                  maquettes finales — et poussé jusqu'au développement de la
+                  tenu le fil UX/UI de bout en bout, de la recherche aux
+                  maquettes finales, et poussé jusqu'au développement de la
                   partie accessibilité. Concevoir <span className="text-espresso">pour</span>{" "}
                   l'accessibilité m'a appris à en faire un réflexe, pas une
                   contrainte de fin de projet.
@@ -480,7 +480,7 @@ export function ProjectMetalAccess() {
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                Musthane — Remettre de l'ordre dans 100+ produits
+                Musthane, Remettre de l'ordre dans 100+ produits
               </h2>
             </Reveal>
           </div>

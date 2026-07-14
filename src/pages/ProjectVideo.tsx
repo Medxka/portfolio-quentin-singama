@@ -7,7 +7,7 @@ import { DotGrid } from "../components/ui/DotGrid"
 import { DISCIPLINES } from "../content"
 
 /**
- * Page /discipline/video — présentée à part des autres disciplines :
+ * Page /discipline/video, présentée à part des autres disciplines :
  * le montage est une passion perso (edits « flow », rythmés sur le son,
  * façon reels / AMV), pas une commande. Galerie de players.
  */
@@ -15,8 +15,8 @@ import { DISCIPLINES } from "../content"
 type Edit = { slug: string; title: string; style: string }
 
 const EDITS: Edit[] = [
-  { slug: "amv-knk", title: "AMV — KNK", style: "AMV · edit rythmé" },
-  { slug: "nun-id-change", title: "Nun — ID change", style: "ID change · calé sur le beat" },
+  { slug: "amv-knk", title: "AMV, KNK", style: "AMV · edit rythmé" },
+  { slug: "nun-id-change", title: "Nun, ID change", style: "ID change · calé sur le beat" },
   { slug: "come-closer", title: "Come Closer", style: "Edit · flow" },
   { slug: "portfolio-etudiant", title: "Portfolio étudiant", style: "Montage cinématique" },
 ]
@@ -52,9 +52,9 @@ export function ProjectVideo() {
   const others = DISCIPLINES.filter((d) => d.id !== "video")
 
   React.useEffect(() => {
-    document.title = "Montage vidéo — Quentin Singama"
+    document.title = "Montage vidéo, Quentin Singama"
     return () => {
-      document.title = "Quentin Singama — UX/UI Designer & Researcher"
+      document.title = "Quentin Singama · UX/UI Designer & Researcher"
     }
   }, [])
 
@@ -81,7 +81,7 @@ export function ProjectVideo() {
 
           <Reveal delay={0.08}>
             <div className="mt-10">
-              <Kicker className="text-greige">Hors cadre — une passion</Kicker>
+              <Kicker className="text-greige">Hors cadre, une passion</Kicker>
             </div>
           </Reveal>
 
@@ -93,8 +93,7 @@ export function ProjectVideo() {
 
           <Reveal delay={0.24}>
             <p className="mt-7 max-w-[60ch] text-plarge text-greige">
-              En dehors du design, je monte. Des edits nerveux, façon flow —
-              coupes serrées, transitions calées sur le son, l'énergie des reels
+              En dehors du design, je monte. Des edits nerveux, façon flow, coupes serrées, transitions calées sur le son, l'énergie des reels
               et des AMV. Pas une commande : je le fais pour le plaisir de sentir
               un montage tomber pile sur le beat.
             </p>
@@ -102,7 +101,7 @@ export function ProjectVideo() {
 
           <Reveal delay={0.32}>
             <p className="mt-8 font-mono text-mono-label uppercase text-apricot">
-              {EDITS.length} edits · le son fait partie du montage —{" "}
+              {EDITS.length} edits · le son fait partie du montage, {" "}
               <span className="text-greige">monte le volume.</span>
             </p>
           </Reveal>

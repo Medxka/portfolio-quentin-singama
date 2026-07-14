@@ -12,7 +12,7 @@ const NAV_LINKS = [
 ]
 
 /**
- * Footer — espresso closing block: link columns, ghost giant wordmark,
+ * Footer, espresso closing block: link columns, ghost giant wordmark,
  * mono colophon line. DotGrid texture breathes underneath.
  */
 export function Footer() {
@@ -109,7 +109,7 @@ export function Footer() {
         {/* Colophon */}
         <Reveal delay={0.16}>
           <div className="flex flex-col gap-3 font-mono text-mono-label uppercase text-greige sm:flex-row sm:justify-between">
-            <span>© 2026 — Design &amp; code Quentin Singama</span>
+            <span>© 2026, Design &amp; code Quentin Singama</span>
             <span>Bordeaux, France</span>
           </div>
         </Reveal>

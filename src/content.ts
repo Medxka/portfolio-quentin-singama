@@ -1,5 +1,5 @@
 /**
- * Contenu réel du portfolio — source unique pour toutes les sections.
+ * Contenu réel du portfolio, source unique pour toutes les sections.
  * Zéro lorem : tout vient du parcours de Quentin.
  */
 
@@ -79,7 +79,7 @@ export const PROJECTS: Project[] = [
     year: "2024",
     desc: "Repenser la découverte en librairie indépendante. Refonte desktop et système d'icônes, en trois jours.",
     image: "/work/lina-cover.png",
-    imageAlt: "LINA — Librairies Indépendantes, identité orange",
+    imageAlt: "LINA, Librairies Indépendantes, identité orange",
     tags: ["UI Design", "Iconographie", "Sprint"],
     disciplines: ["uxui"],
   },
@@ -92,7 +92,7 @@ export const PROJECTS: Project[] = [
     year: "2026",
     desc: "Deux mois de stage en graphic design : campagnes de recrutement saisonnières pour un réseau d'agences.",
     image: "/work/happyjob-affiche.webp",
-    imageAlt: "Affiche Happy Job — emplois saisonniers toute l'année",
+    imageAlt: "Affiche Happy Job, emplois saisonniers toute l'année",
     tags: ["Campagnes", "Print", "Multi-agences"],
     disciplines: ["graphisme"],
   },
@@ -105,18 +105,18 @@ export const PROJECTS: Project[] = [
     year: "2026",
     desc: "Rendre les festivals metal accessibles aux personnes en situation de handicap : plateforme, outil d'audit et signalétique. UX/UI de toutes les maquettes + développement.",
     image: "/work/metal-access/ma-cover.webp",
-    imageAlt: "Metal Access — l'accessibilité au cœur du festival",
+    imageAlt: "Metal Access, l'accessibilité au cœur du festival",
     tags: ["Accessibilité", "Design system", "Signalétique"],
     disciplines: ["uxui", "research"],
   },
 ]
 
-/** Disciplines — source unique pour le méga-menu et les pages /discipline/:id. */
+/** Disciplines, source unique pour le méga-menu et les pages /discipline/:id. */
 export const DISCIPLINES: Discipline[] = [
   {
     id: "uxui",
     name: "UX/UI Design",
-    desc: "Interfaces, apps, refontes — de la recherche au design system.",
+    desc: "Interfaces, apps, refontes, de la recherche au design system.",
     intro: "De la recherche à l'interface : refontes, apps et design systems.",
   },
   {
@@ -174,7 +174,7 @@ export const SKILLS = [
 export const TIMELINE = [
   {
     year: "2026",
-    role: "Graphic Designer — Stage",
+    role: "Graphic Designer, Stage",
     company: "Happy Job · Bordeaux",
     desc: "Campagnes de recrutement saisonnières pour le réseau d'agences, gestion des assets créatifs, coordination multi-agences.",
   },
@@ -202,6 +202,6 @@ export const CONTACT = {
   email: "quentinsingama974@gmail.com",
   linkedin: "https://www.linkedin.com/in/quentin-singama-1b36b31b9",
   location: "Bordeaux, France",
-  status: "Disponible en alternance — septembre 2026",
+  status: "Disponible en alternance, septembre 2026",
   formation: "M2 UX/UI · ECV Bordeaux",
 }

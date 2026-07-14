@@ -3,7 +3,7 @@ import { Reveal } from "../ui/Reveal"
 import { SKILLS } from "../../content"
 
 /**
- * Process — the six practices as numbered hairline rows (dark section).
+ * Process, the six practices as numbered hairline rows (dark section).
  * System grammar: mono index in apricot, no cards, borders as structure.
  */
 export function Process() {

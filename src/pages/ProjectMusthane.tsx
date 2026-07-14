@@ -7,7 +7,7 @@ import { DotGrid } from "../components/ui/DotGrid"
 import { PillButton } from "../components/ui/PillButton"
 
 /**
- * Cas d'étude Musthane — structure type case study (sommaire latéral,
+ * Cas d'étude Musthane, structure type case study (sommaire latéral,
  * hero + méta, contexte, problèmes, solutions, bilan, projet suivant)
  * dans la grammaire du système : kickers, mono labels, cartes espresso.
  */
@@ -33,22 +33,22 @@ const PROBLEMS = [
   {
     num: "01",
     title: "Quatre axes de nav qui se croisent",
-    desc: "Sur-mesure / Nos solutions / Votre industrie + 7 sous-marques. Le même produit est trouvable par 3 chemins différents — l'utilisateur ne sait pas où chercher.",
+    desc: "Sur-mesure / Nos solutions / Votre industrie + 7 sous-marques. Le même produit est trouvable par 3 chemins différents, l'utilisateur ne sait pas où chercher.",
   },
   {
     num: "02",
     title: "7 sous-marques sans logique apparente",
-    desc: "Mustmove, Muststore, Mustshock, Muststop, Mustbalance, Mustlift, Mustpress. Aucune explication de la logique — à quoi sert chaque marque ? Pour quel besoin ?",
+    desc: "Mustmove, Muststore, Mustshock, Muststop, Mustbalance, Mustlift, Mustpress. Aucune explication de la logique, à quoi sert chaque marque ? Pour quel besoin ?",
   },
   {
     num: "03",
     title: "Sous-menu industries surchargé",
-    desc: "9 industries affichées sur 4 colonnes au survol. Surcharge cognitive immédiate — pas de hiérarchisation entre les marchés principaux et secondaires.",
+    desc: "9 industries affichées sur 4 colonnes au survol. Surcharge cognitive immédiate, pas de hiérarchisation entre les marchés principaux et secondaires.",
   },
   {
     num: "04",
     title: "Hero homepage flou",
-    desc: "« Design to mobility » / « We design for tomorrow » — aucune mention claire de ce que fabrique vraiment Musthane (réservoirs, citernes, obturateurs gonflables) avant de scroller longuement.",
+    desc: "« Design to mobility » / « We design for tomorrow », aucune mention claire de ce que fabrique vraiment Musthane (réservoirs, citernes, obturateurs gonflables) avant de scroller longuement.",
   },
   {
     num: "05",
@@ -161,12 +161,12 @@ function BeforeAfter() {
       <Figure
         src="/work/musthane/musthane-arbo-old.webp"
         alt="Ancienne arborescence Musthane : quatre axes parallèles"
-        caption="Avant — 4 axes qui se contredisent"
+        caption="Avant, 4 axes qui se contredisent"
       />
       <Figure
         src="/work/musthane/musthane-arbo-new.webp"
         alt="Nouvelle arborescence Musthane : une seule logique par usage"
-        caption="Après — une seule logique, par usage"
+        caption="Après, une seule logique, par usage"
       />
     </div>
   )
@@ -217,7 +217,7 @@ function MobileRow() {
           <div className="overflow-hidden rounded-2xl bg-espresso-2 shadow-lg">
             <img
               src={m.src}
-              alt={`Écran mobile — ${m.label}`}
+              alt={`Écran mobile, ${m.label}`}
               loading="lazy"
               className="block h-auto w-full"
             />
@@ -236,9 +236,9 @@ export function ProjectMusthane() {
   const navigate = useNavigate()
 
   React.useEffect(() => {
-    document.title = "Musthane — Cas d'étude · Quentin Singama"
+    document.title = "Musthane · Cas d'étude · Quentin Singama"
     return () => {
-      document.title = "Quentin Singama — UX/UI Designer & Researcher"
+      document.title = "Quentin Singama · UX/UI Designer & Researcher"
     }
   }, [])
 
@@ -266,7 +266,7 @@ export function ProjectMusthane() {
           <Reveal delay={0.08}>
             <div className="mt-10">
               <Kicker className="text-greige">
-                Cas d'étude — UX Design · 2025
+                Cas d'étude · UX Design · 2025
               </Kicker>
             </div>
           </Reveal>
@@ -319,7 +319,7 @@ export function ProjectMusthane() {
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Le site actuel propose quatre entrées parallèles vers les
                   mêmes produits : le sur-mesure, les solutions, les industries
-                  et les sous-marques. Chaque chemin a sa propre logique — et
+                  et les sous-marques. Chaque chemin a sa propre logique, et
                   aucun ne dit clairement où trouver quoi.
                 </p>
               </Reveal>
@@ -328,7 +328,7 @@ export function ProjectMusthane() {
                   <Figure
                     src="/work/musthane/musthane-old-nav.webp"
                     alt="Mega-menu Nos Solutions du site Musthane actuel, 7 sous-marques en colonnes"
-                    caption="Le mega-menu actuel — 7 sous-marques en colonnes"
+                    caption="Le mega-menu actuel, 7 sous-marques en colonnes"
                   />
                 </div>
               </Reveal>
@@ -374,7 +374,7 @@ export function ProjectMusthane() {
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Suppression des 4 axes parallèles. Un seul point d'entrée
-                  principal — « Nos solutions » — classé par usage métier
+                  principal, « Nos solutions », classé par usage métier
                   (stockage, levage, obturation…). Les sous-marques deviennent
                   des labels secondaires sur les fiches produit, pas un système
                   de nav. Les industries deviennent un filtre, pas un menu.
@@ -395,7 +395,7 @@ export function ProjectMusthane() {
                   Cinq entrées, cinq mega-menus.
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
-                  Top nav réduit à 5 entrées — Nos produits · Nos solutions ·
+                  Top nav réduit à 5 entrées, Nos produits · Nos solutions ·
                   Votre industrie · Ressources · À propos. Chaque entrée
                   déploie un mega-menu groupé par usage avec visuels et
                   descriptions courtes. Contact en CTA sticky à droite.
@@ -461,7 +461,7 @@ export function ProjectMusthane() {
                 </h2>
                 <p className="mt-6 max-w-[58ch] text-plarge text-taupe">
                   En 2 jours, le piège c'était d'aller trop vite vers les
-                  maquettes. J'ai pris du temps sur l'arbo et l'audit — sans
+                  maquettes. J'ai pris du temps sur l'arbo et l'audit, sans
                   ça, refaire un mega-menu propre n'aurait été qu'une couche
                   cosmétique.
                 </p>
@@ -479,7 +479,7 @@ export function ProjectMusthane() {
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                Concerts 18-25 — La découverte de concerts chez les étudiants
+                Concerts 18-25, La découverte de concerts chez les étudiants
               </h2>
             </Reveal>
           </div>

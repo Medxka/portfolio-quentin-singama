@@ -7,7 +7,7 @@ import { DotGrid } from "../components/ui/DotGrid"
 import { PillButton } from "../components/ui/PillButton"
 
 /**
- * Cas d'étude Concerts 18-25 — étude qualitative UX Research.
+ * Cas d'étude Concerts 18-25, étude qualitative UX Research.
  * Projet sans visuels : tout repose sur la structure et les récits.
  * Même gabarit que Musthane/INK/LINA (hero espresso + sommaire scrollspy).
  */
@@ -38,7 +38,7 @@ const HYPOTHESES = [
   {
     tag: "H2",
     title: "Les amis déclenchent la décision ?",
-    desc: "On pensait que le groupe social est central — le concert devient surtout un prétexte pour se retrouver entre potes.",
+    desc: "On pensait que le groupe social est central, le concert devient surtout un prétexte pour se retrouver entre potes.",
     result: "Confirmée · 7/7",
   },
 ]
@@ -68,7 +68,7 @@ const INSIGHTS = [
   {
     num: "01",
     title: "La découverte se fait par hasard",
-    desc: "Confirmé chez 6 participants sur 7. Personne ne cherche activement sur Google ou une app spécialisée — l'information arrive en scrollant les réseaux. Seule exception : T2, sans réseaux, qui découvre quand même passivement via les affiches et ses amis.",
+    desc: "Confirmé chez 6 participants sur 7. Personne ne cherche activement sur Google ou une app spécialisée, l'information arrive en scrollant les réseaux. Seule exception : T2, sans réseaux, qui découvre quand même passivement via les affiches et ses amis.",
     quote:
       "Je les découvre en scrollant Twitter, j'ai juste à attendre que le concert soit annoncé.",
     author: "Q1",
@@ -84,7 +84,7 @@ const INSIGHTS = [
   {
     num: "03",
     title: "Le budget est le vrai frein, pas les outils",
-    desc: "Résultat inattendu : les 7 ont parlé du budget spontanément, souvent en premier. Ce n'était pas dans nos hypothèses. Certains ne s'informent même pas quand le budget est serré — l'attention dépend de la capacité à agir.",
+    desc: "Résultat inattendu : les 7 ont parlé du budget spontanément, souvent en premier. Ce n'était pas dans nos hypothèses. Certains ne s'informent même pas quand le budget est serré, l'attention dépend de la capacité à agir.",
     quote: "Quand j'ai pas d'argent, je m'informe pas trop.",
     author: "Q2",
   },
@@ -170,7 +170,7 @@ const PROFILES: Profile[] = [
 const IMPLICATIONS = [
   {
     id: "01",
-    text: "Les alertes proactives sont plus utiles que les moteurs de recherche. L'utilisateur ne cherche pas — il reçoit.",
+    text: "Les alertes proactives sont plus utiles que les moteurs de recherche. L'utilisateur ne cherche pas, il reçoit.",
   },
   {
     id: "02",
@@ -182,7 +182,7 @@ const IMPLICATIONS = [
   },
   {
     id: "04",
-    text: "Couvrir les événements underground — le catalogue incomplet est la friction principale de T1 sur Dice.",
+    text: "Couvrir les événements underground, le catalogue incomplet est la friction principale de T1 sur Dice.",
   },
 ]
 
@@ -342,8 +342,7 @@ function InsightCard({
         <blockquote className="mt-5 border-l-2 border-sienna/40 pl-4 text-plarge italic text-espresso">
           « {quote} »
           {author && (
-            <cite className="mt-2 block font-mono text-mono-label uppercase not-italic text-sienna">
-              — {author}
+            <cite className="mt-2 block font-mono text-mono-label uppercase not-italic text-sienna">, {author}
             </cite>
           )}
         </blockquote>
@@ -371,38 +370,38 @@ function ProfileCard({
           : "border border-espresso/10 bg-cream"
       }`}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3">
-          <span
-            className={`grid place-items-center rounded-xl font-mono text-h5 ${
-              dark
-                ? "h-12 w-12 bg-apricot/15 text-apricot"
-                : "h-11 w-11 bg-espresso/8 text-sienna"
-            }`}
-          >
-            {name}
-          </span>
-          <span className="block">
-            <span className={`block text-psmall ${dark ? "text-linen" : "text-espresso"}`}>
-              {age}
-            </span>
-            <span
-              className={`block font-mono text-mono-label uppercase ${
-                dark ? "text-greige" : "text-taupe-2"
-              }`}
-            >
-              {genre}
-            </span>
-          </span>
-        </div>
+      {/* haut : monogramme + badge (le badge peut passer à la ligne) */}
+      <div className="flex items-start justify-between gap-2">
         <span
-          className={`shrink-0 rounded-sm border px-2 py-0.5 font-mono text-mono-label uppercase ${
+          className={`grid shrink-0 place-items-center rounded-xl font-mono text-h5 ${
+            dark
+              ? "h-12 w-12 bg-apricot/15 text-apricot"
+              : "h-11 w-11 bg-espresso/8 text-sienna"
+          }`}
+        >
+          {name}
+        </span>
+        <span
+          className={`max-w-[62%] rounded-sm border px-2 py-0.5 text-right font-mono text-[0.72rem] uppercase leading-tight ${
             dark
               ? "border-apricot/40 text-apricot"
               : "border-espresso/15 text-taupe-2"
           }`}
         >
           {badge}
+        </span>
+      </div>
+      {/* méta : âge + genre, pleine largeur */}
+      <div className="mt-4">
+        <span className={`block text-psmall ${dark ? "text-linen" : "text-espresso"}`}>
+          {age}
+        </span>
+        <span
+          className={`mt-0.5 block font-mono text-mono-label uppercase ${
+            dark ? "text-greige" : "text-taupe-2"
+          }`}
+        >
+          {genre}
         </span>
       </div>
 
@@ -437,9 +436,9 @@ export function ProjectResearch() {
   const navigate = useNavigate()
 
   React.useEffect(() => {
-    document.title = "Concerts 18-25 — Cas d'étude · Quentin Singama"
+    document.title = "Concerts 18-25 · Cas d'étude · Quentin Singama"
     return () => {
-      document.title = "Quentin Singama — UX/UI Designer & Researcher"
+      document.title = "Quentin Singama · UX/UI Designer & Researcher"
     }
   }, [])
 
@@ -467,7 +466,7 @@ export function ProjectResearch() {
           <Reveal delay={0.08}>
             <div className="mt-10">
               <Kicker className="text-greige">
-                Cas d'étude — UX Research · 2025
+                Cas d'étude · UX Research · 2025
               </Kicker>
             </div>
           </Reveal>
@@ -482,7 +481,7 @@ export function ProjectResearch() {
           <Reveal delay={0.24}>
             <p className="mt-7 max-w-[62ch] text-plarge text-greige">
               Une étude qualitative pour comprendre comment cette génération
-              trouve — et choisit — ses concerts. Sept entretiens
+              trouve, et choisit, ses concerts. Sept entretiens
               semi-directifs, une tâche en conditions réelles, et quatre
               insights qui retournent le brief de départ.
             </p>
@@ -520,7 +519,7 @@ export function ProjectResearch() {
                   On voulait comprendre comment les étudiants utilisent le
                   numérique pour aller en concert. Pas pour juger telle ou telle
                   app, mais pour voir comment ces outils s'insèrent vraiment dans
-                  leur quotidien — et ce qui les pousse, ou les freine, à y
+                  leur quotidien, et ce qui les pousse, ou les freine, à y
                   aller.
                 </p>
               </Reveal>
@@ -542,7 +541,7 @@ export function ProjectResearch() {
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   On a rencontré 7 étudiants de 18 à 25 ans, aux profils
-                  volontairement variés — genres musicaux, fréquences de sortie
+                  volontairement variés, genres musicaux, fréquences de sortie
                   et outils différents. L'objectif : des récits riches et
                   contrastés, pas un échantillon représentatif.
                 </p>
@@ -656,7 +655,7 @@ export function ProjectResearch() {
           <div>
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
-              <h2 className="mt-5 text-h3 text-linen">INK — La chute du print</h2>
+              <h2 className="mt-5 text-h3 text-linen">INK, La chute du print</h2>
             </Reveal>
           </div>
           <Reveal delay={0.08}>

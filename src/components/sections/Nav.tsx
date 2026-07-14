@@ -42,7 +42,7 @@ const MENUS: { id: MenuId; label: string; href: string }[] = [
 ]
 
 /**
- * Nav — design & animation repris d'effortel.com :
+ * Nav, design & animation repris d'effortel.com :
  * - barre fixe espresso + backdrop-blur(30px), overflow-hidden ; les items
  *   "tombent" en place depuis le haut (translateY -170% → 0) en cascade.
  * - liens = texte + "+" ; cliquer ouvre un méga-menu (le "+" tourne en "×",

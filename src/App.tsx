@@ -44,7 +44,7 @@ export function App() {
     else window.scrollTo(0, 0)
   }, [pathname, hash])
 
-  // Remonter en haut de page — via Lenis, sinon sa boucle rAF écrase le scroll.
+  // Remonter en haut de page, via Lenis, sinon sa boucle rAF écrase le scroll.
   const scrollToTop = React.useCallback(() => {
     const lenis = lenisRef.current
     if (lenis) lenis.scrollTo(0, { duration: 1.1 })

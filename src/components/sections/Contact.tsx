@@ -136,7 +136,7 @@ export function Contact() {
                 Construisons quelque chose d'évident.
               </h2>
               <p className="max-w-[38ch] text-pbody text-espresso/75">
-                Disponible en alternance — septembre 2026. Écris-moi pour
+                Disponible en alternance, septembre 2026. Écris-moi pour
                 discuter d'un besoin, d'un projet, ou juste pour dire bonjour.
               </p>
             </div>

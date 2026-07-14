@@ -8,7 +8,7 @@ import { PROJECTS } from "../../content"
 import type { Project } from "../../content"
 
 /**
- * Projects — pile de cartes façon effortel (.sticky-card) : chaque carte
+ * Projects, pile de cartes façon effortel (.sticky-card) : chaque carte
  * s'épingle au même point (sticky top), la suivante monte par-dessus, et
  * la précédente "recule" (scale down depuis le haut + voile pêche qui la
  * fond dans l'arrière-plan). Piloté au scroll en rAF via --recede.
@@ -66,7 +66,7 @@ function ProjectVisual({ project, index }: { project: Project; index: number }) 
         je sais.&nbsp;»
       </p>
       <cite className="mt-4 block font-mono text-mono-label uppercase not-italic text-greige">
-        Léa, 21 ans — entretien n°4
+        Léa, 21 ans, entretien n°4
       </cite>
     </blockquote>
   )

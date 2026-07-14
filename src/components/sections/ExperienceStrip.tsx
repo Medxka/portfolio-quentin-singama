@@ -3,7 +3,7 @@ import { useReducedMotion } from "motion/react"
 import { Reveal } from "../ui/Reveal"
 
 /**
- * ExperienceStrip — slim trust strip under the hero. Mono label, then a
+ * ExperienceStrip, slim trust strip under the hero. Mono label, then a
  * full-bleed marquee of wordmarks (schools, studios, clients) drifting
  * slowly left. Two identical sequences make the -50% translate loop
  * seamless; hover pauses it; reduced motion renders a static centered row.

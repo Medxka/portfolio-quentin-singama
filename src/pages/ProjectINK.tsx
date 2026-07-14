@@ -7,7 +7,7 @@ import { DotGrid } from "../components/ui/DotGrid"
 import { PillButton } from "../components/ui/PillButton"
 
 /**
- * Cas d'étude INK — hackathon 48h (2ᵉ place) : un univers dystopique
+ * Cas d'étude INK, hackathon 48h (2ᵉ place) : un univers dystopique
  * complet et deux marques opposées. Même gabarit que Musthane/LINA.
  */
 
@@ -46,7 +46,7 @@ const TIMELINE = [
   {
     year: "2054",
     title: "Traité de Genève numérique",
-    desc: "Signature par 187 nations d'un accord de « stabilisation informationnelle ». Création du Conseil Provisoire de Régulation Mondiale — premier embryon du futur 13ᵉ Ordre.",
+    desc: "Signature par 187 nations d'un accord de « stabilisation informationnelle ». Création du Conseil Provisoire de Régulation Mondiale, premier embryon du futur 13ᵉ Ordre.",
   },
   {
     year: "2078",
@@ -66,7 +66,7 @@ const TIMELINE = [
   {
     year: "2100",
     title: "Loi d'épuration · phase finale",
-    desc: "Extension à tout objet imprimé : tickets, étiquettes, emballages, photographies, affiches. Le print devient le bien le plus illégal — et donc le plus précieux — du monde. Naissance du marché noir.",
+    desc: "Extension à tout objet imprimé : tickets, étiquettes, emballages, photographies, affiches. Le print devient le bien le plus illégal, et donc le plus précieux, du monde. Naissance du marché noir.",
   },
   {
     year: "2134",
@@ -167,9 +167,9 @@ export function ProjectINK() {
   const navigate = useNavigate()
 
   React.useEffect(() => {
-    document.title = "INK — Cas d'étude · Quentin Singama"
+    document.title = "INK · Cas d'étude · Quentin Singama"
     return () => {
-      document.title = "Quentin Singama — UX/UI Designer & Researcher"
+      document.title = "Quentin Singama · UX/UI Designer & Researcher"
     }
   }, [])
 
@@ -197,7 +197,7 @@ export function ProjectINK() {
           <Reveal delay={0.08}>
             <div className="mt-10">
               <Kicker className="text-greige">
-                Cas d'étude — Branding & Storytelling · 2024
+                Cas d'étude · Branding & Storytelling · 2024
               </Kicker>
             </div>
           </Reveal>
@@ -212,7 +212,7 @@ export function ProjectINK() {
             <p className="mt-7 max-w-[62ch] text-plarge text-greige">
               Un hackathon créatif de 48h. Un thème : « A Journey ». Un medium
               imposé : le print. On aurait pu faire une marque d'impression
-              classique — on a inventé un monde où le papier est devenu le bien
+              classique, on a inventé un monde où le papier est devenu le bien
               le plus illégal de l'humanité, et la marque de résistance qui le
               sauve. 2ᵉ place.
             </p>
@@ -244,7 +244,7 @@ export function ProjectINK() {
               <Reveal>
                 <Kicker className="text-taupe-2">Contexte</Kicker>
                 <h2 className="mt-5 max-w-[24ch] text-h3 text-espresso">
-                  INK — Illicit Network Keepers.
+                  INK, Illicit Network Keepers.
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Une organisation clandestine qui voyage dans le temps pour
@@ -258,8 +258,8 @@ export function ProjectINK() {
                 <div className="mt-10">
                   <Figure
                     src="/work/ink-cover-card.png"
-                    alt="Identité INK — logo étoile sur fond noir étoilé"
-                    caption="L'identité INK — l'étincelle d'un réseau caché"
+                    alt="Identité INK, logo étoile sur fond noir étoilé"
+                    caption="L'identité INK, l'étincelle d'un réseau caché"
                   />
                 </div>
               </Reveal>
@@ -274,7 +274,7 @@ export function ProjectINK() {
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Mon rôle principal : construire le lore. Une chronologie de
-                  1075 ans qui rend l'univers crédible — chaque événement
+                  1075 ans qui rend l'univers crédible, chaque événement
                   justifie l'existence des deux marques.
                 </p>
               </Reveal>
@@ -282,8 +282,8 @@ export function ProjectINK() {
                 <div className="mt-10">
                   <Figure
                     src="/work/ink/ink-contexte.webp"
-                    alt="Contexte narratif — le 13ᵉ Ordre"
-                    caption="Le contexte narratif — le 13ᵉ Ordre"
+                    alt="Contexte narratif, le 13ᵉ Ordre"
+                    caption="Le contexte narratif, le 13ᵉ Ordre"
                   />
                 </div>
               </Reveal>
@@ -327,20 +327,20 @@ export function ProjectINK() {
                 <div className="mt-10 grid gap-6 md:grid-cols-2">
                   <Figure
                     src="/work/ink/ink-cover-kni.webp"
-                    alt="Identité KNI — Kinetic Nutrition Inc., la façade officielle"
-                    caption="KNI — la façade · « Mangez en 10 secondes. Vivez 100 %. »"
+                    alt="Identité KNI, Kinetic Nutrition Inc., la façade officielle"
+                    caption="KNI, la façade · « Mangez en 10 secondes. Vivez 100 %. »"
                   />
                   <Figure
                     src="/work/ink/ink-cover-ink.webp"
-                    alt="Identité INK — le réseau clandestin"
-                    caption="INK — le réseau · ce que l'Ordre cherche à effacer"
+                    alt="Identité INK, le réseau clandestin"
+                    caption="INK, le réseau · ce que l'Ordre cherche à effacer"
                   />
                 </div>
                 <div className="mt-6">
                   <Figure
                     src="/work/ink/ink-cover-13ordre.webp"
                     alt="File cover du 13ᵉ Ordre, l'autorité de l'univers"
-                    caption="Le 13ᵉ Ordre — l'antagoniste qui relie les deux marques"
+                    caption="Le 13ᵉ Ordre, l'antagoniste qui relie les deux marques"
                   />
                 </div>
               </Reveal>
@@ -389,7 +389,7 @@ export function ProjectINK() {
                     <Figure
                       src="/work/ink/ink-moodboard.webp"
                       alt="Moodboard dystopique du projet"
-                      caption="Moodboard — références dystopiques"
+                      caption="Moodboard, références dystopiques"
                     />
                     <Figure
                       src="/work/ink/ink-sommaire.webp"
@@ -411,8 +411,8 @@ export function ProjectINK() {
                 </h2>
                 <p className="mt-6 max-w-[62ch] text-pbody text-taupe">
                   Le site KNI : interface froide, épurée, capsules nutritives
-                  en grille — tout semble normal. Le site INK : prints aux
-                  enchères, prix en crédits — le marché noir de la mémoire
+                  en grille, tout semble normal. Le site INK : prints aux
+                  enchères, prix en crédits, le marché noir de la mémoire
                   imprimée.
                 </p>
               </Reveal>
@@ -421,17 +421,17 @@ export function ProjectINK() {
                   <Figure
                     src="/work/ink/ink-maquette-kni.webp"
                     alt="Site KNI, la façade gouvernementale"
-                    caption="Le site KNI — la façade"
+                    caption="Le site KNI, la façade"
                   />
                   <Figure
                     src="/work/ink/ink-maquette.webp"
                     alt="Site INK, l'interface clandestine d'enchères"
-                    caption="Le site INK — l'interface clandestine"
+                    caption="Le site INK, l'interface clandestine"
                   />
                   <Figure
                     src="/work/ink/ink-enchere.webp"
                     alt="Détail d'une enchère de print sur le site INK"
-                    caption="Détail — une enchère de print"
+                    caption="Détail, une enchère de print"
                   />
                 </div>
               </Reveal>
@@ -442,23 +442,23 @@ export function ProjectINK() {
                 <div className="mt-6 grid gap-6 md:grid-cols-2">
                   <Figure
                     src="/work/ink/ink-home-kni.webp"
-                    alt="KNI — page d'accueil complète"
-                    caption="KNI — page d'accueil"
+                    alt="KNI, page d'accueil complète"
+                    caption="KNI, page d'accueil"
                   />
                   <Figure
                     src="/work/ink/ink-produit-kni.webp"
-                    alt="KNI — page produits nutritionnels"
-                    caption="KNI — produits nutritionnels"
+                    alt="KNI, page produits nutritionnels"
+                    caption="KNI, produits nutritionnels"
                   />
                   <Figure
                     src="/work/ink/ink-enchere-full.webp"
-                    alt="INK — plateforme de mise aux enchères complète"
-                    caption="INK — plateforme d'enchères"
+                    alt="INK, plateforme de mise aux enchères complète"
+                    caption="INK, plateforme d'enchères"
                   />
                   <Figure
                     src="/work/ink/ink-produits-print.webp"
-                    alt="INK — collection de prints"
-                    caption="INK — collection de prints"
+                    alt="INK, collection de prints"
+                    caption="INK, collection de prints"
                   />
                 </div>
               </Reveal>
@@ -472,8 +472,7 @@ export function ProjectINK() {
                   Rendre l'univers crédible.
                 </h2>
                 <p className="mt-6 max-w-[58ch] text-plarge text-taupe">
-                  Dans ce groupe de 11, je me suis occupé du storytelling —
-                  construire la chronologie, les institutions, les enjeux — et
+                  Dans ce groupe de 11, je me suis occupé du storytelling, construire la chronologie, les institutions, les enjeux, et
                   de l'UI des maquettes. Le branding, le moodboard et les
                   assets produits ont été réalisés en collaboration avec
                   l'équipe.
@@ -506,7 +505,7 @@ export function ProjectINK() {
             <Reveal>
               <Kicker className="text-greige">Projet suivant</Kicker>
               <h2 className="mt-5 text-h3 text-linen">
-                LINA — Repenser la librairie indépendante
+                LINA, Repenser la librairie indépendante
               </h2>
             </Reveal>
           </div>

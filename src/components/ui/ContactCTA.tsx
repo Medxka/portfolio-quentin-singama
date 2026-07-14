@@ -114,7 +114,7 @@ function CtaCursor({
 }
 
 /**
- * ContactCTA — gros bouton "Me contacter" (espresso + chip flèche) avec le
+ * ContactCTA, gros bouton "Me contacter" (espresso + chip flèche) avec le
  * curseur custom "Sois pas timide" qui suit la souris au survol.
  */
 export function ContactCTA({ className }: { className?: string }) {

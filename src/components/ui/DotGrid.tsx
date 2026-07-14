@@ -1,7 +1,7 @@
 import * as React from "react"
 
 /**
- * DotGrid — trame de points canvas, texture signature des cartes sombres.
+ * DotGrid, trame de points canvas, texture signature des cartes sombres.
  * Les points respirent doucement ; une lueur suit la souris (désactivé
  * si prefers-reduced-motion : trame statique).
  */
