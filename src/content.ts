@@ -12,6 +12,8 @@ export type Discipline = {
   desc: string
   /** Sous-titre de la page /discipline/:id. */
   intro: string
+  /** Deux covers montrées dans la grande carte du méga-menu (au survol). */
+  covers: [string, string]
 }
 
 export type Project = {
@@ -118,24 +120,28 @@ export const DISCIPLINES: Discipline[] = [
     name: "UX/UI Design",
     desc: "Interfaces, apps, refontes, de la recherche au design system.",
     intro: "De la recherche à l'interface : refontes, apps et design systems.",
+    covers: ["/work/ink-cover-card.png", "/work/lina-cover.png"],
   },
   {
     id: "research",
     name: "UX Research",
     desc: "Entretiens, tests, synthèse. Comprendre avant de dessiner.",
     intro: "Comprendre avant de dessiner. Entretiens, tests et synthèses qui orientent les décisions.",
+    covers: ["/work/musthane-hero.webp", "/work/metal-access/ma-cover.webp"],
   },
   {
     id: "graphisme",
     name: "Graphisme & Identité",
     desc: "Direction artistique, identités de marque, print, affiches.",
     intro: "Identités de marque, direction artistique et print. Le fond autant que la forme.",
+    covers: ["/work/ink-cover-card.png", "/work/happyjob-affiche.webp"],
   },
   {
     id: "video",
     name: "Montage vidéo",
     desc: "Contenu vidéo pour réseaux et campagnes. Montage, rythme.",
     intro: "Montage et rythme pour les réseaux et les campagnes.",
+    covers: ["/work/video/amv-knk.webp", "/work/video/come-closer.webp"],
   },
 ]
 

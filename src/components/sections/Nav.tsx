@@ -147,11 +147,25 @@ const NAV_CSS = `
   animation: mega-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* Panneau Projets : la grande carte suit le survol des tuiles. Son contenu
+   et la tuile qui la remplace apparaissent en fondu (le remount via key ne
+   rejoue l'animation que sur ce qui change réellement). */
+@keyframes mega-swap-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.mega-featured,
+.disc-tiles > a {
+  animation: mega-swap-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav-drop,
   .nav-line { animation: none; }
   .mega-body { transition: none; }
-  .mega-panel[data-active="true"] { animation: none; }
+  .mega-panel[data-active="true"],
+  .mega-featured,
+  .disc-tiles > a { animation: none; }
   .mega-overlay,
   .mega-wrap,
   .mega-plus,
@@ -257,18 +271,21 @@ function Tile({
   sub,
   href,
   onNav,
+  onHover,
 }: {
   Icon: LucideIcon
   title: string
   sub: string
   href: string
   onNav: (e: React.MouseEvent) => void
+  onHover?: () => void
   key?: React.Key | null
 }) {
   return (
     <a
       href={href}
       onClick={onNav}
+      onMouseEnter={onHover}
       className="mega-tile group flex flex-col gap-3 rounded-2xl bg-linen/[0.03] p-4 transition-colors duration-300 hover:bg-linen/[0.07]"
     >
       <IconBadge Icon={Icon} />
@@ -279,53 +296,75 @@ function Tile({
 }
 
 function ProjetsPanel({ onGo }: { onGo: (id: string) => void }) {
-  const [featured, ...rest] = DISCIPLINES
+  const mainId = DISCIPLINES[0].id
+  const [activeId, setActiveId] = React.useState(mainId)
+  const active = DISCIPLINES.find((d) => d.id === activeId) ?? DISCIPLINES[0]
+  const rest = DISCIPLINES.filter((d) => d.id !== active.id)
+
+  // Précharge les covers pour un swap sans flash au survol.
+  React.useEffect(() => {
+    DISCIPLINES.forEach((d) =>
+      d.covers.forEach((src) => {
+        const img = new Image()
+        img.src = src
+      })
+    )
+  }, [])
+
   return (
-    <div className="grid gap-3 md:grid-cols-[1.15fr_1fr]">
+    <div
+      className="grid gap-3 md:grid-cols-[1.15fr_1fr]"
+      onMouseLeave={() => setActiveId(mainId)}
+    >
+      {/* Grande carte = discipline survolée (UX/UI par défaut) */}
       <a
-        href={`/discipline/${featured.id}`}
+        href={`/discipline/${active.id}`}
         onClick={(e) => {
           e.preventDefault()
-          onGo(featured.id)
+          onGo(active.id)
         }}
-        className="mega-tile group relative flex flex-col overflow-hidden rounded-2xl bg-espresso-3 p-6"
+        className="mega-tile group relative flex min-h-[22rem] flex-col overflow-hidden rounded-2xl bg-espresso-3 p-6"
       >
         <span
           aria-hidden
           className="dot-texture pointer-events-none absolute inset-0"
         />
-        {/* texte en haut */}
-        <div className="relative z-10">
+        {/* le contenu se rejoue en fondu à chaque changement de discipline */}
+        <div
+          key={active.id}
+          className="mega-featured relative z-10 flex flex-1 flex-col"
+        >
           <span className="font-mono text-mono-label uppercase text-apricot">
-            Discipline principale
+            {active.id === mainId ? "Discipline principale" : "Discipline"}
           </span>
-          <h3 className="mt-2 font-sans text-h4 text-linen">{featured.name}</h3>
+          <h3 className="mt-2 font-sans text-h4 text-linen">{active.name}</h3>
           <p className="mt-1.5 max-w-[30ch] text-psmall text-greige">
-            {featured.desc}
+            {active.desc}
           </p>
-        </div>
-        {/* mockups projets UI/UX en bas (façon carte EMS d'effortel) */}
-        <div className="relative z-10 mt-auto flex items-end justify-center pt-9">
-          <div className="w-[46%] -rotate-2 overflow-hidden rounded-lg shadow-2xl ring-1 ring-linen/10 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-1.5 group-hover:-rotate-[4deg]">
-            <img
-              src="/work/ink-cover-card.png"
-              alt=""
-              loading="lazy"
-              className="aspect-[4/3] w-full object-cover"
-            />
-          </div>
-          <div className="-ml-6 w-[54%] translate-y-3 rotate-2 overflow-hidden rounded-lg shadow-2xl ring-1 ring-linen/10 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-y-1 group-hover:rotate-[4deg]">
-            <img
-              src="/work/lina-cover.png"
-              alt=""
-              loading="lazy"
-              className="aspect-[4/3] w-full object-cover"
-            />
+          {/* covers en éventail (façon carte EMS d'effortel) */}
+          <div className="mt-auto flex items-end justify-center pt-9">
+            <div className="w-[46%] -rotate-2 overflow-hidden rounded-lg shadow-2xl ring-1 ring-linen/10 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:-translate-y-1.5 group-hover:-rotate-[4deg]">
+              <img
+                src={active.covers[0]}
+                alt=""
+                loading="lazy"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
+            <div className="-ml-6 w-[54%] translate-y-3 rotate-2 overflow-hidden rounded-lg shadow-2xl ring-1 ring-linen/10 transition-transform duration-500 ease-[var(--ease-out-expo)] group-hover:translate-y-1 group-hover:rotate-[4deg]">
+              <img
+                src={active.covers[1]}
+                alt=""
+                loading="lazy"
+                className="aspect-[4/3] w-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </a>
 
-      <div className="grid gap-3">
+      {/* Tuiles = les autres disciplines ; survol → deviennent la grande carte */}
+      <div className="disc-tiles grid gap-3">
         {rest.map((d) => (
           <Tile
             key={d.id}
@@ -333,6 +372,7 @@ function ProjetsPanel({ onGo }: { onGo: (id: string) => void }) {
             title={d.name}
             sub={d.desc}
             href={`/discipline/${d.id}`}
+            onHover={() => setActiveId(d.id)}
             onNav={(e) => {
               e.preventDefault()
               onGo(d.id)
