@@ -213,7 +213,7 @@ export function Projects() {
         <Reveal>
           <Kicker className="text-taupe-2">Projets sélectionnés</Kicker>
           <h2 className="mt-6 max-w-[20ch] text-h3 text-espresso">
-            Cinq projets, une même exigence&nbsp;: l'évidence.
+            Six projets, une même exigence&nbsp;: l'évidence.
           </h2>
         </Reveal>
 

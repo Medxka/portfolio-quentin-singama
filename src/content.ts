@@ -34,8 +34,21 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    id: "musthane",
+    id: "metal-access",
     num: "01",
+    title: "Metal Access",
+    href: "/projets/metal-access",
+    role: "UX/UI Design & Dév · Sprint équipe",
+    year: "2026",
+    desc: "Rendre les festivals metal accessibles aux personnes en situation de handicap : plateforme, outil d'audit et signalétique. UX/UI de toutes les maquettes + développement.",
+    image: "/work/metal-access/ma-cover-fede.webp",
+    imageAlt: "Metal Access, l'accessibilité au cœur du festival",
+    tags: ["Accessibilité", "Design system", "Signalétique"],
+    disciplines: ["uxui", "research"],
+  },
+  {
+    id: "musthane",
+    num: "02",
     title: "Musthane",
     href: "/projets/musthane",
     role: "UX Research · Refonte navigation",
@@ -48,7 +61,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "research",
-    num: "02",
+    num: "03",
     title: "Concerts 18-25",
     href: "/projets/research",
     role: "UX Research",
@@ -61,7 +74,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "ink",
-    num: "03",
+    num: "04",
     title: "INK",
     href: "/projets/ink",
     role: "Identité · Hackathon 48h",
@@ -74,7 +87,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "lina",
-    num: "04",
+    num: "05",
     title: "LINA",
     href: "/projets/lina",
     role: "UI Design · Sprint 3 jours",
@@ -87,7 +100,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "happyjob",
-    num: "05",
+    num: "06",
     title: "Happy Job",
     href: "/projets/happyjob",
     role: "Graphic Design · Stage 2 mois",
@@ -97,19 +110,6 @@ export const PROJECTS: Project[] = [
     imageAlt: "Affiche Happy Job, emplois saisonniers toute l'année",
     tags: ["Campagnes", "Print", "Multi-agences"],
     disciplines: ["graphisme"],
-  },
-  {
-    id: "metal-access",
-    num: "06",
-    title: "Metal Access",
-    href: "/projets/metal-access",
-    role: "UX/UI Design & Dév · Sprint équipe",
-    year: "2026",
-    desc: "Rendre les festivals metal accessibles aux personnes en situation de handicap : plateforme, outil d'audit et signalétique. UX/UI de toutes les maquettes + développement.",
-    image: "/work/metal-access/ma-cover.webp",
-    imageAlt: "Metal Access, l'accessibilité au cœur du festival",
-    tags: ["Accessibilité", "Design system", "Signalétique"],
-    disciplines: ["uxui", "research"],
   },
 ]
 
