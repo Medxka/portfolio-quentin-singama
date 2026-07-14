@@ -199,8 +199,8 @@ export const TIMELINE = [
 ]
 
 export const CONTACT = {
-  email: "quentinlouis97400@gmail.com",
-  linkedin: "https://www.linkedin.com/in/quentin-singama",
+  email: "quentinsingama974@gmail.com",
+  linkedin: "https://www.linkedin.com/in/quentin-singama-1b36b31b9",
   location: "Bordeaux, France",
   status: "Disponible en alternance — septembre 2026",
   formation: "M2 UX/UI · ECV Bordeaux",
