@@ -212,8 +212,9 @@ export function Projects() {
       <div className="shell">
         <Reveal>
           <Kicker className="text-taupe-2">Projets sélectionnés</Kicker>
-          <h2 className="mt-6 max-w-[20ch] text-h3 text-espresso">
-            Six projets, une même exigence&nbsp;: l'évidence.
+          <h2 className="mt-6 max-w-[22ch] text-h3 text-espresso">
+            Les projets sur lesquels j'ai{" "}
+            <span className="text-sienna">travaillé</span>.
           </h2>
         </Reveal>
 
