@@ -352,83 +352,58 @@ function InsightCard({
 }
 
 /* ── Carte profil (bento) ─────────────────────────────────── */
-function ProfileCard({
-  name,
-  age,
-  genre,
-  badge,
-  score,
-  desc,
-  featured = false,
-}: Profile & { key?: React.Key | null }) {
-  const dark = featured
+/* K2, le paradoxe : pleine largeur, traité comme une citation. */
+function FeaturedProfile({ p }: { p: Profile }) {
   return (
-    <div
-      className={`flex h-full flex-col rounded-card p-6 shadow-sm ${
-        dark
-          ? "bg-espresso text-linen sm:col-span-2 lg:col-span-2"
-          : "border border-espresso/10 bg-cream"
-      }`}
-    >
-      {/* identité : monogramme + âge/genre */}
-      <div className="flex items-center gap-3">
-        <span
-          className={`grid shrink-0 place-items-center rounded-xl font-mono text-h5 ${
-            dark
-              ? "h-12 w-12 bg-apricot/15 text-apricot"
-              : "h-11 w-11 bg-espresso/8 text-sienna"
-          }`}
-        >
-          {name}
+    <div className="rounded-card bg-espresso p-6 text-linen md:p-8">
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-apricot/15 font-mono text-h5 text-apricot">
+          {p.name}
         </span>
         <span className="min-w-0">
-          <span className={`block text-psmall ${dark ? "text-linen" : "text-espresso"}`}>
-            {age}
+          <span className="block text-psmall text-linen">
+            Le {p.badge.toLowerCase()} · {p.age}
           </span>
-          <span
-            className={`mt-0.5 block font-mono text-mono-label uppercase ${
-              dark ? "text-greige" : "text-taupe-2"
-            }`}
-          >
-            {genre}
+          <span className="mt-0.5 block font-mono text-mono-label uppercase text-greige">
+            {p.genre}
           </span>
         </span>
       </div>
-      {/* badge : sa propre ligne, une seule ligne, jamais coupé */}
-      <span
-        className={`mt-4 w-fit whitespace-nowrap rounded-sm border px-2 py-0.5 font-mono text-[0.72rem] uppercase leading-tight ${
-          dark
-            ? "border-apricot/40 text-apricot"
-            : "border-espresso/15 text-taupe-2"
-        }`}
-      >
-        {badge}
-      </span>
-
-      <p
-        className={`mt-4 flex-1 ${
-          dark ? "text-plarge italic text-linen" : "text-psmall text-taupe"
-        }`}
-      >
-        {dark ? `« ${desc} »` : desc}
-      </p>
-
-      {/* la ligne passe en 2 rangées si la carte est trop étroite */}
-      <div
-        className={`mt-5 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-t pt-4 ${
-          dark ? "border-linen/15" : "border-espresso/10"
-        }`}
-      >
-        <span
-          className={`whitespace-nowrap font-mono text-mono-label uppercase ${
-            dark ? "text-greige" : "text-taupe-2"
-          }`}
-        >
+      <blockquote className="mt-6 max-w-[56ch] text-plarge italic">
+        « {p.desc} »
+      </blockquote>
+      <div className="mt-7 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-t border-linen/15 pt-4">
+        <span className="whitespace-nowrap font-mono text-mono-label uppercase text-greige">
           SEQ · facilité
         </span>
-        <SeqDots score={score} tone={dark ? "dark" : "light"} />
+        <SeqDots score={p.score} tone="dark" />
       </div>
     </div>
+  )
+}
+
+/* Les autres : rangées éditoriales (trait fin, titre, méta mono, récit). */
+function ProfileRow({ p }: { p: Profile; key?: React.Key | null }) {
+  return (
+    <li className="border-t border-espresso/10 py-6 first:border-t-0">
+      <div className="flex flex-wrap items-start gap-x-5 gap-y-3">
+        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-espresso/8 font-mono text-h5 text-sienna">
+          {p.name}
+        </span>
+        <div className="min-w-0 flex-1 basis-60">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <h3 className="text-h5 text-espresso">{p.badge}</h3>
+            <span className="font-mono text-mono-label uppercase text-taupe-2">
+              {p.age} · {p.genre}
+            </span>
+          </div>
+          <p className="mt-2 max-w-[58ch] text-psmall text-taupe">{p.desc}</p>
+        </div>
+        <div className="shrink-0 sm:pt-2">
+          <SeqDots score={p.score} tone="light" />
+        </div>
+      </div>
+    </li>
   )
 }
 
@@ -583,11 +558,16 @@ export function ProjectResearch() {
                 </h2>
               </Reveal>
               <Reveal delay={0.1}>
-                <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                  {PROFILES.map((p) => (
-                    <ProfileCard key={p.name} {...p} />
-                  ))}
+                <div className="mt-10">
+                  <FeaturedProfile p={PROFILES[0]} />
                 </div>
+              </Reveal>
+              <Reveal delay={0.16}>
+                <ol className="mt-8 border-b border-espresso/10">
+                  {PROFILES.filter((p) => !p.featured).map((p) => (
+                    <ProfileRow key={p.name} p={p} />
+                  ))}
+                </ol>
               </Reveal>
             </section>
 
