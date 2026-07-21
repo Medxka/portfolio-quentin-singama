@@ -370,8 +370,8 @@ function ProfileCard({
           : "border border-espresso/10 bg-cream"
       }`}
     >
-      {/* haut : monogramme + badge (le badge peut passer à la ligne) */}
-      <div className="flex items-start justify-between gap-2">
+      {/* identité : monogramme + âge/genre */}
+      <div className="flex items-center gap-3">
         <span
           className={`grid shrink-0 place-items-center rounded-xl font-mono text-h5 ${
             dark
@@ -381,29 +381,29 @@ function ProfileCard({
         >
           {name}
         </span>
-        <span
-          className={`max-w-[62%] rounded-sm border px-2 py-0.5 text-right font-mono text-[0.72rem] uppercase leading-tight ${
-            dark
-              ? "border-apricot/40 text-apricot"
-              : "border-espresso/15 text-taupe-2"
-          }`}
-        >
-          {badge}
+        <span className="min-w-0">
+          <span className={`block text-psmall ${dark ? "text-linen" : "text-espresso"}`}>
+            {age}
+          </span>
+          <span
+            className={`mt-0.5 block font-mono text-mono-label uppercase ${
+              dark ? "text-greige" : "text-taupe-2"
+            }`}
+          >
+            {genre}
+          </span>
         </span>
       </div>
-      {/* méta : âge + genre, pleine largeur */}
-      <div className="mt-4">
-        <span className={`block text-psmall ${dark ? "text-linen" : "text-espresso"}`}>
-          {age}
-        </span>
-        <span
-          className={`mt-0.5 block font-mono text-mono-label uppercase ${
-            dark ? "text-greige" : "text-taupe-2"
-          }`}
-        >
-          {genre}
-        </span>
-      </div>
+      {/* badge : sa propre ligne, une seule ligne, jamais coupé */}
+      <span
+        className={`mt-4 w-fit whitespace-nowrap rounded-sm border px-2 py-0.5 font-mono text-[0.72rem] uppercase leading-tight ${
+          dark
+            ? "border-apricot/40 text-apricot"
+            : "border-espresso/15 text-taupe-2"
+        }`}
+      >
+        {badge}
+      </span>
 
       <p
         className={`mt-4 flex-1 ${
@@ -413,13 +413,14 @@ function ProfileCard({
         {dark ? `« ${desc} »` : desc}
       </p>
 
+      {/* la ligne passe en 2 rangées si la carte est trop étroite */}
       <div
-        className={`mt-5 flex items-center justify-between gap-3 border-t pt-4 ${
+        className={`mt-5 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-t pt-4 ${
           dark ? "border-linen/15" : "border-espresso/10"
         }`}
       >
         <span
-          className={`font-mono text-mono-label uppercase ${
+          className={`whitespace-nowrap font-mono text-mono-label uppercase ${
             dark ? "text-greige" : "text-taupe-2"
           }`}
         >
